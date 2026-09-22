@@ -10,34 +10,163 @@
       box-sizing: border-box;
     }
 
+    :root {
+      --bg: #0f1115;
+      --card: #181b21;
+      --card-hover: #1d2128;
+      --input: #101318;
+      --border: #2a2e37;
+      --border-light: #333845;
+      --text: #e8e8e8;
+      --muted: #9299a8;
+      --muted-2: #aeb4c0;
+      --primary: #6374ff;
+      --green: #4ade80;
+      --red: #f87171;
+      --yellow: #facc15;
+    }
+
     body {
       margin: 0;
       font-family: Arial, "Microsoft JhengHei", sans-serif;
-      background: #0f1115;
-      color: #e8e8e8;
+      background: var(--bg);
+      color: var(--text);
     }
 
     .container {
       width: min(1250px, calc(100% - 32px));
-      margin: 32px auto;
+      margin: 24px auto;
     }
 
     h1 {
-      margin: 0 0 24px;
+      margin: 0 0 20px;
       font-size: 28px;
     }
 
     .card {
-      background: #181b21;
-      border: 1px solid #2a2e37;
+      background: var(--card);
+      border: 1px solid var(--border);
       border-radius: 14px;
       padding: 20px;
       margin-bottom: 20px;
     }
 
+    /* =========================
+       SUMMARY
+    ========================= */
+
+    .summary {
+      display: grid;
+      grid-template-columns: repeat(6, 1fr);
+      gap: 12px;
+      margin-bottom: 20px;
+    }
+
+    .summary-box {
+      background: var(--card);
+      border: 1px solid var(--border);
+      border-radius: 12px;
+      padding: 16px;
+      min-width: 0;
+    }
+
+    .summary-box span {
+      display: block;
+      color: var(--muted);
+      font-size: 12px;
+      margin-bottom: 7px;
+    }
+
+    .summary-box strong {
+      display: block;
+      font-size: 20px;
+      word-break: break-word;
+    }
+
+    .positive {
+      color: var(--green);
+    }
+
+    .negative {
+      color: var(--red);
+    }
+
+    .neutral {
+      color: var(--text);
+    }
+
+    /* =========================
+       COLLAPSIBLE FORM
+    ========================= */
+
+    .collapsible-card {
+      padding: 0;
+      overflow: hidden;
+    }
+
+    .collapsible-header {
+      padding: 18px 20px;
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      gap: 12px;
+      cursor: pointer;
+      user-select: none;
+    }
+
+    .collapsible-header:hover {
+      background: var(--card-hover);
+    }
+
+    .collapsible-header strong {
+      display: block;
+      font-size: 15px;
+    }
+
+    .collapsible-header span {
+      display: block;
+      margin-top: 4px;
+      font-size: 12px;
+      color: #8f96a3;
+    }
+
+    .toggle-icon {
+      flex-shrink: 0;
+      font-size: 13px;
+      color: #9da5b4;
+      transition: transform 0.25s ease;
+    }
+
+    .toggle-icon.open {
+      transform: rotate(180deg);
+    }
+
+    .collapsible-content {
+      display: none;
+      padding: 0 20px 20px;
+    }
+
+    .collapsible-content.open {
+      display: block;
+    }
+
+    .editing-box {
+      display: none;
+      margin-bottom: 16px;
+      padding: 12px 14px;
+      border-radius: 8px;
+      background: #202838;
+      color: #bcd0ff;
+      font-size: 13px;
+    }
+
+    /* =========================
+       FORM
+    ========================= */
+
     .form-grid {
       display: grid;
-      grid-template-columns: repeat(4, 1fr);
+      grid-template-columns: repeat(4, minmax(0, 1fr));
       gap: 14px;
     }
 
@@ -45,6 +174,7 @@
       display: flex;
       flex-direction: column;
       gap: 7px;
+      min-width: 0;
     }
 
     .field.full {
@@ -53,15 +183,16 @@
 
     label {
       font-size: 13px;
-      color: #aeb4c0;
+      color: var(--muted-2);
     }
 
     input,
     select,
     textarea {
       width: 100%;
-      border: 1px solid #333845;
-      background: #101318;
+      max-width: 100%;
+      border: 1px solid var(--border-light);
+      background: var(--input);
       color: white;
       border-radius: 8px;
       padding: 11px 12px;
@@ -72,7 +203,7 @@
     input:focus,
     select:focus,
     textarea:focus {
-      border-color: #6c7cff;
+      border-color: var(--primary);
     }
 
     textarea {
@@ -96,7 +227,7 @@
     }
 
     .primary {
-      background: #6374ff;
+      background: var(--primary);
       color: white;
     }
 
@@ -113,138 +244,289 @@
     .edit-btn {
       background: #263653;
       color: #a9c6ff;
-      padding: 6px 10px;
+      padding: 7px 10px;
       font-size: 12px;
-      margin-right: 6px;
     }
 
     .delete-btn {
       background: #42232a;
       color: #ff9ca5;
-      padding: 6px 10px;
+      padding: 7px 10px;
       font-size: 12px;
-    }
-
-    .summary {
-      display: grid;
-      grid-template-columns: repeat(6, 1fr);
-      gap: 12px;
-      margin-bottom: 20px;
-    }
-
-    .summary-box {
-      background: #181b21;
-      border: 1px solid #2a2e37;
-      border-radius: 12px;
-      padding: 16px;
-    }
-
-    .summary-box span {
-      display: block;
-      color: #9299a8;
-      font-size: 12px;
-      margin-bottom: 7px;
-    }
-
-    .summary-box strong {
-      font-size: 20px;
-    }
-
-    .positive {
-      color: #4ade80;
-    }
-
-    .negative {
-      color: #f87171;
-    }
-
-    .neutral {
-      color: #e8e8e8;
     }
 
     .long {
-      color: #4ade80;
+      color: var(--green);
       font-weight: bold;
     }
 
     .short {
-      color: #f87171;
+      color: var(--red);
       font-weight: bold;
     }
 
     .result-open {
-      color: #facc15;
+      color: var(--yellow);
       font-weight: bold;
     }
 
     .result-win {
-      color: #4ade80;
+      color: var(--green);
       font-weight: bold;
     }
 
     .result-loss {
-      color: #f87171;
+      color: var(--red);
       font-weight: bold;
     }
 
     .rr-good {
-      color: #4ade80;
+      color: var(--green);
     }
 
     .rr-bad {
-      color: #f87171;
+      color: var(--red);
     }
 
-    .editing-box {
-      display: none;
-      margin-bottom: 16px;
-      padding: 12px 14px;
-      border-radius: 8px;
-      background: #202838;
-      color: #bcd0ff;
-      font-size: 13px;
-    }
+    /* =========================
+       DESKTOP TABLE
+    ========================= */
 
     .table-wrap {
-      overflow-x: auto;
+      overflow: hidden;
     }
 
-    table {
+    .desktop-table {
       width: 100%;
       border-collapse: collapse;
-      min-width: 1250px;
     }
 
-    th,
-    td {
+    .desktop-table th,
+    .desktop-table td {
       padding: 11px 10px;
-      border-bottom: 1px solid #2a2e37;
+      border-bottom: 1px solid var(--border);
       text-align: left;
       font-size: 13px;
+      vertical-align: top;
+    }
+
+    .desktop-table th {
+      color: var(--muted);
+      font-weight: normal;
       white-space: nowrap;
     }
 
-    th {
-      color: #9299a8;
-      font-weight: normal;
+    .desktop-table td {
+      word-break: break-word;
     }
 
-    @media (max-width: 1000px) {
+    .action-cell {
+      white-space: nowrap;
+    }
+
+    .note-cell {
+      white-space: normal;
+      min-width: 150px;
+      max-width: 240px;
+    }
+
+    /* =========================
+       MOBILE TRADE CARDS
+    ========================= */
+
+    .mobile-trades {
+      display: none;
+    }
+
+    .trade-mobile-card {
+      border: 1px solid var(--border);
+      background: #15181e;
+      border-radius: 12px;
+      padding: 14px;
+      margin-bottom: 12px;
+    }
+
+    .trade-mobile-card:last-child {
+      margin-bottom: 0;
+    }
+
+    .trade-mobile-top {
+      display: flex;
+      justify-content: space-between;
+      align-items: flex-start;
+      gap: 10px;
+      padding-bottom: 12px;
+      border-bottom: 1px solid var(--border);
+      margin-bottom: 12px;
+    }
+
+    .trade-mobile-symbol {
+      font-size: 17px;
+      font-weight: bold;
+      word-break: break-word;
+    }
+
+    .trade-mobile-side {
+      font-size: 13px;
+      flex-shrink: 0;
+    }
+
+    .trade-mobile-grid {
+      display: grid;
+      grid-template-columns: repeat(2, minmax(0, 1fr));
+      gap: 10px;
+    }
+
+    .trade-mobile-item {
+      background: #101318;
+      border-radius: 8px;
+      padding: 10px;
+      min-width: 0;
+    }
+
+    .trade-mobile-item.full {
+      grid-column: 1 / -1;
+    }
+
+    .trade-mobile-label {
+      display: block;
+      font-size: 11px;
+      color: var(--muted);
+      margin-bottom: 5px;
+    }
+
+    .trade-mobile-value {
+      display: block;
+      font-size: 14px;
+      word-break: break-word;
+    }
+
+    .trade-mobile-actions {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 8px;
+      margin-top: 12px;
+    }
+
+    .trade-mobile-actions button {
+      width: 100%;
+    }
+
+    .empty-state {
+      color: var(--muted);
+      text-align: center;
+      padding: 24px 10px;
+      font-size: 14px;
+    }
+
+    /* =========================
+       RESPONSIVE
+    ========================= */
+
+    @media (max-width: 1100px) {
       .summary {
         grid-template-columns: repeat(3, 1fr);
       }
-    }
 
-    @media (max-width: 850px) {
       .form-grid {
-        grid-template-columns: repeat(2, 1fr);
+        grid-template-columns: repeat(2, minmax(0, 1fr));
       }
     }
 
-    @media (max-width: 520px) {
-      .form-grid,
+    @media (max-width: 760px) {
+      body {
+        overflow-x: hidden;
+      }
+
+      .container {
+        width: calc(100% - 20px);
+        margin: 14px auto;
+      }
+
+      h1 {
+        font-size: 22px;
+        margin-bottom: 14px;
+      }
+
       .summary {
+        grid-template-columns: repeat(2, minmax(0, 1fr));
+        gap: 8px;
+      }
+
+      .summary-box {
+        padding: 12px;
+      }
+
+      .summary-box strong {
+        font-size: 17px;
+      }
+
+      .collapsible-header {
+        padding: 15px 14px;
+      }
+
+      .collapsible-content {
+        padding: 0 14px 14px;
+      }
+
+      .form-grid {
         grid-template-columns: 1fr;
+        gap: 12px;
+      }
+
+      .field.full {
+        grid-column: auto;
+      }
+
+      .buttons {
+        display: grid;
+        grid-template-columns: 1fr 1fr;
+      }
+
+      .buttons button {
+        width: 100%;
+      }
+
+      .table-wrap {
+        padding: 14px;
+      }
+
+      .desktop-table {
+        display: none;
+      }
+
+      .mobile-trades {
+        display: block;
+      }
+    }
+
+    @media (max-width: 430px) {
+      .summary {
+        grid-template-columns: 1fr 1fr;
+      }
+
+      .summary-box {
+        padding: 10px;
+      }
+
+      .summary-box span {
+        font-size: 11px;
+      }
+
+      .summary-box strong {
+        font-size: 15px;
+      }
+
+      .buttons {
+        grid-template-columns: 1fr;
+      }
+
+      .trade-mobile-grid {
+        grid-template-columns: 1fr 1fr;
+      }
+
+      .trade-mobile-item.full {
+        grid-column: 1 / -1;
       }
     }
   </style>
@@ -256,6 +538,8 @@
 
     <h1>交易紀錄</h1>
 
+
+    <!-- 統計區 -->
     <div class="summary">
 
       <div class="summary-box">
@@ -290,165 +574,231 @@
 
     </div>
 
-    <div class="card">
+
+    <!-- 可收合輸入區 -->
+    <div class="card collapsible-card">
 
       <div
-        id="editingBox"
-        class="editing-box"
+        class="collapsible-header"
+        onclick="toggleTradeForm()"
       >
-        正在編輯交易
-      </div>
 
-      <div class="form-grid">
-
-        <div class="field">
-          <label>交易標的</label>
-          <input
-            id="symbol"
-            placeholder="例如 ZECUSDT"
-          />
+        <div>
+          <strong>新增 / 編輯交易</strong>
+          <span id="formStatus">點擊展開</span>
         </div>
 
-        <div class="field">
-          <label>方向</label>
-          <select id="side">
-            <option value="LONG">LONG 多</option>
-            <option value="SHORT">SHORT 空</option>
-          </select>
-        </div>
-
-        <div class="field">
-          <label>進場價</label>
-          <input
-            id="entry"
-            type="number"
-            step="any"
-            placeholder="1510.23"
-          />
-        </div>
-
-        <div class="field">
-          <label>SL</label>
-          <input
-            id="sl"
-            type="number"
-            step="any"
-            placeholder="1516"
-          />
-        </div>
-
-        <div class="field">
-          <label>TP1</label>
-          <input
-            id="tp1"
-            type="number"
-            step="any"
-            placeholder="1492"
-          />
-        </div>
-
-        <div class="field">
-          <label>TP2</label>
-          <input
-            id="tp2"
-            type="number"
-            step="any"
-            placeholder="1469.06"
-          />
-        </div>
-
-        <div class="field">
-          <label>FTP / 最終 TP</label>
-          <input
-            id="ftp"
-            type="number"
-            step="any"
-            placeholder="1421.25"
-          />
-        </div>
-
-        <div class="field">
-          <label>槓桿</label>
-          <input
-            id="leverage"
-            type="number"
-            step="1"
-            placeholder="50"
-          />
-        </div>
-
-        <div class="field">
-          <label>結果</label>
-          <select id="result">
-            <option value="OPEN">未結束</option>
-            <option value="TP1">TP1</option>
-            <option value="TP2">TP2</option>
-            <option value="FTP">FTP</option>
-            <option value="SL">SL</option>
-            <option value="MANUAL">手動平倉</option>
-          </select>
-        </div>
-
-        <div class="field">
-          <label>實際盈虧 USDT</label>
-          <input
-            id="pnl"
-            type="number"
-            step="any"
-            placeholder="例如 35 或 -18.5"
-          />
-        </div>
-
-        <div class="field full">
-          <label>進場原因 / 備註</label>
-          <textarea
-            id="note"
-            placeholder="例如：M5 Break OB，上緣附近進場..."
-          ></textarea>
+        <div
+          id="toggleIcon"
+          class="toggle-icon"
+        >
+          ▼
         </div>
 
       </div>
 
-      <div class="buttons">
 
-        <button
-          id="submitButton"
-          class="primary"
-          onclick="saveTrade()"
-        >
-          新增交易
-        </button>
+      <div
+        id="tradeFormContent"
+        class="collapsible-content"
+      >
 
-        <button
-          id="cancelEditButton"
-          class="secondary"
-          onclick="cancelEdit()"
-          style="display:none;"
+        <div
+          id="editingBox"
+          class="editing-box"
         >
-          取消編輯
-        </button>
+          正在編輯交易
+        </div>
 
-        <button
-          class="secondary"
-          onclick="clearForm()"
-        >
-          清空輸入
-        </button>
 
-        <button
-          class="danger"
-          onclick="clearAll()"
-        >
-          刪除全部紀錄
-        </button>
+        <div class="form-grid">
+
+          <div class="field">
+            <label>交易標的</label>
+            <input
+              id="symbol"
+              placeholder="例如 ZECUSDT"
+            />
+          </div>
+
+          <div class="field">
+            <label>方向</label>
+
+            <select id="side">
+              <option value="LONG">
+                LONG 多
+              </option>
+
+              <option value="SHORT">
+                SHORT 空
+              </option>
+            </select>
+          </div>
+
+          <div class="field">
+            <label>進場價</label>
+
+            <input
+              id="entry"
+              type="number"
+              step="any"
+              placeholder="1510.23"
+            />
+          </div>
+
+          <div class="field">
+            <label>SL</label>
+
+            <input
+              id="sl"
+              type="number"
+              step="any"
+              placeholder="1516"
+            />
+          </div>
+
+          <div class="field">
+            <label>TP1</label>
+
+            <input
+              id="tp1"
+              type="number"
+              step="any"
+              placeholder="1492"
+            />
+          </div>
+
+          <div class="field">
+            <label>TP2</label>
+
+            <input
+              id="tp2"
+              type="number"
+              step="any"
+              placeholder="1469.06"
+            />
+          </div>
+
+          <div class="field">
+            <label>FTP / 最終 TP</label>
+
+            <input
+              id="ftp"
+              type="number"
+              step="any"
+              placeholder="1421.25"
+            />
+          </div>
+
+          <div class="field">
+            <label>槓桿</label>
+
+            <input
+              id="leverage"
+              type="number"
+              step="1"
+              placeholder="50"
+            />
+          </div>
+
+          <div class="field">
+            <label>結果</label>
+
+            <select id="result">
+              <option value="OPEN">
+                未結束
+              </option>
+
+              <option value="TP1">
+                TP1
+              </option>
+
+              <option value="TP2">
+                TP2
+              </option>
+
+              <option value="FTP">
+                FTP
+              </option>
+
+              <option value="SL">
+                SL
+              </option>
+
+              <option value="MANUAL">
+                手動平倉
+              </option>
+            </select>
+          </div>
+
+          <div class="field">
+            <label>實際盈虧 USDT</label>
+
+            <input
+              id="pnl"
+              type="number"
+              step="any"
+              placeholder="例如 35 或 -18.5"
+            />
+          </div>
+
+          <div class="field full">
+            <label>進場原因 / 備註</label>
+
+            <textarea
+              id="note"
+              placeholder="例如：M5 Break OB，上緣附近進場..."
+            ></textarea>
+          </div>
+
+        </div>
+
+
+        <div class="buttons">
+
+          <button
+            id="submitButton"
+            class="primary"
+            onclick="saveTrade()"
+          >
+            新增交易
+          </button>
+
+          <button
+            id="cancelEditButton"
+            class="secondary"
+            onclick="cancelEdit()"
+            style="display:none;"
+          >
+            取消編輯
+          </button>
+
+          <button
+            class="secondary"
+            onclick="clearForm()"
+          >
+            清空輸入
+          </button>
+
+          <button
+            class="danger"
+            onclick="clearAll()"
+          >
+            刪除全部紀錄
+          </button>
+
+        </div>
 
       </div>
 
     </div>
 
+
+    <!-- 交易紀錄 -->
     <div class="card table-wrap">
 
-      <table>
+      <!-- 桌機版 -->
+      <table class="desktop-table">
 
         <thead>
           <tr>
@@ -473,9 +823,17 @@
 
       </table>
 
+
+      <!-- 手機版 -->
+      <div
+        id="mobileTrades"
+        class="mobile-trades"
+      ></div>
+
     </div>
 
   </div>
+
 
   <script>
 
@@ -494,7 +852,79 @@
     }
 
 
-    function calculateRR(side, entry, sl, tp) {
+    function toggleTradeForm(forceOpen = null) {
+
+      const content =
+        document.getElementById(
+          "tradeFormContent"
+        );
+
+      const icon =
+        document.getElementById(
+          "toggleIcon"
+        );
+
+      const status =
+        document.getElementById(
+          "formStatus"
+        );
+
+      let shouldOpen;
+
+      if (forceOpen === true) {
+
+        shouldOpen = true;
+
+      } else if (forceOpen === false) {
+
+        shouldOpen = false;
+
+      } else {
+
+        shouldOpen =
+          !content.classList.contains(
+            "open"
+          );
+
+      }
+
+      if (shouldOpen) {
+
+        content.classList.add(
+          "open"
+        );
+
+        icon.classList.add(
+          "open"
+        );
+
+        status.textContent =
+          "點擊收合";
+
+      } else {
+
+        content.classList.remove(
+          "open"
+        );
+
+        icon.classList.remove(
+          "open"
+        );
+
+        status.textContent =
+          "點擊展開";
+
+      }
+
+    }
+
+
+    function calculateRR(
+      side,
+      entry,
+      sl,
+      tp
+    ) {
 
       entry = Number(entry);
       sl = Number(sl);
@@ -526,6 +956,7 @@
       }
 
       return reward / risk;
+
     }
 
 
@@ -607,6 +1038,7 @@
 
       };
 
+
       tradeData.rrTP1 =
         calculateRR(
           tradeData.side,
@@ -614,6 +1046,7 @@
           tradeData.sl,
           tradeData.tp1
         );
+
 
       tradeData.rrFTP =
         calculateRR(
@@ -658,6 +1091,7 @@
       cancelEdit();
 
       renderTrades();
+
     }
 
 
@@ -674,6 +1108,8 @@
       }
 
       editingId = id;
+
+      toggleTradeForm(true);
 
       document
         .getElementById("symbol")
@@ -753,10 +1189,18 @@
           " / " +
           trade.side;
 
-      window.scrollTo({
-        top: 0,
-        behavior: "smooth"
-      });
+      setTimeout(() => {
+
+        document
+          .querySelector(
+            ".collapsible-card"
+          )
+          .scrollIntoView({
+            behavior: "smooth",
+            block: "start"
+          });
+
+      }, 50);
 
     }
 
@@ -1002,7 +1446,10 @@
     }
 
 
-    function getResultClass(result, pnl) {
+    function getResultClass(
+      result,
+      pnl
+    ) {
 
       if (result === "OPEN") {
         return "result-open";
@@ -1023,12 +1470,38 @@
 
     function renderTrades() {
 
+      renderDesktopTrades();
+      renderMobileTrades();
+      renderSummary();
+
+    }
+
+
+    function renderDesktopTrades() {
+
       const tbody =
         document.getElementById(
           "tradeTable"
         );
 
       tbody.innerHTML = "";
+
+      if (trades.length === 0) {
+
+        tbody.innerHTML = `
+          <tr>
+            <td
+              colspan="14"
+              class="empty-state"
+            >
+              尚無交易紀錄
+            </td>
+          </tr>
+        `;
+
+        return;
+      }
+
 
       trades.forEach(
         trade => {
@@ -1042,7 +1515,9 @@
 
             <td>
               <strong>
-                ${trade.symbol}
+                ${escapeHTML(
+                  trade.symbol
+                )}
               </strong>
             </td>
 
@@ -1140,11 +1615,13 @@
               )}
             </td>
 
-            <td>
-              ${trade.note || "-"}
+            <td class="note-cell">
+              ${escapeHTML(
+                trade.note || "-"
+              )}
             </td>
 
-            <td>
+            <td class="action-cell">
 
               <button
                 class="edit-btn"
@@ -1171,7 +1648,289 @@
         }
       );
 
-      renderSummary();
+    }
+
+
+    function renderMobileTrades() {
+
+      const container =
+        document.getElementById(
+          "mobileTrades"
+        );
+
+      container.innerHTML = "";
+
+      if (trades.length === 0) {
+
+        container.innerHTML = `
+          <div class="empty-state">
+            尚無交易紀錄
+          </div>
+        `;
+
+        return;
+      }
+
+
+      trades.forEach(
+        trade => {
+
+          const card =
+            document.createElement(
+              "div"
+            );
+
+          card.className =
+            "trade-mobile-card";
+
+
+          card.innerHTML = `
+
+            <div class="trade-mobile-top">
+
+              <div
+                class="trade-mobile-symbol"
+              >
+                ${escapeHTML(
+                  trade.symbol
+                )}
+              </div>
+
+              <div
+                class="
+                  trade-mobile-side
+                  ${
+                    trade.side === "LONG"
+                      ? "long"
+                      : "short"
+                  }
+                "
+              >
+                ${
+                  trade.side === "LONG"
+                    ? "LONG 多"
+                    : "SHORT 空"
+                }
+              </div>
+
+            </div>
+
+
+            <div class="trade-mobile-grid">
+
+              <div class="trade-mobile-item">
+                <span class="trade-mobile-label">
+                  進場
+                </span>
+
+                <span class="trade-mobile-value">
+                  ${formatNumber(
+                    trade.entry
+                  )}
+                </span>
+              </div>
+
+
+              <div class="trade-mobile-item">
+                <span class="trade-mobile-label">
+                  SL
+                </span>
+
+                <span class="trade-mobile-value">
+                  ${formatNumber(
+                    trade.sl
+                  )}
+                </span>
+              </div>
+
+
+              <div class="trade-mobile-item">
+                <span class="trade-mobile-label">
+                  TP1
+                </span>
+
+                <span class="trade-mobile-value">
+                  ${formatNumber(
+                    trade.tp1
+                  )}
+                </span>
+              </div>
+
+
+              <div class="trade-mobile-item">
+                <span class="trade-mobile-label">
+                  TP2
+                </span>
+
+                <span class="trade-mobile-value">
+                  ${formatNumber(
+                    trade.tp2
+                  )}
+                </span>
+              </div>
+
+
+              <div class="trade-mobile-item">
+                <span class="trade-mobile-label">
+                  FTP
+                </span>
+
+                <span class="trade-mobile-value">
+                  ${formatNumber(
+                    trade.ftp
+                  )}
+                </span>
+              </div>
+
+
+              <div class="trade-mobile-item">
+                <span class="trade-mobile-label">
+                  槓桿
+                </span>
+
+                <span class="trade-mobile-value">
+                  ${
+                    trade.leverage
+                      ? trade.leverage +
+                        "x"
+                      : "-"
+                  }
+                </span>
+              </div>
+
+
+              <div class="trade-mobile-item">
+                <span class="trade-mobile-label">
+                  RR TP1
+                </span>
+
+                <span
+                  class="
+                    trade-mobile-value
+                    ${
+                      trade.rrTP1 >= 1
+                        ? "rr-good"
+                        : "rr-bad"
+                    }
+                  "
+                >
+                  ${formatRR(
+                    trade.rrTP1
+                  )}
+                </span>
+              </div>
+
+
+              <div class="trade-mobile-item">
+                <span class="trade-mobile-label">
+                  RR FTP
+                </span>
+
+                <span
+                  class="
+                    trade-mobile-value
+                    ${
+                      trade.rrFTP >= 1
+                        ? "rr-good"
+                        : "rr-bad"
+                    }
+                  "
+                >
+                  ${formatRR(
+                    trade.rrFTP
+                  )}
+                </span>
+              </div>
+
+
+              <div class="trade-mobile-item">
+                <span class="trade-mobile-label">
+                  結果
+                </span>
+
+                <span
+                  class="
+                    trade-mobile-value
+                    ${getResultClass(
+                      trade.result,
+                      trade.pnl
+                    )}
+                  "
+                >
+                  ${getResultText(
+                    trade.result
+                  )}
+                </span>
+              </div>
+
+
+              <div class="trade-mobile-item">
+                <span class="trade-mobile-label">
+                  實際盈虧
+                </span>
+
+                <span
+                  class="
+                    trade-mobile-value
+                    ${getPnLClass(
+                      trade.pnl
+                    )}
+                  "
+                >
+                  ${formatPnL(
+                    trade.pnl
+                  )}
+                </span>
+              </div>
+
+
+              <div
+                class="
+                  trade-mobile-item
+                  full
+                "
+              >
+                <span class="trade-mobile-label">
+                  進場原因 / 備註
+                </span>
+
+                <span class="trade-mobile-value">
+                  ${escapeHTML(
+                    trade.note || "-"
+                  )}
+                </span>
+              </div>
+
+            </div>
+
+
+            <div class="trade-mobile-actions">
+
+              <button
+                class="edit-btn"
+                onclick="editTrade(${trade.id})"
+              >
+                編輯
+              </button>
+
+              <button
+                class="delete-btn"
+                onclick="deleteTrade(${trade.id})"
+              >
+                刪除
+              </button>
+
+            </div>
+
+          `;
+
+
+          container.appendChild(
+            card
+          );
+
+        }
+      );
 
     }
 
@@ -1181,6 +1940,7 @@
       const total =
         trades.length;
 
+
       const closed =
         trades.filter(
           trade =>
@@ -1188,8 +1948,10 @@
             trade.result !== "OPEN"
         );
 
+
       const closedCount =
         closed.length;
+
 
       const wins =
         closed.filter(
@@ -1197,6 +1959,7 @@
             typeof trade.pnl === "number" &&
             trade.pnl > 0
         );
+
 
       const winRate =
         closedCount > 0
@@ -1207,11 +1970,13 @@
             ).toFixed(1)
           : null;
 
+
       const pnlTrades =
         trades.filter(
           trade =>
             typeof trade.pnl === "number"
         );
+
 
       const totalPnL =
         pnlTrades.reduce(
@@ -1220,11 +1985,13 @@
           0
         );
 
+
       const averagePnL =
         pnlTrades.length > 0
           ? totalPnL /
             pnlTrades.length
           : 0;
+
 
       const validRR =
         trades
@@ -1239,6 +2006,7 @@
               rr > 0
           );
 
+
       const avgRR =
         validRR.length
           ? (
@@ -1251,6 +2019,7 @@
             ).toFixed(2)
           : "-";
 
+
       document
         .getElementById(
           "totalTrades"
@@ -1258,12 +2027,14 @@
         .textContent =
           total;
 
+
       document
         .getElementById(
           "closedTrades"
         )
         .textContent =
           closedCount;
+
 
       document
         .getElementById(
@@ -1280,6 +2051,7 @@
           "totalPnL"
         );
 
+
       totalPnLElement.textContent =
         (
           totalPnL > 0
@@ -1288,6 +2060,7 @@
         ) +
         totalPnL.toFixed(2) +
         " USDT";
+
 
       totalPnLElement.className =
         totalPnL > 0
@@ -1302,6 +2075,7 @@
           "averagePnL"
         );
 
+
       avgPnLElement.textContent =
         (
           averagePnL > 0
@@ -1310,6 +2084,7 @@
         ) +
         averagePnL.toFixed(2) +
         " USDT";
+
 
       avgPnLElement.className =
         averagePnL > 0
@@ -1327,6 +2102,18 @@
           avgRR === "-"
             ? "-"
             : avgRR + "R";
+
+    }
+
+
+    function escapeHTML(value) {
+
+      return String(value)
+        .replaceAll("&", "&amp;")
+        .replaceAll("<", "&lt;")
+        .replaceAll(">", "&gt;")
+        .replaceAll('"', "&quot;")
+        .replaceAll("'", "&#039;");
 
     }
 
