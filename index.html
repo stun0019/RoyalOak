@@ -1,0 +1,1339 @@
+<!DOCTYPE html>
+<html lang="zh-Hant">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Trade Journal</title>
+
+  <style>
+    * {
+      box-sizing: border-box;
+    }
+
+    body {
+      margin: 0;
+      font-family: Arial, "Microsoft JhengHei", sans-serif;
+      background: #0f1115;
+      color: #e8e8e8;
+    }
+
+    .container {
+      width: min(1250px, calc(100% - 32px));
+      margin: 32px auto;
+    }
+
+    h1 {
+      margin: 0 0 24px;
+      font-size: 28px;
+    }
+
+    .card {
+      background: #181b21;
+      border: 1px solid #2a2e37;
+      border-radius: 14px;
+      padding: 20px;
+      margin-bottom: 20px;
+    }
+
+    .form-grid {
+      display: grid;
+      grid-template-columns: repeat(4, 1fr);
+      gap: 14px;
+    }
+
+    .field {
+      display: flex;
+      flex-direction: column;
+      gap: 7px;
+    }
+
+    .field.full {
+      grid-column: 1 / -1;
+    }
+
+    label {
+      font-size: 13px;
+      color: #aeb4c0;
+    }
+
+    input,
+    select,
+    textarea {
+      width: 100%;
+      border: 1px solid #333845;
+      background: #101318;
+      color: white;
+      border-radius: 8px;
+      padding: 11px 12px;
+      outline: none;
+      font-size: 14px;
+    }
+
+    input:focus,
+    select:focus,
+    textarea:focus {
+      border-color: #6c7cff;
+    }
+
+    textarea {
+      resize: vertical;
+      min-height: 80px;
+    }
+
+    .buttons {
+      margin-top: 18px;
+      display: flex;
+      gap: 10px;
+      flex-wrap: wrap;
+    }
+
+    button {
+      border: 0;
+      border-radius: 8px;
+      padding: 10px 16px;
+      cursor: pointer;
+      font-weight: bold;
+    }
+
+    .primary {
+      background: #6374ff;
+      color: white;
+    }
+
+    .secondary {
+      background: #292e38;
+      color: white;
+    }
+
+    .danger {
+      background: #7c2d35;
+      color: white;
+    }
+
+    .edit-btn {
+      background: #263653;
+      color: #a9c6ff;
+      padding: 6px 10px;
+      font-size: 12px;
+      margin-right: 6px;
+    }
+
+    .delete-btn {
+      background: #42232a;
+      color: #ff9ca5;
+      padding: 6px 10px;
+      font-size: 12px;
+    }
+
+    .summary {
+      display: grid;
+      grid-template-columns: repeat(6, 1fr);
+      gap: 12px;
+      margin-bottom: 20px;
+    }
+
+    .summary-box {
+      background: #181b21;
+      border: 1px solid #2a2e37;
+      border-radius: 12px;
+      padding: 16px;
+    }
+
+    .summary-box span {
+      display: block;
+      color: #9299a8;
+      font-size: 12px;
+      margin-bottom: 7px;
+    }
+
+    .summary-box strong {
+      font-size: 20px;
+    }
+
+    .positive {
+      color: #4ade80;
+    }
+
+    .negative {
+      color: #f87171;
+    }
+
+    .neutral {
+      color: #e8e8e8;
+    }
+
+    .long {
+      color: #4ade80;
+      font-weight: bold;
+    }
+
+    .short {
+      color: #f87171;
+      font-weight: bold;
+    }
+
+    .result-open {
+      color: #facc15;
+      font-weight: bold;
+    }
+
+    .result-win {
+      color: #4ade80;
+      font-weight: bold;
+    }
+
+    .result-loss {
+      color: #f87171;
+      font-weight: bold;
+    }
+
+    .rr-good {
+      color: #4ade80;
+    }
+
+    .rr-bad {
+      color: #f87171;
+    }
+
+    .editing-box {
+      display: none;
+      margin-bottom: 16px;
+      padding: 12px 14px;
+      border-radius: 8px;
+      background: #202838;
+      color: #bcd0ff;
+      font-size: 13px;
+    }
+
+    .table-wrap {
+      overflow-x: auto;
+    }
+
+    table {
+      width: 100%;
+      border-collapse: collapse;
+      min-width: 1250px;
+    }
+
+    th,
+    td {
+      padding: 11px 10px;
+      border-bottom: 1px solid #2a2e37;
+      text-align: left;
+      font-size: 13px;
+      white-space: nowrap;
+    }
+
+    th {
+      color: #9299a8;
+      font-weight: normal;
+    }
+
+    @media (max-width: 1000px) {
+      .summary {
+        grid-template-columns: repeat(3, 1fr);
+      }
+    }
+
+    @media (max-width: 850px) {
+      .form-grid {
+        grid-template-columns: repeat(2, 1fr);
+      }
+    }
+
+    @media (max-width: 520px) {
+      .form-grid,
+      .summary {
+        grid-template-columns: 1fr;
+      }
+    }
+  </style>
+</head>
+
+<body>
+
+  <div class="container">
+
+    <h1>交易紀錄</h1>
+
+    <div class="summary">
+
+      <div class="summary-box">
+        <span>總交易</span>
+        <strong id="totalTrades">0</strong>
+      </div>
+
+      <div class="summary-box">
+        <span>已結束</span>
+        <strong id="closedTrades">0</strong>
+      </div>
+
+      <div class="summary-box">
+        <span>勝率</span>
+        <strong id="winRate">-</strong>
+      </div>
+
+      <div class="summary-box">
+        <span>總 PNL</span>
+        <strong id="totalPnL">0 USDT</strong>
+      </div>
+
+      <div class="summary-box">
+        <span>平均盈虧</span>
+        <strong id="averagePnL">0 USDT</strong>
+      </div>
+
+      <div class="summary-box">
+        <span>平均 RR</span>
+        <strong id="averageRR">-</strong>
+      </div>
+
+    </div>
+
+    <div class="card">
+
+      <div
+        id="editingBox"
+        class="editing-box"
+      >
+        正在編輯交易
+      </div>
+
+      <div class="form-grid">
+
+        <div class="field">
+          <label>交易標的</label>
+          <input
+            id="symbol"
+            placeholder="例如 ZECUSDT"
+          />
+        </div>
+
+        <div class="field">
+          <label>方向</label>
+          <select id="side">
+            <option value="LONG">LONG 多</option>
+            <option value="SHORT">SHORT 空</option>
+          </select>
+        </div>
+
+        <div class="field">
+          <label>進場價</label>
+          <input
+            id="entry"
+            type="number"
+            step="any"
+            placeholder="1510.23"
+          />
+        </div>
+
+        <div class="field">
+          <label>SL</label>
+          <input
+            id="sl"
+            type="number"
+            step="any"
+            placeholder="1516"
+          />
+        </div>
+
+        <div class="field">
+          <label>TP1</label>
+          <input
+            id="tp1"
+            type="number"
+            step="any"
+            placeholder="1492"
+          />
+        </div>
+
+        <div class="field">
+          <label>TP2</label>
+          <input
+            id="tp2"
+            type="number"
+            step="any"
+            placeholder="1469.06"
+          />
+        </div>
+
+        <div class="field">
+          <label>FTP / 最終 TP</label>
+          <input
+            id="ftp"
+            type="number"
+            step="any"
+            placeholder="1421.25"
+          />
+        </div>
+
+        <div class="field">
+          <label>槓桿</label>
+          <input
+            id="leverage"
+            type="number"
+            step="1"
+            placeholder="50"
+          />
+        </div>
+
+        <div class="field">
+          <label>結果</label>
+          <select id="result">
+            <option value="OPEN">未結束</option>
+            <option value="TP1">TP1</option>
+            <option value="TP2">TP2</option>
+            <option value="FTP">FTP</option>
+            <option value="SL">SL</option>
+            <option value="MANUAL">手動平倉</option>
+          </select>
+        </div>
+
+        <div class="field">
+          <label>實際盈虧 USDT</label>
+          <input
+            id="pnl"
+            type="number"
+            step="any"
+            placeholder="例如 35 或 -18.5"
+          />
+        </div>
+
+        <div class="field full">
+          <label>進場原因 / 備註</label>
+          <textarea
+            id="note"
+            placeholder="例如：M5 Break OB，上緣附近進場..."
+          ></textarea>
+        </div>
+
+      </div>
+
+      <div class="buttons">
+
+        <button
+          id="submitButton"
+          class="primary"
+          onclick="saveTrade()"
+        >
+          新增交易
+        </button>
+
+        <button
+          id="cancelEditButton"
+          class="secondary"
+          onclick="cancelEdit()"
+          style="display:none;"
+        >
+          取消編輯
+        </button>
+
+        <button
+          class="secondary"
+          onclick="clearForm()"
+        >
+          清空輸入
+        </button>
+
+        <button
+          class="danger"
+          onclick="clearAll()"
+        >
+          刪除全部紀錄
+        </button>
+
+      </div>
+
+    </div>
+
+    <div class="card table-wrap">
+
+      <table>
+
+        <thead>
+          <tr>
+            <th>標的</th>
+            <th>方向</th>
+            <th>進場</th>
+            <th>SL</th>
+            <th>TP1</th>
+            <th>TP2</th>
+            <th>FTP</th>
+            <th>RR TP1</th>
+            <th>RR FTP</th>
+            <th>槓桿</th>
+            <th>結果</th>
+            <th>實際盈虧</th>
+            <th>備註</th>
+            <th>操作</th>
+          </tr>
+        </thead>
+
+        <tbody id="tradeTable"></tbody>
+
+      </table>
+
+    </div>
+
+  </div>
+
+  <script>
+
+    let trades =
+      JSON.parse(
+        localStorage.getItem("tradeJournal")
+      ) || [];
+
+    let editingId = null;
+
+
+    function getValue(id) {
+      return document
+        .getElementById(id)
+        .value;
+    }
+
+
+    function calculateRR(side, entry, sl, tp) {
+
+      entry = Number(entry);
+      sl = Number(sl);
+      tp = Number(tp);
+
+      if (!entry || !sl || !tp) {
+        return null;
+      }
+
+      const risk =
+        Math.abs(entry - sl);
+
+      if (risk === 0) {
+        return null;
+      }
+
+      let reward;
+
+      if (side === "LONG") {
+
+        reward =
+          tp - entry;
+
+      } else {
+
+        reward =
+          entry - tp;
+
+      }
+
+      return reward / risk;
+    }
+
+
+    function saveTrade() {
+
+      const symbol =
+        getValue("symbol")
+          .trim()
+          .toUpperCase();
+
+      const side =
+        getValue("side");
+
+      const entry =
+        Number(
+          getValue("entry")
+        );
+
+      const sl =
+        Number(
+          getValue("sl")
+        );
+
+      if (!symbol) {
+
+        alert("請輸入交易標的");
+        return;
+      }
+
+      if (!entry || !sl) {
+
+        alert("請輸入進場價與 SL");
+        return;
+      }
+
+      const pnlInput =
+        getValue("pnl").trim();
+
+      const tradeData = {
+
+        symbol,
+
+        side,
+
+        entry,
+
+        sl,
+
+        tp1:
+          Number(
+            getValue("tp1")
+          ) || null,
+
+        tp2:
+          Number(
+            getValue("tp2")
+          ) || null,
+
+        ftp:
+          Number(
+            getValue("ftp")
+          ) || null,
+
+        leverage:
+          Number(
+            getValue("leverage")
+          ) || null,
+
+        result:
+          getValue("result"),
+
+        pnl:
+          pnlInput === ""
+            ? null
+            : Number(pnlInput),
+
+        note:
+          getValue("note")
+
+      };
+
+      tradeData.rrTP1 =
+        calculateRR(
+          tradeData.side,
+          tradeData.entry,
+          tradeData.sl,
+          tradeData.tp1
+        );
+
+      tradeData.rrFTP =
+        calculateRR(
+          tradeData.side,
+          tradeData.entry,
+          tradeData.sl,
+          tradeData.ftp
+        );
+
+
+      if (editingId !== null) {
+
+        const index =
+          trades.findIndex(
+            trade =>
+              trade.id === editingId
+          );
+
+        if (index !== -1) {
+
+          trades[index] = {
+            ...trades[index],
+            ...tradeData
+          };
+
+        }
+
+      } else {
+
+        trades.unshift({
+
+          id: Date.now(),
+
+          ...tradeData
+
+        });
+
+      }
+
+      saveTrades();
+
+      cancelEdit();
+
+      renderTrades();
+    }
+
+
+    function editTrade(id) {
+
+      const trade =
+        trades.find(
+          trade =>
+            trade.id === id
+        );
+
+      if (!trade) {
+        return;
+      }
+
+      editingId = id;
+
+      document
+        .getElementById("symbol")
+        .value =
+          trade.symbol || "";
+
+      document
+        .getElementById("side")
+        .value =
+          trade.side || "LONG";
+
+      document
+        .getElementById("entry")
+        .value =
+          trade.entry ?? "";
+
+      document
+        .getElementById("sl")
+        .value =
+          trade.sl ?? "";
+
+      document
+        .getElementById("tp1")
+        .value =
+          trade.tp1 ?? "";
+
+      document
+        .getElementById("tp2")
+        .value =
+          trade.tp2 ?? "";
+
+      document
+        .getElementById("ftp")
+        .value =
+          trade.ftp ?? "";
+
+      document
+        .getElementById("leverage")
+        .value =
+          trade.leverage ?? "";
+
+      document
+        .getElementById("result")
+        .value =
+          trade.result || "OPEN";
+
+      document
+        .getElementById("pnl")
+        .value =
+          trade.pnl ?? "";
+
+      document
+        .getElementById("note")
+        .value =
+          trade.note || "";
+
+      document
+        .getElementById("submitButton")
+        .textContent =
+          "更新交易";
+
+      document
+        .getElementById("cancelEditButton")
+        .style.display =
+          "inline-block";
+
+      document
+        .getElementById("editingBox")
+        .style.display =
+          "block";
+
+      document
+        .getElementById("editingBox")
+        .textContent =
+          "正在編輯：" +
+          trade.symbol +
+          " / " +
+          trade.side;
+
+      window.scrollTo({
+        top: 0,
+        behavior: "smooth"
+      });
+
+    }
+
+
+    function cancelEdit() {
+
+      editingId = null;
+
+      clearForm();
+
+      document
+        .getElementById("submitButton")
+        .textContent =
+          "新增交易";
+
+      document
+        .getElementById("cancelEditButton")
+        .style.display =
+          "none";
+
+      document
+        .getElementById("editingBox")
+        .style.display =
+          "none";
+
+    }
+
+
+    function saveTrades() {
+
+      localStorage.setItem(
+        "tradeJournal",
+        JSON.stringify(trades)
+      );
+
+    }
+
+
+    function deleteTrade(id) {
+
+      const confirmDelete =
+        confirm(
+          "確定刪除這筆交易？"
+        );
+
+      if (!confirmDelete) {
+        return;
+      }
+
+      trades =
+        trades.filter(
+          trade =>
+            trade.id !== id
+        );
+
+      if (editingId === id) {
+        cancelEdit();
+      }
+
+      saveTrades();
+
+      renderTrades();
+
+    }
+
+
+    function clearAll() {
+
+      const confirmDelete =
+        confirm(
+          "確定刪除所有交易紀錄？"
+        );
+
+      if (!confirmDelete) {
+        return;
+      }
+
+      trades = [];
+
+      cancelEdit();
+
+      saveTrades();
+
+      renderTrades();
+
+    }
+
+
+    function clearForm() {
+
+      document
+        .getElementById("symbol")
+        .value = "";
+
+      document
+        .getElementById("side")
+        .value = "LONG";
+
+      document
+        .getElementById("entry")
+        .value = "";
+
+      document
+        .getElementById("sl")
+        .value = "";
+
+      document
+        .getElementById("tp1")
+        .value = "";
+
+      document
+        .getElementById("tp2")
+        .value = "";
+
+      document
+        .getElementById("ftp")
+        .value = "";
+
+      document
+        .getElementById("leverage")
+        .value = "";
+
+      document
+        .getElementById("result")
+        .value = "OPEN";
+
+      document
+        .getElementById("pnl")
+        .value = "";
+
+      document
+        .getElementById("note")
+        .value = "";
+
+    }
+
+
+    function formatNumber(value) {
+
+      if (
+        value === null ||
+        value === undefined ||
+        value === ""
+      ) {
+        return "-";
+      }
+
+      return Number(value)
+        .toLocaleString(
+          undefined,
+          {
+            maximumFractionDigits: 8
+          }
+        );
+
+    }
+
+
+    function formatRR(rr) {
+
+      if (
+        rr === null ||
+        rr === undefined
+      ) {
+        return "-";
+      }
+
+      return (
+        rr.toFixed(2) +
+        "R"
+      );
+
+    }
+
+
+    function formatPnL(pnl) {
+
+      if (
+        pnl === null ||
+        pnl === undefined
+      ) {
+        return "-";
+      }
+
+      if (pnl > 0) {
+
+        return (
+          "+" +
+          pnl.toFixed(2) +
+          " USDT"
+        );
+
+      }
+
+      return (
+        pnl.toFixed(2) +
+        " USDT"
+      );
+
+    }
+
+
+    function getPnLClass(pnl) {
+
+      if (
+        pnl === null ||
+        pnl === undefined
+      ) {
+        return "";
+      }
+
+      if (pnl > 0) {
+        return "positive";
+      }
+
+      if (pnl < 0) {
+        return "negative";
+      }
+
+      return "neutral";
+
+    }
+
+
+    function getResultText(result) {
+
+      const map = {
+
+        OPEN: "未結束",
+        TP1: "TP1",
+        TP2: "TP2",
+        FTP: "FTP",
+        SL: "SL",
+        MANUAL: "手動平倉"
+
+      };
+
+      return (
+        map[result] ||
+        "-"
+      );
+
+    }
+
+
+    function getResultClass(result, pnl) {
+
+      if (result === "OPEN") {
+        return "result-open";
+      }
+
+      if (pnl > 0) {
+        return "result-win";
+      }
+
+      if (pnl < 0) {
+        return "result-loss";
+      }
+
+      return "";
+
+    }
+
+
+    function renderTrades() {
+
+      const tbody =
+        document.getElementById(
+          "tradeTable"
+        );
+
+      tbody.innerHTML = "";
+
+      trades.forEach(
+        trade => {
+
+          const row =
+            document.createElement(
+              "tr"
+            );
+
+          row.innerHTML = `
+
+            <td>
+              <strong>
+                ${trade.symbol}
+              </strong>
+            </td>
+
+            <td
+              class="${
+                trade.side === "LONG"
+                  ? "long"
+                  : "short"
+              }"
+            >
+              ${trade.side}
+            </td>
+
+            <td>
+              ${formatNumber(
+                trade.entry
+              )}
+            </td>
+
+            <td>
+              ${formatNumber(
+                trade.sl
+              )}
+            </td>
+
+            <td>
+              ${formatNumber(
+                trade.tp1
+              )}
+            </td>
+
+            <td>
+              ${formatNumber(
+                trade.tp2
+              )}
+            </td>
+
+            <td>
+              ${formatNumber(
+                trade.ftp
+              )}
+            </td>
+
+            <td
+              class="${
+                trade.rrTP1 >= 1
+                  ? "rr-good"
+                  : "rr-bad"
+              }"
+            >
+              ${formatRR(
+                trade.rrTP1
+              )}
+            </td>
+
+            <td
+              class="${
+                trade.rrFTP >= 1
+                  ? "rr-good"
+                  : "rr-bad"
+              }"
+            >
+              ${formatRR(
+                trade.rrFTP
+              )}
+            </td>
+
+            <td>
+              ${
+                trade.leverage
+                  ? trade.leverage +
+                    "x"
+                  : "-"
+              }
+            </td>
+
+            <td
+              class="${getResultClass(
+                trade.result,
+                trade.pnl
+              )}"
+            >
+              ${getResultText(
+                trade.result
+              )}
+            </td>
+
+            <td
+              class="${getPnLClass(
+                trade.pnl
+              )}"
+            >
+              ${formatPnL(
+                trade.pnl
+              )}
+            </td>
+
+            <td>
+              ${trade.note || "-"}
+            </td>
+
+            <td>
+
+              <button
+                class="edit-btn"
+                onclick="editTrade(${trade.id})"
+              >
+                編輯
+              </button>
+
+              <button
+                class="delete-btn"
+                onclick="deleteTrade(${trade.id})"
+              >
+                刪除
+              </button>
+
+            </td>
+
+          `;
+
+          tbody.appendChild(
+            row
+          );
+
+        }
+      );
+
+      renderSummary();
+
+    }
+
+
+    function renderSummary() {
+
+      const total =
+        trades.length;
+
+      const closed =
+        trades.filter(
+          trade =>
+            trade.result &&
+            trade.result !== "OPEN"
+        );
+
+      const closedCount =
+        closed.length;
+
+      const wins =
+        closed.filter(
+          trade =>
+            typeof trade.pnl === "number" &&
+            trade.pnl > 0
+        );
+
+      const winRate =
+        closedCount > 0
+          ? (
+              wins.length /
+              closedCount *
+              100
+            ).toFixed(1)
+          : null;
+
+      const pnlTrades =
+        trades.filter(
+          trade =>
+            typeof trade.pnl === "number"
+        );
+
+      const totalPnL =
+        pnlTrades.reduce(
+          (sum, trade) =>
+            sum + trade.pnl,
+          0
+        );
+
+      const averagePnL =
+        pnlTrades.length > 0
+          ? totalPnL /
+            pnlTrades.length
+          : 0;
+
+      const validRR =
+        trades
+          .map(
+            trade =>
+              trade.rrFTP
+          )
+          .filter(
+            rr =>
+              rr !== null &&
+              rr !== undefined &&
+              rr > 0
+          );
+
+      const avgRR =
+        validRR.length
+          ? (
+              validRR.reduce(
+                (a, b) =>
+                  a + b,
+                0
+              ) /
+              validRR.length
+            ).toFixed(2)
+          : "-";
+
+      document
+        .getElementById(
+          "totalTrades"
+        )
+        .textContent =
+          total;
+
+      document
+        .getElementById(
+          "closedTrades"
+        )
+        .textContent =
+          closedCount;
+
+      document
+        .getElementById(
+          "winRate"
+        )
+        .textContent =
+          winRate === null
+            ? "-"
+            : winRate + "%";
+
+
+      const totalPnLElement =
+        document.getElementById(
+          "totalPnL"
+        );
+
+      totalPnLElement.textContent =
+        (
+          totalPnL > 0
+            ? "+"
+            : ""
+        ) +
+        totalPnL.toFixed(2) +
+        " USDT";
+
+      totalPnLElement.className =
+        totalPnL > 0
+          ? "positive"
+          : totalPnL < 0
+            ? "negative"
+            : "neutral";
+
+
+      const avgPnLElement =
+        document.getElementById(
+          "averagePnL"
+        );
+
+      avgPnLElement.textContent =
+        (
+          averagePnL > 0
+            ? "+"
+            : ""
+        ) +
+        averagePnL.toFixed(2) +
+        " USDT";
+
+      avgPnLElement.className =
+        averagePnL > 0
+          ? "positive"
+          : averagePnL < 0
+            ? "negative"
+            : "neutral";
+
+
+      document
+        .getElementById(
+          "averageRR"
+        )
+        .textContent =
+          avgRR === "-"
+            ? "-"
+            : avgRR + "R";
+
+    }
+
+
+    renderTrades();
+
+  </script>
+
+</body>
+</html>
