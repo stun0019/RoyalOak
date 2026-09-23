@@ -14,7 +14,6 @@
     :root {
       --bg: #0f1115;
       --card: #181b21;
-      --card2: #111419;
       --border: #2b303a;
 
       --text: #eeeeee;
@@ -43,7 +42,7 @@
     }
 
     h1 {
-      margin: 0 0 12px;
+      margin: 0;
       font-size: 20px;
     }
 
@@ -75,6 +74,18 @@
       margin-bottom: 10px;
       font-size: 11px;
       color: var(--muted);
+    }
+
+    .error-box {
+      display: none;
+      margin-bottom: 10px;
+      padding: 9px 10px;
+      border: 1px solid rgba(248, 113, 113, .35);
+      background: rgba(248, 113, 113, .06);
+      color: #ffb0b0;
+      border-radius: 8px;
+      font-size: 11px;
+      line-height: 1.45;
     }
 
     .stats {
@@ -222,18 +233,6 @@
       font-size: 12px;
     }
 
-    .error-box {
-      display: none;
-      margin-bottom: 10px;
-      padding: 9px 10px;
-      border: 1px solid rgba(248, 113, 113, .35);
-      background: rgba(248, 113, 113, .06);
-      color: #ffb0b0;
-      border-radius: 8px;
-      font-size: 11px;
-      line-height: 1.45;
-    }
-
     @media (max-width: 600px) {
       .app {
         width: calc(100% - 12px);
@@ -363,10 +362,11 @@
 <script>
 
   /*
-    Google Sheet:
-    檔案 → 共用 → 發布到網路 → CSV
+    Google Sheet：
+    檔案 → 共用 → 發布到網路
+    選擇 CSV
 
-    把網址貼在這裡
+    把公開 CSV 網址貼在這裡
   */
   const SHEET_CSV_URL =
     "https://docs.google.com/spreadsheets/d/1tPLSXTk56Z-ylsDjz5VQ4R_30J4OFpGAVUmtxujqupE/edit?gid=0#gid=0";
@@ -408,7 +408,7 @@
     ) {
 
       showError(
-        "請先在 index.html 設定 SHEET_CSV_URL"
+        "請先設定 SHEET_CSV_URL"
       );
 
       return;
@@ -419,25 +419,29 @@
     button.disabled =
       true;
 
+
     status.textContent =
       "正在讀取 Google Sheet...";
 
 
     try {
 
+      const url =
+        SHEET_CSV_URL +
+        (
+          SHEET_CSV_URL.includes("?")
+            ? "&"
+            : "?"
+        ) +
+        "_=" +
+        Date.now();
+
+
       const response =
         await fetch(
-          SHEET_CSV_URL +
-          (
-            SHEET_CSV_URL.includes("?")
-              ? "&"
-              : "?"
-          ) +
-          "_=" +
-          Date.now(),
+          url,
           {
-            cache:
-              "no-store"
+            cache: "no-store"
           }
         );
 
@@ -501,9 +505,7 @@
   }
 
 
-  function showError(
-    message
-  ) {
+  function showError(message) {
 
     const errorBox =
       document.getElementById(
@@ -514,6 +516,7 @@
     errorBox.textContent =
       message;
 
+
     errorBox.style.display =
       "block";
 
@@ -521,19 +524,20 @@
 
 
   /*
-    簡單 CSV Parser
+    CSV Parser
+
     支援：
     - 逗號
     - 雙引號
     - 欄位內逗號
-    - 換行
+    - 欄位內換行
   */
   function parseCSV(text) {
 
     const rows = [];
 
     let row = [];
-    let value = "";
+    let cell = "";
 
     let insideQuotes =
       false;
@@ -558,7 +562,7 @@
         next === '"'
       ) {
 
-        value += '"';
+        cell += '"';
 
         i++;
 
@@ -585,10 +589,10 @@
       ) {
 
         row.push(
-          value
+          cell
         );
 
-        value = "";
+        cell = "";
 
         continue;
 
@@ -614,16 +618,16 @@
 
 
         row.push(
-          value
+          cell
         );
 
-        value = "";
+        cell = "";
 
 
         const hasData =
           row.some(
-            cell =>
-              String(cell)
+            item =>
+              String(item)
                 .trim() !== ""
           );
 
@@ -644,25 +648,25 @@
       }
 
 
-      value += char;
+      cell += char;
 
     }
 
 
     if (
-      value !== "" ||
+      cell !== "" ||
       row.length > 0
     ) {
 
       row.push(
-        value
+        cell
       );
 
 
       const hasData =
         row.some(
-          cell =>
-            String(cell)
+          item =>
+            String(item)
               .trim() !== ""
         );
 
@@ -683,13 +687,31 @@
   }
 
 
-  function rowsToTrades(
-    rows
-  ) {
+  /*
+    完全不讀 title。
+
+    Google Sheet 固定欄位：
+
+    A = symbol
+    B = side
+    C = entry
+    D = sl
+    E = tp1
+    F = tp2
+    G = ftp
+    H = leverage
+    I = status
+    J = result
+    K = pnl
+    L = note
+
+    第一列可以直接放交易資料。
+  */
+  function rowsToTrades(rows) {
 
     if (
       !rows ||
-      rows.length < 2
+      rows.length === 0
     ) {
 
       return [];
@@ -697,94 +719,22 @@
     }
 
 
-    const headers =
-      rows[0]
-        .map(
-          header =>
-            String(header)
-              .trim()
-              .toLowerCase()
-        );
-
-
-    const required =
-      [
-        "symbol",
-        "side",
-        "entry"
-      ];
-
-
-    const missing =
-      required.filter(
-        key =>
-          !headers.includes(
-            key
-          )
-      );
-
-
-    if (
-      missing.length
-    ) {
-
-      throw new Error(
-        "Google Sheet 缺少欄位：" +
-        missing.join(", ")
-      );
-
-    }
-
-
     return rows
-      .slice(1)
+
       .map(
         (row, index) => {
 
-          const obj = {};
-
-
-          headers.forEach(
-            (
-              header,
-              columnIndex
-            ) => {
-
-              obj[header] =
-                row[columnIndex] ??
-                "";
-
-            }
-          );
-
-
           const symbol =
             String(
-              obj.symbol || ""
+              row[0] || ""
             )
               .trim()
               .toUpperCase();
 
 
-          const side =
+          const sideRaw =
             String(
-              obj.side || ""
-            )
-              .trim()
-              .toUpperCase();
-
-
-          const status =
-            String(
-              obj.status || "OPEN"
-            )
-              .trim()
-              .toUpperCase();
-
-
-          const result =
-            String(
-              obj.result || ""
+              row[1] || ""
             )
               .trim()
               .toUpperCase();
@@ -792,44 +742,101 @@
 
           const entry =
             toNumberOrNull(
-              obj.entry
+              row[2]
             );
 
 
           const sl =
             toNumberOrNull(
-              obj.sl
+              row[3]
             );
 
 
           const tp1 =
             toNumberOrNull(
-              obj.tp1
+              row[4]
             );
 
 
           const tp2 =
             toNumberOrNull(
-              obj.tp2
+              row[5]
             );
 
 
           const ftp =
             toNumberOrNull(
-              obj.ftp
+              row[6]
             );
 
 
           const leverage =
             toNumberOrNull(
-              obj.leverage
+              row[7]
             );
+
+
+          const statusRaw =
+            String(
+              row[8] ||
+              "OPEN"
+            )
+              .trim()
+              .toUpperCase();
+
+
+          const result =
+            String(
+              row[9] || ""
+            )
+              .trim()
+              .toUpperCase();
 
 
           const pnl =
             toNumberOrNull(
-              obj.pnl
+              row[10]
             );
+
+
+          const note =
+            String(
+              row[11] || ""
+            ).trim();
+
+
+          let side =
+            "LONG";
+
+
+          if (
+            sideRaw === "SHORT" ||
+            sideRaw === "空" ||
+            sideRaw === "SELL"
+          ) {
+
+            side =
+              "SHORT";
+
+          }
+
+
+          let status =
+            "OPEN";
+
+
+          if (
+            statusRaw === "CLOSED" ||
+            statusRaw === "CLOSE" ||
+            statusRaw === "已結束" ||
+            statusRaw === "平倉" ||
+            statusRaw === "完全平倉"
+          ) {
+
+            status =
+              "CLOSED";
+
+          }
 
 
           return {
@@ -839,10 +846,7 @@
 
             symbol,
 
-            side:
-              side === "SHORT"
-                ? "SHORT"
-                : "LONG",
+            side,
 
             entry,
 
@@ -856,19 +860,13 @@
 
             leverage,
 
-            status:
-              status === "CLOSED"
-                ? "CLOSED"
-                : "OPEN",
+            status,
 
             result,
 
             pnl,
 
-            note:
-              String(
-                obj.note || ""
-              ).trim(),
+            note,
 
             rrTP1:
               calculateRR(
@@ -890,6 +888,7 @@
 
         }
       )
+
       .filter(
         trade =>
           trade.symbol &&
@@ -899,14 +898,13 @@
   }
 
 
-  function toNumberOrNull(
-    value
-  ) {
+  function toNumberOrNull(value) {
 
     if (
       value === null ||
       value === undefined ||
-      String(value).trim() === ""
+      String(value)
+        .trim() === ""
     ) {
 
       return null;
@@ -916,12 +914,29 @@
 
     const normalized =
       String(value)
-        .replaceAll(",", "")
+        .replaceAll(
+          ",",
+          ""
+        )
+        .replace(
+          "x",
+          ""
+        )
+        .replace(
+          "X",
+          ""
+        )
+        .replace(
+          "+",
+          ""
+        )
         .trim();
 
 
     const number =
-      Number(normalized);
+      Number(
+        normalized
+      );
 
 
     return Number.isFinite(
@@ -975,12 +990,8 @@
 
 
     const reward =
-      String(side)
-        .toUpperCase() ===
-        "SHORT"
-
+      side === "SHORT"
         ? entry - target
-
         : target - entry;
 
 
@@ -992,9 +1003,7 @@
   }
 
 
-  function formatNumber(
-    value
-  ) {
+  function formatNumber(value) {
 
     if (
       value === null ||
@@ -1019,9 +1028,7 @@
   }
 
 
-  function formatRR(
-    rr
-  ) {
+  function formatRR(rr) {
 
     if (
       rr === null ||
@@ -1042,9 +1049,7 @@
   }
 
 
-  function formatPnL(
-    pnl
-  ) {
+  function formatPnL(pnl) {
 
     if (
       pnl === null ||
@@ -1071,9 +1076,7 @@
   }
 
 
-  function escapeHTML(
-    value
-  ) {
+  function escapeHTML(value) {
 
     return String(
       value ?? ""
@@ -1102,17 +1105,34 @@
   }
 
 
-  function getResultText(
-    result
-  ) {
+  function getResultText(result) {
 
     const map = {
-      TP1: "TP1",
-      TP2: "TP2",
-      FTP: "FTP",
-      SL: "SL",
-      MANUAL: "手動",
-      "手動平倉": "手動"
+
+      TP1:
+        "TP1",
+
+      TP2:
+        "TP2",
+
+      FTP:
+        "FTP",
+
+      SL:
+        "SL",
+
+      MANUAL:
+        "手動",
+
+      "手動平倉":
+        "手動",
+
+      FULL:
+        "完全平倉",
+
+      "完全平倉":
+        "完全平倉"
+
     };
 
 
@@ -1147,27 +1167,19 @@
     let statusClass =
       "open";
 
+
     let statusText =
       "未結束";
 
 
     if (!isOpen) {
 
-      if (
+      statusClass =
         Number(
           trade.pnl
-        ) > 0
-      ) {
-
-        statusClass =
-          "win";
-
-      } else {
-
-        statusClass =
-          "loss";
-
-      }
+        ) >= 0
+          ? "win"
+          : "loss";
 
 
       statusText =
@@ -1226,7 +1238,9 @@
 
     card.innerHTML = `
 
-      <div class="trade-title-row">
+      <div class="
+        trade-title-row
+      ">
 
         <span class="symbol">
           ${escapeHTML(
@@ -1285,15 +1299,23 @@
       </div>
 
 
-      <div class="compact-data">
+      <div class="
+        compact-data
+      ">
 
-        <div class="compact-item">
+        <div class="
+          compact-item
+        ">
 
-          <span class="compact-label">
+          <span class="
+            compact-label
+          ">
             SL
           </span>
 
-          <span class="compact-value">
+          <span class="
+            compact-value
+          ">
             ${formatNumber(
               trade.sl
             )}
@@ -1302,13 +1324,19 @@
         </div>
 
 
-        <div class="compact-item">
+        <div class="
+          compact-item
+        ">
 
-          <span class="compact-label">
+          <span class="
+            compact-label
+          ">
             TP1
           </span>
 
-          <span class="compact-value">
+          <span class="
+            compact-value
+          ">
             ${formatNumber(
               trade.tp1
             )}
@@ -1317,13 +1345,19 @@
         </div>
 
 
-        <div class="compact-item">
+        <div class="
+          compact-item
+        ">
 
-          <span class="compact-label">
+          <span class="
+            compact-label
+          ">
             FTP
           </span>
 
-          <span class="compact-value">
+          <span class="
+            compact-value
+          ">
             ${formatNumber(
               trade.ftp
             )}
@@ -1332,13 +1366,19 @@
         </div>
 
 
-        <div class="compact-item">
+        <div class="
+          compact-item
+        ">
 
-          <span class="compact-label">
+          <span class="
+            compact-label
+          ">
             RR
           </span>
 
-          <span class="compact-value">
+          <span class="
+            compact-value
+          ">
             ${formatRR(
               trade.rrFTP
             )}
@@ -1352,8 +1392,12 @@
       ${
         extra.length
           ? `
-            <div class="card-extra">
-              ${extra.join("<br>")}
+            <div class="
+              card-extra
+            ">
+              ${extra.join(
+                "<br>"
+              )}
             </div>
           `
           : ""
@@ -1408,6 +1452,7 @@
 
     openContainer.innerHTML =
       "";
+
 
     closedContainer.innerHTML =
       "";
@@ -1579,7 +1624,8 @@
       .textContent =
         winRate === null
           ? "-"
-          : winRate + "%";
+          : winRate +
+            "%";
 
 
     document
@@ -1592,7 +1638,13 @@
   }
 
 
-  render();
+  /*
+    網頁打開時直接自動同步一次。
+
+    如果不想自動同步，
+    刪掉這行即可。
+  */
+  loadSheetTrades();
 
 </script>
 
