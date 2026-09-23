@@ -1,26 +1,17 @@
 <!DOCTYPE html>
 <html lang="zh-Hant">
-
 <head>
-
   <meta charset="UTF-8">
-
-  <meta
-    name="viewport"
-    content="width=device-width, initial-scale=1.0"
-  >
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
 
   <title>RoyalOak</title>
 
-
   <style>
-
     * {
       box-sizing: border-box;
     }
 
     :root {
-
       --bg: #0f1115;
       --card: #181b21;
       --card2: #111419;
@@ -33,117 +24,84 @@
       --green: #4ade80;
       --red: #f87171;
       --yellow: #facc15;
-
     }
 
     body {
-
       margin: 0;
-
       background: var(--bg);
       color: var(--text);
-
-      font-family:
-        Arial,
-        "Microsoft JhengHei",
-        sans-serif;
-
+      font-family: Arial, "Microsoft JhengHei", sans-serif;
     }
 
-    button,
-    input,
-    select,
-    textarea {
-
+    button {
       font: inherit;
-
     }
 
     .app {
-
-      width:
-        min(
-          900px,
-          calc(100% - 20px)
-        );
-
-      margin:
-        16px auto 50px;
-
+      width: min(900px, calc(100% - 16px));
+      margin: 12px auto 50px;
     }
 
     h1 {
-
-      margin:
-        0 0 14px;
-
-      font-size:
-        22px;
-
+      margin: 0 0 12px;
+      font-size: 20px;
     }
 
+    .topbar {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      gap: 8px;
+      margin-bottom: 12px;
+    }
 
-    /* =========================
-       統計
-    ========================= */
+    .sync-btn {
+      border: 0;
+      border-radius: 8px;
+      padding: 8px 11px;
+      background: var(--blue);
+      color: white;
+      cursor: pointer;
+      font-size: 12px;
+      font-weight: bold;
+    }
+
+    .sync-btn:disabled {
+      opacity: .5;
+      cursor: default;
+    }
+
+    .sync-status {
+      margin-bottom: 10px;
+      font-size: 11px;
+      color: var(--muted);
+    }
 
     .stats {
-
       display: grid;
-
-      grid-template-columns:
-        repeat(3, 1fr);
-
-      gap: 8px;
-
-      margin-bottom:
-        12px;
-
+      grid-template-columns: repeat(3, minmax(0, 1fr));
+      gap: 6px;
+      margin-bottom: 14px;
     }
 
     .stat {
-
-      background:
-        var(--card);
-
-      border:
-        1px solid var(--border);
-
-      border-radius:
-        10px;
-
-      padding:
-        11px;
-
-      min-width:
-        0;
-
+      background: var(--card);
+      border: 1px solid var(--border);
+      border-radius: 10px;
+      padding: 9px;
+      min-width: 0;
     }
 
     .stat-label {
-
-      font-size:
-        11px;
-
-      color:
-        var(--muted);
-
-      margin-bottom:
-        4px;
-
+      font-size: 10px;
+      color: var(--muted);
+      margin-bottom: 4px;
     }
 
     .stat-value {
-
-      font-size:
-        17px;
-
-      font-weight:
-        bold;
-
-      word-break:
-        break-word;
-
+      font-size: 15px;
+      font-weight: bold;
+      word-break: break-word;
     }
 
     .positive {
@@ -154,927 +112,195 @@
       color: var(--red);
     }
 
-
-    /* =========================
-       頂部操作
-    ========================= */
-
-    .top-actions {
-
-      display: grid;
-
-      grid-template-columns:
-        1fr 1fr;
-
-      gap: 7px;
-
-      margin-bottom:
-        12px;
-
-    }
-
-    button {
-
-      border: 0;
-
-      border-radius:
-        8px;
-
-      padding:
-        9px 11px;
-
-      cursor:
-        pointer;
-
-      font-weight:
-        bold;
-
-      font-size:
-        12px;
-
-    }
-
-    .primary {
-
-      background:
-        var(--blue);
-
-      color:
-        white;
-
-    }
-
-    .secondary {
-
-      background:
-        #292f39;
-
-      color:
-        white;
-
-    }
-
-    .danger {
-
-      background:
-        #51272e;
-
-      color:
-        #ff9aa5;
-
-    }
-
-
-    /* =========================
-       BingX Sync
-    ========================= */
-
-    .sync-panel {
-
-      display:
-        none;
-
-      background:
-        var(--card);
-
-      border:
-        1px solid var(--border);
-
-      border-radius:
-        10px;
-
-      padding:
-        10px;
-
-      margin-bottom:
-        12px;
-
-    }
-
-    .sync-panel.open {
-
-      display:
-        block;
-
-    }
-
-    .sync-status {
-
-      font-size:
-        11px;
-
-      color:
-        var(--muted);
-
-      margin-bottom:
-        8px;
-
-    }
-
-    .bingx-position {
-
-      border:
-        1px solid var(--border);
-
-      background:
-        var(--card2);
-
-      border-radius:
-        8px;
-
-      padding:
-        9px;
-
-      margin-bottom:
-        6px;
-
-    }
-
-    .bingx-position:last-child {
-
-      margin-bottom:
-        0;
-
-    }
-
-    .bingx-position-top {
-
-      display:
-        flex;
-
-      justify-content:
-        space-between;
-
-      align-items:
-        center;
-
-      gap:
-        8px;
-
-    }
-
-    .bingx-symbol {
-
-      font-size:
-        13px;
-
-      font-weight:
-        bold;
-
-    }
-
-    .bingx-side {
-
-      font-size:
-        10px;
-
-      font-weight:
-        bold;
-
-    }
-
-    .bingx-side.long {
-      color: var(--green);
-    }
-
-    .bingx-side.short {
-      color: var(--red);
-    }
-
-    .bingx-info {
-
-      display:
-        flex;
-
-      flex-wrap:
-        wrap;
-
-      gap:
-        4px 10px;
-
-      margin-top:
-        6px;
-
-      font-size:
-        10px;
-
-      color:
-        var(--muted);
-
-    }
-
-    .bingx-position-actions {
-
-      margin-top:
-        7px;
-
-    }
-
-    .bingx-position-actions button {
-
-      width:
-        100%;
-
-      padding:
-        7px;
-
-    }
-
-
-    /* =========================
-       新增表單
-    ========================= */
-
-    .panel {
-
-      background:
-        var(--card);
-
-      border:
-        1px solid var(--border);
-
-      border-radius:
-        11px;
-
-      margin-bottom:
-        14px;
-
-      overflow:
-        hidden;
-
-    }
-
-    .panel-header {
-
-      padding:
-        13px 14px;
-
-      display:
-        flex;
-
-      justify-content:
-        space-between;
-
-      align-items:
-        center;
-
-      cursor:
-        pointer;
-
-      user-select:
-        none;
-
-    }
-
-    .panel-header-title {
-
-      font-size:
-        14px;
-
-      font-weight:
-        bold;
-
-    }
-
-    .panel-header-sub {
-
-      margin-top:
-        3px;
-
-      font-size:
-        11px;
-
-      color:
-        var(--muted);
-
-    }
-
-    .arrow {
-
-      font-size:
-        12px;
-
-      transition:
-        transform .2s;
-
-    }
-
-    .arrow.open {
-
-      transform:
-        rotate(180deg);
-
-    }
-
-    .panel-content {
-
-      display:
-        none;
-
-      padding:
-        0 14px 14px;
-
-    }
-
-    .panel-content.open {
-
-      display:
-        block;
-
-    }
-
-    .editing-banner {
-
-      display:
-        none;
-
-      margin-bottom:
-        12px;
-
-      padding:
-        9px 10px;
-
-      background:
-        #20283a;
-
-      color:
-        #b5c7ff;
-
-      border-radius:
-        8px;
-
-      font-size:
-        12px;
-
-    }
-
-    .quick-grid {
-
-      display:
-        grid;
-
-      grid-template-columns:
-        repeat(
-          2,
-          minmax(0, 1fr)
-        );
-
-      gap:
-        10px;
-
-    }
-
-    .field {
-
-      min-width:
-        0;
-
-    }
-
-    .field.full {
-
-      grid-column:
-        1 / -1;
-
-    }
-
-    label {
-
-      display:
-        block;
-
-      margin-bottom:
-        5px;
-
-      font-size:
-        11px;
-
-      color:
-        #b2b8c2;
-
-    }
-
-    input,
-    select,
-    textarea {
-
-      width:
-        100%;
-
-      border:
-        1px solid #343a46;
-
-      background:
-        var(--card2);
-
-      color:
-        white;
-
-      border-radius:
-        8px;
-
-      padding:
-        9px 10px;
-
-      outline:
-        none;
-
-      font-size:
-        13px;
-
-    }
-
-    textarea {
-
-      min-height:
-        65px;
-
-      resize:
-        vertical;
-
-    }
-
-    .direction-buttons {
-
-      display:
-        grid;
-
-      grid-template-columns:
-        1fr 1fr;
-
-      gap:
-        6px;
-
-    }
-
-    .direction-button {
-
-      border:
-        1px solid #343a46;
-
-      background:
-        var(--card2);
-
-      color:
-        #aaa;
-
-      padding:
-        9px;
-
-    }
-
-    .direction-button.long.active {
-
-      color:
-        var(--green);
-
-      border-color:
-        var(--green);
-
-    }
-
-    .direction-button.short.active {
-
-      color:
-        var(--red);
-
-      border-color:
-        var(--red);
-
-    }
-
-    .more-toggle {
-
-      display:
-        inline-block;
-
-      margin-top:
-        11px;
-
-      font-size:
-        12px;
-
-      color:
-        #a8b2ff;
-
-      cursor:
-        pointer;
-
-    }
-
-    .more-options {
-
-      display:
-        none;
-
-      margin-top:
-        11px;
-
-      padding-top:
-        11px;
-
-      border-top:
-        1px solid var(--border);
-
-    }
-
-    .more-options.open {
-
-      display:
-        block;
-
-    }
-
-    .form-actions {
-
-      display:
-        grid;
-
-      grid-template-columns:
-        1fr 1fr;
-
-      gap:
-        7px;
-
-      margin-top:
-        13px;
-
-    }
-
-
-    /* =========================
-       卡片
-    ========================= */
-
     .section-title {
-
-      margin:
-        15px 0 8px;
-
-      font-size:
-        12px;
-
-      color:
-        var(--muted);
-
+      margin: 15px 0 7px;
+      font-size: 12px;
+      color: var(--muted);
     }
 
     .trade-card {
-
-      background:
-        var(--card);
-
-      border:
-        1px solid var(--border);
-
-      border-radius:
-        10px;
-
-      padding:
-        9px 10px;
-
-      margin-bottom:
-        7px;
-
+      background: var(--card);
+      border: 1px solid var(--border);
+      border-radius: 10px;
+      padding: 9px 10px;
+      margin-bottom: 7px;
     }
 
     .trade-title-row {
-
-      display:
-        flex;
-
-      align-items:
-        center;
-
-      gap:
-        7px;
-
-      flex-wrap:
-        wrap;
-
+      display: flex;
+      align-items: center;
+      gap: 7px;
+      flex-wrap: wrap;
     }
 
     .symbol {
-
-      font-size:
-        15px;
-
-      font-weight:
-        bold;
-
+      font-size: 15px;
+      font-weight: bold;
     }
 
     .side,
     .status {
-
-      display:
-        inline-block;
-
-      font-size:
-        9px;
-
-      font-weight:
-        bold;
-
-      border-radius:
-        999px;
-
-      padding:
-        3px 6px;
-
+      display: inline-block;
+      font-size: 9px;
+      font-weight: bold;
+      border-radius: 999px;
+      padding: 3px 6px;
     }
 
     .side.long {
       color: var(--green);
+      background: rgba(74, 222, 128, .08);
     }
 
     .side.short {
       color: var(--red);
+      background: rgba(248, 113, 113, .08);
     }
 
     .status.open {
       color: var(--yellow);
+      background: rgba(250, 204, 21, .08);
     }
 
     .status.win {
       color: var(--green);
+      background: rgba(74, 222, 128, .08);
     }
 
     .status.loss {
       color: var(--red);
+      background: rgba(248, 113, 113, .08);
     }
 
     .entry-line {
-
-      margin-top:
-        3px;
-
-      font-size:
-        11px;
-
-      color:
-        var(--muted);
-
+      margin-top: 3px;
+      font-size: 11px;
+      color: var(--muted);
     }
 
     .compact-data {
-
-      display:
-        flex;
-
-      flex-wrap:
-        wrap;
-
-      gap:
-        5px 12px;
-
-      margin-top:
-        6px;
-
+      display: flex;
+      flex-wrap: wrap;
+      gap: 5px 12px;
+      margin-top: 6px;
     }
 
     .compact-item {
-
-      font-size:
-        11px;
-
-      white-space:
-        nowrap;
-
+      font-size: 11px;
+      white-space: nowrap;
     }
 
     .compact-label {
-
-      color:
-        var(--muted);
-
-      margin-right:
-        3px;
-
+      color: var(--muted);
+      margin-right: 3px;
     }
 
     .compact-value {
-
-      font-weight:
-        bold;
-
+      font-weight: bold;
     }
 
     .card-extra {
-
-      margin-top:
-        6px;
-
-      padding-top:
-        6px;
-
-      border-top:
-        1px solid var(--border);
-
-      color:
-        #aeb5bf;
-
-      font-size:
-        10px;
-
-      line-height:
-        1.4;
-
+      margin-top: 6px;
+      padding-top: 6px;
+      border-top: 1px solid var(--border);
+      color: #aeb5bf;
+      font-size: 10px;
+      line-height: 1.4;
+      word-break: break-word;
     }
 
     .pnl {
-
-      font-size:
-        15px;
-
-      font-weight:
-        bold;
-
-      margin-top:
-        6px;
-
-    }
-
-    .card-actions {
-
-      display:
-        grid;
-
-      grid-template-columns:
-        1fr 1fr;
-
-      gap:
-        6px;
-
-      margin-top:
-        7px;
-
-    }
-
-    .card-actions.three {
-
-      grid-template-columns:
-        repeat(3, 1fr);
-
-    }
-
-    .settle-area {
-
-      display:
-        none;
-
-      margin-top:
-        8px;
-
-      padding-top:
-        8px;
-
-      border-top:
-        1px solid var(--border);
-
-    }
-
-    .settle-area.open {
-
-      display:
-        block;
-
-    }
-
-    .settle-grid {
-
-      display:
-        grid;
-
-      grid-template-columns:
-        1fr 1fr;
-
-      gap:
-        7px;
-
-    }
-
-    .settle-actions {
-
-      display:
-        grid;
-
-      grid-template-columns:
-        1fr 1fr;
-
-      gap:
-        6px;
-
-      margin-top:
-        7px;
-
+      margin-top: 6px;
+      font-size: 15px;
+      font-weight: bold;
     }
 
     .empty {
-
-      padding:
-        18px 10px;
-
-      text-align:
-        center;
-
-      color:
-        var(--muted);
-
-      font-size:
-        12px;
-
+      padding: 18px 10px;
+      text-align: center;
+      color: var(--muted);
+      font-size: 12px;
     }
 
+    .error-box {
+      display: none;
+      margin-bottom: 10px;
+      padding: 9px 10px;
+      border: 1px solid rgba(248, 113, 113, .35);
+      background: rgba(248, 113, 113, .06);
+      color: #ffb0b0;
+      border-radius: 8px;
+      font-size: 11px;
+      line-height: 1.45;
+    }
 
-    @media (
-      max-width: 600px
-    ) {
-
+    @media (max-width: 600px) {
       .app {
-
-        width:
-          calc(100% - 12px);
-
-        margin-top:
-          7px;
-
+        width: calc(100% - 12px);
+        margin-top: 7px;
       }
 
       h1 {
-
-        font-size:
-          18px;
-
-      }
-
-      .stats {
-
-        gap:
-          5px;
-
+        font-size: 18px;
       }
 
       .stat {
-
-        padding:
-          8px 7px;
-
+        padding: 8px 7px;
       }
 
       .stat-label {
-
-        font-size:
-          9px;
-
+        font-size: 9px;
       }
 
       .stat-value {
-
-        font-size:
-          13px;
-
+        font-size: 13px;
       }
 
-      .quick-grid {
-
-        grid-template-columns:
-          1fr;
-
+      .compact-data {
+        gap: 4px 9px;
       }
 
-      .form-actions {
-
-        grid-template-columns:
-          1fr;
-
+      .compact-item {
+        font-size: 10px;
       }
-
-      .settle-grid {
-
-        grid-template-columns:
-          1fr;
-
-      }
-
     }
-
   </style>
-
 </head>
-
 
 <body>
 
 <div class="app">
 
-  <h1>RoyalOak</h1>
+  <div class="topbar">
+    <h1>RoyalOak</h1>
+
+    <button
+      id="syncButton"
+      class="sync-btn"
+      onclick="loadSheetTrades()"
+    >
+      ↻ 同步 Sheet
+    </button>
+  </div>
+
+
+  <div
+    id="syncStatus"
+    class="sync-status"
+  >
+    尚未同步
+  </div>
+
+
+  <div
+    id="errorBox"
+    class="error-box"
+  ></div>
 
 
   <div class="stats">
 
     <div class="stat">
-
       <div class="stat-label">
         總 PNL
       </div>
@@ -1085,12 +311,10 @@
       >
         0 U
       </div>
-
     </div>
 
 
     <div class="stat">
-
       <div class="stat-label">
         勝率
       </div>
@@ -1101,12 +325,10 @@
       >
         -
       </div>
-
     </div>
 
 
     <div class="stat">
-
       <div class="stat-label">
         總筆數
       </div>
@@ -1117,300 +339,6 @@
       >
         0
       </div>
-
-    </div>
-
-  </div>
-
-
-  <div class="top-actions">
-
-    <button
-      class="primary"
-      onclick="toggleQuickForm(true)"
-    >
-      + 快速新增
-    </button>
-
-
-    <button
-      id="syncButton"
-      class="secondary"
-      onclick="syncBingX()"
-    >
-      ↻ 同步 BingX
-    </button>
-
-  </div>
-
-
-  <div
-    id="syncPanel"
-    class="sync-panel"
-  >
-
-    <div
-      id="syncStatus"
-      class="sync-status"
-    >
-      尚未同步
-    </div>
-
-    <div id="bingxPositions">
-    </div>
-
-  </div>
-
-
-  <div class="panel">
-
-    <div
-      class="panel-header"
-      onclick="toggleQuickForm()"
-    >
-
-      <div>
-
-        <div class="panel-header-title">
-          快速新增交易
-        </div>
-
-        <div
-          id="formStatus"
-          class="panel-header-sub"
-        >
-          點擊展開
-        </div>
-
-      </div>
-
-
-      <div
-        id="formArrow"
-        class="arrow"
-      >
-        ▼
-      </div>
-
-    </div>
-
-
-    <div
-      id="quickForm"
-      class="panel-content"
-    >
-
-      <div
-        id="editingBanner"
-        class="editing-banner"
-      ></div>
-
-
-      <div class="quick-grid">
-
-        <div class="field">
-
-          <label>
-            交易標的
-          </label>
-
-          <input
-            id="symbol"
-            placeholder="ZEC"
-          >
-
-        </div>
-
-
-        <div class="field">
-
-          <label>
-            方向
-          </label>
-
-          <div class="direction-buttons">
-
-            <button
-              id="longButton"
-              class="
-                direction-button
-                long
-                active
-              "
-              onclick="
-                setSide('LONG')
-              "
-              type="button"
-            >
-              LONG
-            </button>
-
-
-            <button
-              id="shortButton"
-              class="
-                direction-button
-                short
-              "
-              onclick="
-                setSide('SHORT')
-              "
-              type="button"
-            >
-              SHORT
-            </button>
-
-          </div>
-
-        </div>
-
-
-        <div class="field">
-
-          <label>
-            Entry
-          </label>
-
-          <input
-            id="entry"
-            type="number"
-            step="any"
-          >
-
-        </div>
-
-
-        <div class="field">
-
-          <label>
-            SL
-          </label>
-
-          <input
-            id="sl"
-            type="number"
-            step="any"
-          >
-
-        </div>
-
-
-        <div class="field">
-
-          <label>
-            TP1
-          </label>
-
-          <input
-            id="tp1"
-            type="number"
-            step="any"
-          >
-
-        </div>
-
-
-        <div class="field">
-
-          <label>
-            FTP
-          </label>
-
-          <input
-            id="ftp"
-            type="number"
-            step="any"
-          >
-
-        </div>
-
-      </div>
-
-
-      <div
-        class="more-toggle"
-        onclick="toggleMoreOptions()"
-      >
-        + 更多設定
-      </div>
-
-
-      <div
-        id="moreOptions"
-        class="more-options"
-      >
-
-        <div class="quick-grid">
-
-          <div class="field">
-
-            <label>
-              TP2
-            </label>
-
-            <input
-              id="tp2"
-              type="number"
-              step="any"
-            >
-
-          </div>
-
-
-          <div class="field">
-
-            <label>
-              槓桿
-            </label>
-
-            <input
-              id="leverage"
-              type="number"
-              step="1"
-            >
-
-          </div>
-
-
-          <div class="field full">
-
-            <label>
-              備註
-            </label>
-
-            <textarea
-              id="note"
-            ></textarea>
-
-          </div>
-
-        </div>
-
-      </div>
-
-
-      <div class="form-actions">
-
-        <button
-          id="saveButton"
-          class="primary"
-          onclick="saveTrade()"
-        >
-          新增交易
-        </button>
-
-
-        <button
-          id="cancelEditButton"
-          class="secondary"
-          onclick="cancelEdit()"
-          style="display:none;"
-        >
-          取消編輯
-        </button>
-
-      </div>
-
     </div>
 
   </div>
@@ -1420,16 +348,14 @@
     未結束
   </div>
 
-  <div id="openTrades">
-  </div>
+  <div id="openTrades"></div>
 
 
   <div class="section-title">
     已結束
   </div>
 
-  <div id="closedTrades">
-  </div>
+  <div id="closedTrades"></div>
 
 </div>
 
@@ -1437,56 +363,23 @@
 <script>
 
   /*
-    改成你的 Google Apps Script
-    Web App /exec URL
+    Google Sheet:
+    檔案 → 共用 → 發布到網路 → CSV
+
+    把網址貼在這裡
   */
-  const BINGX_SYNC_URL =
-    "https://script.google.com/macros/s/你的部署ID/exec";
+  const SHEET_CSV_URL =
+    "https://docs.google.com/spreadsheets/d/1tPLSXTk56Z-ylsDjz5VQ4R_30J4OFpGAVUmtxujqupE/edit?gid=0#gid=0";
 
 
-  let trades =
-    JSON.parse(
-      localStorage.getItem(
-        "tradeJournal"
-      )
-    ) || [];
+  let trades = [];
 
 
-  let currentSide =
-    "LONG";
+  async function loadSheetTrades() {
 
-  let editingId =
-    null;
-
-  let settlingId =
-    null;
-
-
-  /* =========================
-     BingX 同步
-  ========================= */
-
-  function syncBingX() {
-
-    if (
-      !BINGX_SYNC_URL ||
-      BINGX_SYNC_URL.includes(
-        "你的部署ID"
-      )
-    ) {
-
-      alert(
-        "請先設定 BINGX_SYNC_URL"
-      );
-
-      return;
-
-    }
-
-
-    const panel =
+    const button =
       document.getElementById(
-        "syncPanel"
+        "syncButton"
       );
 
     const status =
@@ -1494,612 +387,548 @@
         "syncStatus"
       );
 
-    const button =
+    const errorBox =
       document.getElementById(
-        "syncButton"
+        "errorBox"
       );
 
 
-    panel.classList.add(
-      "open"
-    );
+    errorBox.style.display =
+      "none";
+
+    errorBox.textContent =
+      "";
 
 
-    status.textContent =
-      "正在同步 BingX...";
+    if (
+      !SHEET_CSV_URL ||
+      SHEET_CSV_URL.includes(
+        "你的 Google Sheet"
+      )
+    ) {
+
+      showError(
+        "請先在 index.html 設定 SHEET_CSV_URL"
+      );
+
+      return;
+
+    }
 
 
     button.disabled =
       true;
 
-
-    const callbackName =
-      "bingxCallback_" +
-      Date.now();
+    status.textContent =
+      "正在讀取 Google Sheet...";
 
 
-    const script =
-      document.createElement(
-        "script"
-      );
+    try {
 
-
-    const timeout =
-      setTimeout(
-        function() {
-
-          cleanup();
-
-          status.textContent =
-            "同步逾時";
-
-          button.disabled =
-            false;
-
-        },
-        15000
-      );
-
-
-    window[callbackName] =
-      function(data) {
-
-        clearTimeout(
-          timeout
+      const response =
+        await fetch(
+          SHEET_CSV_URL +
+          (
+            SHEET_CSV_URL.includes("?")
+              ? "&"
+              : "?"
+          ) +
+          "_=" +
+          Date.now(),
+          {
+            cache:
+              "no-store"
+          }
         );
 
 
-        cleanup();
+      if (!response.ok) {
 
-
-        button.disabled =
-          false;
-
-
-        if (
-          !data ||
-          !data.success
-        ) {
-
-          status.textContent =
-            "同步失敗：" +
-            (
-              data?.message ||
-              "未知錯誤"
-            );
-
-          return;
-
-        }
-
-
-        const positions =
-          Array.isArray(
-            data.positions
-          )
-            ? data.positions
-            : [];
-
-
-        status.textContent =
-          "找到 " +
-          positions.length +
-          " 筆未平倉持倉";
-
-
-        renderBingXPositions(
-          positions
+        throw new Error(
+          "HTTP " +
+          response.status
         );
 
-      };
+      }
 
 
-    function cleanup() {
+      const csvText =
+        await response.text();
 
-      try {
 
-        delete window[
-          callbackName
-        ];
+      const rows =
+        parseCSV(
+          csvText
+        );
 
-      } catch (e) {
+
+      trades =
+        rowsToTrades(
+          rows
+        );
+
+
+      render();
+
+
+      status.textContent =
+        "同步完成，共 " +
+        trades.length +
+        " 筆交易";
+
+
+    } catch (error) {
+
+      showError(
+        "讀取失敗：" +
+        (
+          error.message ||
+          String(error)
+        )
+      );
+
+
+      status.textContent =
+        "同步失敗";
+
+    } finally {
+
+      button.disabled =
+        false;
+
+    }
+
+  }
+
+
+  function showError(
+    message
+  ) {
+
+    const errorBox =
+      document.getElementById(
+        "errorBox"
+      );
+
+
+    errorBox.textContent =
+      message;
+
+    errorBox.style.display =
+      "block";
+
+  }
+
+
+  /*
+    簡單 CSV Parser
+    支援：
+    - 逗號
+    - 雙引號
+    - 欄位內逗號
+    - 換行
+  */
+  function parseCSV(text) {
+
+    const rows = [];
+
+    let row = [];
+    let value = "";
+
+    let insideQuotes =
+      false;
+
+
+    for (
+      let i = 0;
+      i < text.length;
+      i++
+    ) {
+
+      const char =
+        text[i];
+
+      const next =
+        text[i + 1];
+
+
+      if (
+        char === '"' &&
+        insideQuotes &&
+        next === '"'
+      ) {
+
+        value += '"';
+
+        i++;
+
+        continue;
 
       }
 
 
       if (
-        script.parentNode
+        char === '"'
       ) {
 
-        script.parentNode
-          .removeChild(
-            script
+        insideQuotes =
+          !insideQuotes;
+
+        continue;
+
+      }
+
+
+      if (
+        char === "," &&
+        !insideQuotes
+      ) {
+
+        row.push(
+          value
+        );
+
+        value = "";
+
+        continue;
+
+      }
+
+
+      if (
+        (
+          char === "\n" ||
+          char === "\r"
+        ) &&
+        !insideQuotes
+      ) {
+
+        if (
+          char === "\r" &&
+          next === "\n"
+        ) {
+
+          i++;
+
+        }
+
+
+        row.push(
+          value
+        );
+
+        value = "";
+
+
+        const hasData =
+          row.some(
+            cell =>
+              String(cell)
+                .trim() !== ""
           );
+
+
+        if (hasData) {
+
+          rows.push(
+            row
+          );
+
+        }
+
+
+        row = [];
+
+        continue;
+
+      }
+
+
+      value += char;
+
+    }
+
+
+    if (
+      value !== "" ||
+      row.length > 0
+    ) {
+
+      row.push(
+        value
+      );
+
+
+      const hasData =
+        row.some(
+          cell =>
+            String(cell)
+              .trim() !== ""
+        );
+
+
+      if (hasData) {
+
+        rows.push(
+          row
+        );
 
       }
 
     }
 
 
-    script.onerror =
-      function() {
-
-        clearTimeout(
-          timeout
-        );
-
-
-        cleanup();
-
-
-        button.disabled =
-          false;
-
-
-        status.textContent =
-          "同步失敗：無法連線 Apps Script";
-
-      };
-
-
-    script.src =
-      BINGX_SYNC_URL +
-      "?callback=" +
-      encodeURIComponent(
-        callbackName
-      ) +
-      "&_=" +
-      Date.now();
-
-
-    document.body.appendChild(
-      script
-    );
+    return rows;
 
   }
 
 
-  function renderBingXPositions(
-    positions
+  function rowsToTrades(
+    rows
   ) {
 
-    const container =
-      document.getElementById(
-        "bingxPositions"
-      );
-
-
-    container.innerHTML =
-      "";
-
-
     if (
-      positions.length === 0
+      !rows ||
+      rows.length < 2
     ) {
 
-      container.innerHTML = `
-        <div class="empty">
-          BingX 目前沒有未平倉持倉
-        </div>
-      `;
-
-      return;
+      return [];
 
     }
 
 
-    positions.forEach(
-      function(position) {
+    const headers =
+      rows[0]
+        .map(
+          header =>
+            String(header)
+              .trim()
+              .toLowerCase()
+        );
 
-        const exists =
-          trades.some(
-            function(trade) {
 
-              return (
-                trade.status !==
-                  "CLOSED" &&
-                trade.bingxPositionId &&
-                String(
-                  trade.bingxPositionId
-                ) ===
-                String(
-                  position.positionId
-                )
-              );
+    const required =
+      [
+        "symbol",
+        "side",
+        "entry"
+      ];
+
+
+    const missing =
+      required.filter(
+        key =>
+          !headers.includes(
+            key
+          )
+      );
+
+
+    if (
+      missing.length
+    ) {
+
+      throw new Error(
+        "Google Sheet 缺少欄位：" +
+        missing.join(", ")
+      );
+
+    }
+
+
+    return rows
+      .slice(1)
+      .map(
+        (row, index) => {
+
+          const obj = {};
+
+
+          headers.forEach(
+            (
+              header,
+              columnIndex
+            ) => {
+
+              obj[header] =
+                row[columnIndex] ??
+                "";
 
             }
           );
 
 
-        const row =
-          document.createElement(
-            "div"
-          );
-
-
-        row.className =
-          "bingx-position";
-
-
-        row.innerHTML = `
-
-          <div class="
-            bingx-position-top
-          ">
-
-            <div class="
-              bingx-symbol
-            ">
-              ${escapeHTML(
-                normalizeSymbol(
-                  position.symbol
-                )
-              )}
-            </div>
-
-
-            <div
-              class="
-                bingx-side
-                ${
-                  position.side ===
-                  "LONG"
-                    ? "long"
-                    : "short"
-                }
-              "
-            >
-              ${escapeHTML(
-                position.side
-              )}
-            </div>
-
-          </div>
-
-
-          <div class="
-            bingx-info
-          ">
-
-            <span>
-              Entry
-              ${formatNumber(
-                position.entryPrice
-              )}
-            </span>
-
-            <span>
-              ${formatNumber(
-                position.leverage
-              )}x
-            </span>
-
-            <span>
-              Qty
-              ${formatNumber(
-                position.quantity
-              )}
-            </span>
-
-            <span
-              class="${
-                Number(
-                  position.unrealizedPnL
-                ) >= 0
-                  ? "positive"
-                  : "negative"
-              }"
-            >
-              uPNL
-              ${formatPnL(
-                position.unrealizedPnL
-              )}
-            </span>
-
-          </div>
-
-
-          <div class="
-            bingx-position-actions
-          ">
-
-            <button
-              class="${
-                exists
-                  ? "secondary"
-                  : "primary"
-              }"
-              ${
-                exists
-                  ? "disabled"
-                  : ""
-              }
-              onclick='importBingXPosition(
-                ${JSON.stringify(
-                  position
-                )}
-              )'
-            >
-              ${
-                exists
-                  ? "已匯入"
-                  : "匯入"
-              }
-            </button>
-
-          </div>
-
-        `;
-
-
-        container.appendChild(
-          row
-        );
-
-      }
-    );
-
-  }
-
-
-  function importBingXPosition(
-    position
-  ) {
-
-    const exists =
-      trades.some(
-        function(trade) {
-
-          return (
-            trade.status !==
-              "CLOSED" &&
-            trade.bingxPositionId &&
+          const symbol =
             String(
-              trade.bingxPositionId
-            ) ===
-            String(
-              position.positionId
+              obj.symbol || ""
             )
-          );
+              .trim()
+              .toUpperCase();
+
+
+          const side =
+            String(
+              obj.side || ""
+            )
+              .trim()
+              .toUpperCase();
+
+
+          const status =
+            String(
+              obj.status || "OPEN"
+            )
+              .trim()
+              .toUpperCase();
+
+
+          const result =
+            String(
+              obj.result || ""
+            )
+              .trim()
+              .toUpperCase();
+
+
+          const entry =
+            toNumberOrNull(
+              obj.entry
+            );
+
+
+          const sl =
+            toNumberOrNull(
+              obj.sl
+            );
+
+
+          const tp1 =
+            toNumberOrNull(
+              obj.tp1
+            );
+
+
+          const tp2 =
+            toNumberOrNull(
+              obj.tp2
+            );
+
+
+          const ftp =
+            toNumberOrNull(
+              obj.ftp
+            );
+
+
+          const leverage =
+            toNumberOrNull(
+              obj.leverage
+            );
+
+
+          const pnl =
+            toNumberOrNull(
+              obj.pnl
+            );
+
+
+          return {
+
+            id:
+              index + 1,
+
+            symbol,
+
+            side:
+              side === "SHORT"
+                ? "SHORT"
+                : "LONG",
+
+            entry,
+
+            sl,
+
+            tp1,
+
+            tp2,
+
+            ftp,
+
+            leverage,
+
+            status:
+              status === "CLOSED"
+                ? "CLOSED"
+                : "OPEN",
+
+            result,
+
+            pnl,
+
+            note:
+              String(
+                obj.note || ""
+              ).trim(),
+
+            rrTP1:
+              calculateRR(
+                side,
+                entry,
+                sl,
+                tp1
+              ),
+
+            rrFTP:
+              calculateRR(
+                side,
+                entry,
+                sl,
+                ftp
+              )
+
+          };
 
         }
+      )
+      .filter(
+        trade =>
+          trade.symbol &&
+          trade.entry !== null
       );
-
-
-    if (exists) {
-
-      alert(
-        "這筆 BingX 持倉已經匯入"
-      );
-
-      return;
-
-    }
-
-
-    const symbol =
-      normalizeSymbol(
-        position.symbol
-      );
-
-
-    trades.unshift({
-
-      id:
-        Date.now(),
-
-      bingxPositionId:
-        String(
-          position.positionId ||
-          ""
-        ),
-
-      source:
-        "BINGX",
-
-      symbol:
-        symbol,
-
-      side:
-        String(
-          position.side ||
-          "LONG"
-        ).toUpperCase(),
-
-      entry:
-        Number(
-          position.entryPrice ||
-          0
-        ),
-
-      sl:
-        null,
-
-      tp1:
-        null,
-
-      tp2:
-        null,
-
-      ftp:
-        null,
-
-      leverage:
-        Number(
-          position.leverage ||
-          0
-        ),
-
-      quantity:
-        Number(
-          position.quantity ||
-          0
-        ),
-
-      unrealizedPnL:
-        Number(
-          position.unrealizedPnL ||
-          0
-        ),
-
-      note:
-        "",
-
-      rrTP1:
-        null,
-
-      rrFTP:
-        null,
-
-      status:
-        "OPEN",
-
-      result:
-        null,
-
-      pnl:
-        null
-
-    });
-
-
-    saveStorage();
-
-    render();
-
-
-    syncBingX();
 
   }
 
 
-  function normalizeSymbol(
-    symbol
+  function toNumberOrNull(
+    value
   ) {
-
-    return String(
-      symbol || ""
-    )
-      .replace(
-        "-USDT",
-        ""
-      )
-      .replace(
-        "/USDT",
-        ""
-      )
-      .replace(
-        "USDT",
-        ""
-      )
-      .toUpperCase();
-
-  }
-
-
-  /* =========================
-     基本功能
-  ========================= */
-
-  function value(id) {
-
-    return document
-      .getElementById(id)
-      .value;
-
-  }
-
-
-  function saveStorage() {
-
-    localStorage.setItem(
-      "tradeJournal",
-      JSON.stringify(
-        trades
-      )
-    );
-
-  }
-
-
-  function escapeHTML(value) {
-
-    return String(
-      value ?? ""
-    )
-      .replaceAll(
-        "&",
-        "&amp;"
-      )
-      .replaceAll(
-        "<",
-        "&lt;"
-      )
-      .replaceAll(
-        ">",
-        "&gt;"
-      )
-      .replaceAll(
-        '"',
-        "&quot;"
-      )
-      .replaceAll(
-        "'",
-        "&#039;"
-      );
-
-  }
-
-
-  function formatNumber(value) {
 
     if (
       value === null ||
       value === undefined ||
-      value === ""
+      String(value).trim() === ""
     ) {
 
-      return "-";
+      return null;
 
     }
 
 
-    return Number(
-      value
-    ).toLocaleString(
-      undefined,
-      {
-        maximumFractionDigits:
-          8
-      }
-    );
-
-  }
-
-
-  function formatPnL(pnl) {
-
-    if (
-      pnl === null ||
-      pnl === undefined
-    ) {
-
-      return "-";
-
-    }
+    const normalized =
+      String(value)
+        .replaceAll(",", "")
+        .trim();
 
 
     const number =
-      Number(pnl);
+      Number(normalized);
 
 
-    return (
-      number > 0
-        ? "+"
-        : ""
-    ) +
-    number.toFixed(2) +
-    " U";
+    return Number.isFinite(
+      number
+    )
+      ? number
+      : null;
 
   }
 
@@ -2146,9 +975,13 @@
 
 
     const reward =
-      side === "LONG"
-        ? target - entry
-        : entry - target;
+      String(side)
+        .toUpperCase() ===
+        "SHORT"
+
+        ? entry - target
+
+        : target - entry;
 
 
     return (
@@ -2159,7 +992,36 @@
   }
 
 
-  function formatRR(rr) {
+  function formatNumber(
+    value
+  ) {
+
+    if (
+      value === null ||
+      value === undefined ||
+      value === ""
+    ) {
+
+      return "-";
+
+    }
+
+
+    return Number(value)
+      .toLocaleString(
+        undefined,
+        {
+          maximumFractionDigits:
+            8
+        }
+      );
+
+  }
+
+
+  function formatRR(
+    rr
+  ) {
 
     if (
       rr === null ||
@@ -2180,671 +1042,88 @@
   }
 
 
-  /* =========================
-     Form
-  ========================= */
-
-  function toggleQuickForm(
-    force = null
+  function formatPnL(
+    pnl
   ) {
 
-    const form =
-      document.getElementById(
-        "quickForm"
-      );
-
-    const arrow =
-      document.getElementById(
-        "formArrow"
-      );
-
-    const status =
-      document.getElementById(
-        "formStatus"
-      );
-
-
-    let open;
-
-
     if (
-      force === true
+      pnl === null ||
+      pnl === undefined
     ) {
 
-      open = true;
-
-    } else if (
-      force === false
-    ) {
-
-      open = false;
-
-    } else {
-
-      open =
-        !form.classList
-          .contains(
-            "open"
-          );
+      return "-";
 
     }
 
 
-    form.classList.toggle(
-      "open",
-      open
-    );
+    const number =
+      Number(pnl);
 
 
-    arrow.classList.toggle(
-      "open",
-      open
-    );
-
-
-    status.textContent =
-      open
-        ? "點擊收合"
-        : "點擊展開";
+    return (
+      number > 0
+        ? "+"
+        : ""
+    ) +
+    number.toFixed(2) +
+    " U";
 
   }
 
 
-  function toggleMoreOptions(
-    force = null
+  function escapeHTML(
+    value
   ) {
 
-    const box =
-      document.getElementById(
-        "moreOptions"
-      );
-
-
-    if (
-      force === true
-    ) {
-
-      box.classList.add(
-        "open"
-      );
-
-    } else if (
-      force === false
-    ) {
-
-      box.classList.remove(
-        "open"
-      );
-
-    } else {
-
-      box.classList.toggle(
-        "open"
-      );
-
-    }
-
-  }
-
-
-  function setSide(side) {
-
-    currentSide =
-      side;
-
-
-    document
-      .getElementById(
-        "longButton"
+    return String(
+      value ?? ""
+    )
+      .replaceAll(
+        "&",
+        "&amp;"
       )
-      .classList.toggle(
-        "active",
-        side === "LONG"
-      );
-
-
-    document
-      .getElementById(
-        "shortButton"
+      .replaceAll(
+        "<",
+        "&lt;"
       )
-      .classList.toggle(
-        "active",
-        side === "SHORT"
+      .replaceAll(
+        ">",
+        "&gt;"
+      )
+      .replaceAll(
+        '"',
+        "&quot;"
+      )
+      .replaceAll(
+        "'",
+        "&#039;"
       );
 
   }
 
 
-  function saveTrade() {
+  function getResultText(
+    result
+  ) {
 
-    const symbol =
-      value("symbol")
-        .trim()
-        .toUpperCase();
-
-
-    const entry =
-      Number(
-        value("entry")
-      );
-
-
-    const sl =
-      Number(
-        value("sl")
-      );
-
-
-    const tp1 =
-      Number(
-        value("tp1")
-      ) || null;
-
-
-    const ftp =
-      Number(
-        value("ftp")
-      ) || null;
-
-
-    if (!symbol) {
-
-      alert(
-        "請輸入交易標的"
-      );
-
-      return;
-
-    }
-
-
-    if (!entry) {
-
-      alert(
-        "請輸入 Entry"
-      );
-
-      return;
-
-    }
-
-
-    const tradeData = {
-
-      symbol,
-
-      side:
-        currentSide,
-
-      entry,
-
-      sl:
-        sl || null,
-
-      tp1,
-
-      tp2:
-        Number(
-          value("tp2")
-        ) || null,
-
-      ftp,
-
-      leverage:
-        Number(
-          value("leverage")
-        ) || null,
-
-      note:
-        value("note")
-          .trim(),
-
-      rrTP1:
-        calculateRR(
-          currentSide,
-          entry,
-          sl,
-          tp1
-        ),
-
-      rrFTP:
-        calculateRR(
-          currentSide,
-          entry,
-          sl,
-          ftp
-        )
-
+    const map = {
+      TP1: "TP1",
+      TP2: "TP2",
+      FTP: "FTP",
+      SL: "SL",
+      MANUAL: "手動",
+      "手動平倉": "手動"
     };
 
 
-    if (
-      editingId !== null
-    ) {
-
-      const index =
-        trades.findIndex(
-          trade =>
-            trade.id ===
-            editingId
-        );
-
-
-      if (
-        index !== -1
-      ) {
-
-        trades[index] = {
-          ...trades[index],
-          ...tradeData
-        };
-
-      }
-
-    } else {
-
-      trades.unshift({
-
-        id:
-          Date.now(),
-
-        source:
-          "MANUAL",
-
-        status:
-          "OPEN",
-
-        result:
-          null,
-
-        pnl:
-          null,
-
-        ...tradeData
-
-      });
-
-    }
-
-
-    saveStorage();
-
-    resetForm();
-
-    toggleQuickForm(
-      false
+    return (
+      map[result] ||
+      result ||
+      "已結束"
     );
 
-    render();
-
   }
 
-
-  function editTrade(id) {
-
-    const trade =
-      trades.find(
-        trade =>
-          trade.id === id
-      );
-
-
-    if (!trade) {
-      return;
-    }
-
-
-    editingId =
-      id;
-
-
-    toggleQuickForm(
-      true
-    );
-
-
-    setSide(
-      trade.side
-    );
-
-
-    document
-      .getElementById(
-        "symbol"
-      )
-      .value =
-        trade.symbol ||
-        "";
-
-
-    document
-      .getElementById(
-        "entry"
-      )
-      .value =
-        trade.entry ??
-        "";
-
-
-    document
-      .getElementById(
-        "sl"
-      )
-      .value =
-        trade.sl ??
-        "";
-
-
-    document
-      .getElementById(
-        "tp1"
-      )
-      .value =
-        trade.tp1 ??
-        "";
-
-
-    document
-      .getElementById(
-        "ftp"
-      )
-      .value =
-        trade.ftp ??
-        "";
-
-
-    document
-      .getElementById(
-        "tp2"
-      )
-      .value =
-        trade.tp2 ??
-        "";
-
-
-    document
-      .getElementById(
-        "leverage"
-      )
-      .value =
-        trade.leverage ??
-        "";
-
-
-    document
-      .getElementById(
-        "note"
-      )
-      .value =
-        trade.note ||
-        "";
-
-
-    document
-      .getElementById(
-        "saveButton"
-      )
-      .textContent =
-        "更新交易";
-
-
-    document
-      .getElementById(
-        "cancelEditButton"
-      )
-      .style.display =
-        "block";
-
-
-    const banner =
-      document
-        .getElementById(
-          "editingBanner"
-        );
-
-
-    banner.style.display =
-      "block";
-
-
-    banner.textContent =
-      "正在編輯：" +
-      trade.symbol +
-      " / " +
-      trade.side;
-
-
-    if (
-      trade.tp2 ||
-      trade.leverage ||
-      trade.note
-    ) {
-
-      toggleMoreOptions(
-        true
-      );
-
-    }
-
-  }
-
-
-  function cancelEdit() {
-
-    resetForm();
-
-  }
-
-
-  function resetForm() {
-
-    editingId =
-      null;
-
-
-    [
-      "symbol",
-      "entry",
-      "sl",
-      "tp1",
-      "ftp",
-      "tp2",
-      "leverage",
-      "note"
-    ].forEach(
-      function(id) {
-
-        document
-          .getElementById(id)
-          .value =
-            "";
-
-      }
-    );
-
-
-    setSide(
-      "LONG"
-    );
-
-
-    toggleMoreOptions(
-      false
-    );
-
-
-    document
-      .getElementById(
-        "saveButton"
-      )
-      .textContent =
-        "新增交易";
-
-
-    document
-      .getElementById(
-        "cancelEditButton"
-      )
-      .style.display =
-        "none";
-
-
-    document
-      .getElementById(
-        "editingBanner"
-      )
-      .style.display =
-        "none";
-
-  }
-
-
-  /* =========================
-     結算
-  ========================= */
-
-  function toggleSettle(id) {
-
-    settlingId =
-      settlingId === id
-        ? null
-        : id;
-
-
-    render();
-
-  }
-
-
-  function settleTrade(id) {
-
-    const result =
-      document
-        .getElementById(
-          "result-" + id
-        )
-        .value;
-
-
-    const pnlInput =
-      document
-        .getElementById(
-          "pnl-" + id
-        )
-        .value;
-
-
-    if (
-      pnlInput === ""
-    ) {
-
-      alert(
-        "請輸入實際盈虧"
-      );
-
-      return;
-
-    }
-
-
-    const trade =
-      trades.find(
-        trade =>
-          trade.id === id
-      );
-
-
-    if (!trade) {
-      return;
-    }
-
-
-    trade.status =
-      "CLOSED";
-
-
-    trade.result =
-      result;
-
-
-    trade.pnl =
-      Number(
-        pnlInput
-      );
-
-
-    settlingId =
-      null;
-
-
-    saveStorage();
-
-    render();
-
-  }
-
-
-  function reopenTrade(id) {
-
-    const trade =
-      trades.find(
-        trade =>
-          trade.id === id
-      );
-
-
-    if (!trade) {
-      return;
-    }
-
-
-    trade.status =
-      "OPEN";
-
-    trade.result =
-      null;
-
-    trade.pnl =
-      null;
-
-
-    saveStorage();
-
-    render();
-
-  }
-
-
-  function deleteTrade(id) {
-
-    if (
-      !confirm(
-        "確定刪除這筆交易？"
-      )
-    ) {
-
-      return;
-
-    }
-
-
-    trades =
-      trades.filter(
-        trade =>
-          trade.id !== id
-      );
-
-
-    saveStorage();
-
-    render();
-
-  }
-
-
-  /* =========================
-     卡片
-  ========================= */
 
   function createTradeCard(
     trade
@@ -2865,29 +1144,89 @@
       "trade-card";
 
 
-    const resultClass =
-      isOpen
-        ? "open"
-        : Number(
-            trade.pnl
-          ) >= 0
-            ? "win"
-            : "loss";
+    let statusClass =
+      "open";
+
+    let statusText =
+      "未結束";
 
 
-    const resultText =
-      isOpen
-        ? "未結束"
-        : escapeHTML(
-            trade.result
-          );
+    if (!isOpen) {
+
+      if (
+        Number(
+          trade.pnl
+        ) > 0
+      ) {
+
+        statusClass =
+          "win";
+
+      } else {
+
+        statusClass =
+          "loss";
+
+      }
+
+
+      statusText =
+        getResultText(
+          trade.result
+        );
+
+    }
+
+
+    const extra = [];
+
+
+    if (
+      trade.tp2 !== null
+    ) {
+
+      extra.push(
+        "TP2 " +
+        formatNumber(
+          trade.tp2
+        )
+      );
+
+    }
+
+
+    if (
+      trade.leverage !== null
+    ) {
+
+      extra.push(
+        "槓桿 " +
+        formatNumber(
+          trade.leverage
+        ) +
+        "x"
+      );
+
+    }
+
+
+    if (
+      trade.note
+    ) {
+
+      extra.push(
+        "備註：" +
+        escapeHTML(
+          trade.note
+        )
+      );
+
+    }
 
 
     card.innerHTML = `
 
-      <div class="
-        trade-title-row
-      ">
+      <div class="trade-title-row">
 
         <span class="symbol">
           ${escapeHTML(
@@ -2900,8 +1239,7 @@
           class="
             side
             ${
-              trade.side ===
-              "LONG"
+              trade.side === "LONG"
                 ? "long"
                 : "short"
             }
@@ -2916,67 +1254,46 @@
         <span
           class="
             status
-            ${resultClass}
+            ${statusClass}
           "
         >
-          ${resultText}
+          ${escapeHTML(
+            statusText
+          )}
         </span>
-
-
-        ${
-          trade.source ===
-          "BINGX"
-            ? `
-              <span
-                style="
-                  font-size:9px;
-                  color:#8fa0ff;
-                "
-              >
-                BingX
-              </span>
-            `
-            : ""
-        }
 
       </div>
 
 
-      <div class="
-        entry-line
-      ">
+      <div class="entry-line">
+
         Entry
         ${formatNumber(
           trade.entry
         )}
 
         ${
-          trade.leverage
+          trade.leverage !== null
             ? " · " +
-              trade.leverage +
+              formatNumber(
+                trade.leverage
+              ) +
               "x"
             : ""
         }
+
       </div>
 
 
-      <div class="
-        compact-data
-      ">
+      <div class="compact-data">
 
-        <div class="
-          compact-item
-        ">
+        <div class="compact-item">
 
-          <span class="
-            compact-label
-          ">
+          <span class="compact-label">
             SL
           </span>
 
-          <span class="
-            compact-value
-          ">
+          <span class="compact-value">
             ${formatNumber(
               trade.sl
             )}
@@ -2985,19 +1302,13 @@
         </div>
 
 
-        <div class="
-          compact-item
-        ">
+        <div class="compact-item">
 
-          <span class="
-            compact-label
-          ">
+          <span class="compact-label">
             TP1
           </span>
 
-          <span class="
-            compact-value
-          ">
+          <span class="compact-value">
             ${formatNumber(
               trade.tp1
             )}
@@ -3006,19 +1317,13 @@
         </div>
 
 
-        <div class="
-          compact-item
-        ">
+        <div class="compact-item">
 
-          <span class="
-            compact-label
-          ">
+          <span class="compact-label">
             FTP
           </span>
 
-          <span class="
-            compact-value
-          ">
+          <span class="compact-value">
             ${formatNumber(
               trade.ftp
             )}
@@ -3027,19 +1332,13 @@
         </div>
 
 
-        <div class="
-          compact-item
-        ">
+        <div class="compact-item">
 
-          <span class="
-            compact-label
-          ">
+          <span class="compact-label">
             RR
           </span>
 
-          <span class="
-            compact-value
-          ">
+          <span class="compact-value">
             ${formatRR(
               trade.rrFTP
             )}
@@ -3051,14 +1350,10 @@
 
 
       ${
-        trade.note
+        extra.length
           ? `
-            <div class="
-              card-extra
-            ">
-              ${escapeHTML(
-                trade.note
-              )}
+            <div class="card-extra">
+              ${extra.join("<br>")}
             </div>
           `
           : ""
@@ -3066,7 +1361,8 @@
 
 
       ${
-        !isOpen
+        !isOpen &&
+        trade.pnl !== null
           ? `
             <div
               class="
@@ -3088,17 +1384,6 @@
           : ""
       }
 
-
-      ${
-        isOpen
-          ? openCardActions(
-              trade
-            )
-          : closedCardActions(
-              trade
-            )
-      }
-
     `;
 
 
@@ -3107,230 +1392,22 @@
   }
 
 
-  function openCardActions(
-    trade
-  ) {
-
-    const opened =
-      settlingId ===
-      trade.id;
-
-
-    return `
-
-      <div class="
-        card-actions
-      ">
-
-        <button
-          class="primary"
-          onclick="
-            toggleSettle(
-              ${trade.id}
-            )
-          "
-        >
-          結算
-        </button>
-
-
-        <button
-          class="secondary"
-          onclick="
-            editTrade(
-              ${trade.id}
-            )
-          "
-        >
-          編輯
-        </button>
-
-      </div>
-
-
-      <div
-        class="
-          settle-area
-          ${
-            opened
-              ? "open"
-              : ""
-          }
-        "
-      >
-
-        <div class="
-          settle-grid
-        ">
-
-          <div class="field">
-
-            <label>
-              結果
-            </label>
-
-            <select
-              id="
-                result-${trade.id}
-              "
-            >
-
-              <option value="TP1">
-                TP1
-              </option>
-
-              <option value="TP2">
-                TP2
-              </option>
-
-              <option value="FTP">
-                FTP
-              </option>
-
-              <option value="SL">
-                SL
-              </option>
-
-              <option value="MANUAL">
-                手動
-              </option>
-
-            </select>
-
-          </div>
-
-
-          <div class="field">
-
-            <label>
-              實際 PNL
-            </label>
-
-            <input
-              id="
-                pnl-${trade.id}
-              "
-              type="number"
-              step="any"
-            >
-
-          </div>
-
-        </div>
-
-
-        <div class="
-          settle-actions
-        ">
-
-          <button
-            class="primary"
-            onclick="
-              settleTrade(
-                ${trade.id}
-              )
-            "
-          >
-            完成
-          </button>
-
-
-          <button
-            class="secondary"
-            onclick="
-              toggleSettle(
-                ${trade.id}
-              )
-            "
-          >
-            取消
-          </button>
-
-        </div>
-
-      </div>
-
-    `;
-
-  }
-
-
-  function closedCardActions(
-    trade
-  ) {
-
-    return `
-
-      <div class="
-        card-actions
-        three
-      ">
-
-        <button
-          class="secondary"
-          onclick="
-            editTrade(
-              ${trade.id}
-            )
-          "
-        >
-          編輯
-        </button>
-
-
-        <button
-          class="secondary"
-          onclick="
-            reopenTrade(
-              ${trade.id}
-            )
-          "
-        >
-          重開
-        </button>
-
-
-        <button
-          class="danger"
-          onclick="
-            deleteTrade(
-              ${trade.id}
-            )
-          "
-        >
-          刪除
-        </button>
-
-      </div>
-
-    `;
-
-  }
-
-
-  /* =========================
-     Render
-  ========================= */
-
   function render() {
 
     const openContainer =
-      document
-        .getElementById(
-          "openTrades"
-        );
+      document.getElementById(
+        "openTrades"
+      );
 
 
     const closedContainer =
-      document
-        .getElementById(
-          "closedTrades"
-        );
+      document.getElementById(
+        "closedTrades"
+      );
 
 
     openContainer.innerHTML =
       "";
-
 
     closedContainer.innerHTML =
       "";
@@ -3423,8 +1500,15 @@
       );
 
 
-    const wins =
+    const tradesWithPnL =
       closed.filter(
+        trade =>
+          trade.pnl !== null
+      );
+
+
+    const wins =
+      tradesWithPnL.filter(
         trade =>
           Number(
             trade.pnl
@@ -3433,11 +1517,11 @@
 
 
     const totalPnL =
-      closed.reduce(
-        function(
+      tradesWithPnL.reduce(
+        (
           total,
           trade
-        ) {
+        ) => {
 
           return (
             total +
@@ -3452,23 +1536,22 @@
 
 
     const winRate =
-      closed.length
+      tradesWithPnL.length
         ? (
             wins.length /
-            closed.length *
+            tradesWithPnL.length *
             100
           ).toFixed(1)
         : null;
 
 
-    const pnl =
-      document
-        .getElementById(
-          "totalPnL"
-        );
+    const pnlElement =
+      document.getElementById(
+        "totalPnL"
+      );
 
 
-    pnl.textContent =
+    pnlElement.textContent =
       (
         totalPnL > 0
           ? "+"
@@ -3478,7 +1561,7 @@
       " U";
 
 
-    pnl.className =
+    pnlElement.className =
       "stat-value " +
       (
         totalPnL > 0
@@ -3514,5 +1597,4 @@
 </script>
 
 </body>
-
 </html>
