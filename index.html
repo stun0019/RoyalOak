@@ -1,17 +1,26 @@
 <!DOCTYPE html>
 <html lang="zh-Hant">
-<head>
-  <meta charset="UTF-8">
-  <meta name="viewport" content="width=device-width, initial-scale=1.0">
 
-  <title>Trade Journal</title>
+<head>
+
+  <meta charset="UTF-8">
+
+  <meta
+    name="viewport"
+    content="width=device-width, initial-scale=1.0"
+  >
+
+  <title>RoyalOak</title>
+
 
   <style>
+
     * {
       box-sizing: border-box;
     }
 
     :root {
+
       --bg: #0f1115;
       --card: #181b21;
       --card2: #111419;
@@ -24,61 +33,117 @@
       --green: #4ade80;
       --red: #f87171;
       --yellow: #facc15;
+
     }
 
     body {
+
       margin: 0;
+
       background: var(--bg);
       color: var(--text);
-      font-family: Arial, "Microsoft JhengHei", sans-serif;
+
+      font-family:
+        Arial,
+        "Microsoft JhengHei",
+        sans-serif;
+
     }
 
     button,
     input,
     select,
     textarea {
+
       font: inherit;
+
     }
 
     .app {
-      width: min(900px, calc(100% - 20px));
-      margin: 16px auto 50px;
+
+      width:
+        min(
+          900px,
+          calc(100% - 20px)
+        );
+
+      margin:
+        16px auto 50px;
+
     }
 
     h1 {
-      margin: 0 0 14px;
-      font-size: 22px;
+
+      margin:
+        0 0 14px;
+
+      font-size:
+        22px;
+
     }
+
 
     /* =========================
        統計
     ========================= */
 
     .stats {
+
       display: grid;
-      grid-template-columns: repeat(3, 1fr);
+
+      grid-template-columns:
+        repeat(3, 1fr);
+
       gap: 8px;
-      margin-bottom: 12px;
+
+      margin-bottom:
+        12px;
+
     }
 
     .stat {
-      background: var(--card);
-      border: 1px solid var(--border);
-      border-radius: 10px;
-      padding: 11px;
-      min-width: 0;
+
+      background:
+        var(--card);
+
+      border:
+        1px solid var(--border);
+
+      border-radius:
+        10px;
+
+      padding:
+        11px;
+
+      min-width:
+        0;
+
     }
 
     .stat-label {
-      font-size: 11px;
-      color: var(--muted);
-      margin-bottom: 4px;
+
+      font-size:
+        11px;
+
+      color:
+        var(--muted);
+
+      margin-bottom:
+        4px;
+
     }
 
     .stat-value {
-      font-size: 17px;
-      font-weight: bold;
-      word-break: break-word;
+
+      font-size:
+        17px;
+
+      font-weight:
+        bold;
+
+      word-break:
+        break-word;
+
     }
 
     .positive {
@@ -89,465 +154,1014 @@
       color: var(--red);
     }
 
+
     /* =========================
-       快速新增
+       頂部操作
+    ========================= */
+
+    .top-actions {
+
+      display: grid;
+
+      grid-template-columns:
+        1fr 1fr;
+
+      gap: 7px;
+
+      margin-bottom:
+        12px;
+
+    }
+
+    button {
+
+      border: 0;
+
+      border-radius:
+        8px;
+
+      padding:
+        9px 11px;
+
+      cursor:
+        pointer;
+
+      font-weight:
+        bold;
+
+      font-size:
+        12px;
+
+    }
+
+    .primary {
+
+      background:
+        var(--blue);
+
+      color:
+        white;
+
+    }
+
+    .secondary {
+
+      background:
+        #292f39;
+
+      color:
+        white;
+
+    }
+
+    .danger {
+
+      background:
+        #51272e;
+
+      color:
+        #ff9aa5;
+
+    }
+
+
+    /* =========================
+       BingX Sync
+    ========================= */
+
+    .sync-panel {
+
+      display:
+        none;
+
+      background:
+        var(--card);
+
+      border:
+        1px solid var(--border);
+
+      border-radius:
+        10px;
+
+      padding:
+        10px;
+
+      margin-bottom:
+        12px;
+
+    }
+
+    .sync-panel.open {
+
+      display:
+        block;
+
+    }
+
+    .sync-status {
+
+      font-size:
+        11px;
+
+      color:
+        var(--muted);
+
+      margin-bottom:
+        8px;
+
+    }
+
+    .bingx-position {
+
+      border:
+        1px solid var(--border);
+
+      background:
+        var(--card2);
+
+      border-radius:
+        8px;
+
+      padding:
+        9px;
+
+      margin-bottom:
+        6px;
+
+    }
+
+    .bingx-position:last-child {
+
+      margin-bottom:
+        0;
+
+    }
+
+    .bingx-position-top {
+
+      display:
+        flex;
+
+      justify-content:
+        space-between;
+
+      align-items:
+        center;
+
+      gap:
+        8px;
+
+    }
+
+    .bingx-symbol {
+
+      font-size:
+        13px;
+
+      font-weight:
+        bold;
+
+    }
+
+    .bingx-side {
+
+      font-size:
+        10px;
+
+      font-weight:
+        bold;
+
+    }
+
+    .bingx-side.long {
+      color: var(--green);
+    }
+
+    .bingx-side.short {
+      color: var(--red);
+    }
+
+    .bingx-info {
+
+      display:
+        flex;
+
+      flex-wrap:
+        wrap;
+
+      gap:
+        4px 10px;
+
+      margin-top:
+        6px;
+
+      font-size:
+        10px;
+
+      color:
+        var(--muted);
+
+    }
+
+    .bingx-position-actions {
+
+      margin-top:
+        7px;
+
+    }
+
+    .bingx-position-actions button {
+
+      width:
+        100%;
+
+      padding:
+        7px;
+
+    }
+
+
+    /* =========================
+       新增表單
     ========================= */
 
     .panel {
-      background: var(--card);
-      border: 1px solid var(--border);
-      border-radius: 11px;
-      margin-bottom: 14px;
-      overflow: hidden;
+
+      background:
+        var(--card);
+
+      border:
+        1px solid var(--border);
+
+      border-radius:
+        11px;
+
+      margin-bottom:
+        14px;
+
+      overflow:
+        hidden;
+
     }
 
     .panel-header {
-      padding: 13px 14px;
-      display: flex;
-      justify-content: space-between;
-      align-items: center;
-      cursor: pointer;
-      user-select: none;
+
+      padding:
+        13px 14px;
+
+      display:
+        flex;
+
+      justify-content:
+        space-between;
+
+      align-items:
+        center;
+
+      cursor:
+        pointer;
+
+      user-select:
+        none;
+
     }
 
     .panel-header-title {
-      font-size: 14px;
-      font-weight: bold;
+
+      font-size:
+        14px;
+
+      font-weight:
+        bold;
+
     }
 
     .panel-header-sub {
-      margin-top: 3px;
-      font-size: 11px;
-      color: var(--muted);
+
+      margin-top:
+        3px;
+
+      font-size:
+        11px;
+
+      color:
+        var(--muted);
+
     }
 
     .arrow {
-      font-size: 12px;
-      transition: transform .2s;
+
+      font-size:
+        12px;
+
+      transition:
+        transform .2s;
+
     }
 
     .arrow.open {
-      transform: rotate(180deg);
+
+      transform:
+        rotate(180deg);
+
     }
 
     .panel-content {
-      display: none;
-      padding: 0 14px 14px;
+
+      display:
+        none;
+
+      padding:
+        0 14px 14px;
+
     }
 
     .panel-content.open {
-      display: block;
+
+      display:
+        block;
+
     }
 
     .editing-banner {
-      display: none;
-      margin-bottom: 12px;
-      padding: 9px 10px;
-      background: #20283a;
-      color: #b5c7ff;
-      border-radius: 8px;
-      font-size: 12px;
+
+      display:
+        none;
+
+      margin-bottom:
+        12px;
+
+      padding:
+        9px 10px;
+
+      background:
+        #20283a;
+
+      color:
+        #b5c7ff;
+
+      border-radius:
+        8px;
+
+      font-size:
+        12px;
+
     }
 
     .quick-grid {
-      display: grid;
-      grid-template-columns: repeat(2, minmax(0, 1fr));
-      gap: 10px;
+
+      display:
+        grid;
+
+      grid-template-columns:
+        repeat(
+          2,
+          minmax(0, 1fr)
+        );
+
+      gap:
+        10px;
+
     }
 
     .field {
-      min-width: 0;
+
+      min-width:
+        0;
+
     }
 
     .field.full {
-      grid-column: 1 / -1;
+
+      grid-column:
+        1 / -1;
+
     }
 
     label {
-      display: block;
-      margin-bottom: 5px;
-      font-size: 11px;
-      color: #b2b8c2;
+
+      display:
+        block;
+
+      margin-bottom:
+        5px;
+
+      font-size:
+        11px;
+
+      color:
+        #b2b8c2;
+
     }
 
     input,
     select,
     textarea {
-      width: 100%;
-      border: 1px solid #343a46;
-      background: var(--card2);
-      color: white;
-      border-radius: 8px;
-      padding: 9px 10px;
-      outline: none;
-      font-size: 13px;
-    }
 
-    input:focus,
-    select:focus,
-    textarea:focus {
-      border-color: var(--blue);
+      width:
+        100%;
+
+      border:
+        1px solid #343a46;
+
+      background:
+        var(--card2);
+
+      color:
+        white;
+
+      border-radius:
+        8px;
+
+      padding:
+        9px 10px;
+
+      outline:
+        none;
+
+      font-size:
+        13px;
+
     }
 
     textarea {
-      min-height: 65px;
-      resize: vertical;
+
+      min-height:
+        65px;
+
+      resize:
+        vertical;
+
     }
 
     .direction-buttons {
-      display: grid;
-      grid-template-columns: 1fr 1fr;
-      gap: 6px;
+
+      display:
+        grid;
+
+      grid-template-columns:
+        1fr 1fr;
+
+      gap:
+        6px;
+
     }
 
     .direction-button {
-      border: 1px solid #343a46;
-      background: var(--card2);
-      color: #aaa;
-      padding: 9px;
-      border-radius: 8px;
-      cursor: pointer;
-      font-size: 12px;
+
+      border:
+        1px solid #343a46;
+
+      background:
+        var(--card2);
+
+      color:
+        #aaa;
+
+      padding:
+        9px;
+
     }
 
     .direction-button.long.active {
-      color: var(--green);
-      border-color: var(--green);
-      background: rgba(74, 222, 128, .08);
+
+      color:
+        var(--green);
+
+      border-color:
+        var(--green);
+
     }
 
     .direction-button.short.active {
-      color: var(--red);
-      border-color: var(--red);
-      background: rgba(248, 113, 113, .08);
+
+      color:
+        var(--red);
+
+      border-color:
+        var(--red);
+
     }
 
     .more-toggle {
-      display: inline-block;
-      margin-top: 11px;
-      font-size: 12px;
-      color: #a8b2ff;
-      cursor: pointer;
+
+      display:
+        inline-block;
+
+      margin-top:
+        11px;
+
+      font-size:
+        12px;
+
+      color:
+        #a8b2ff;
+
+      cursor:
+        pointer;
+
     }
 
     .more-options {
-      display: none;
-      margin-top: 11px;
-      padding-top: 11px;
-      border-top: 1px solid var(--border);
+
+      display:
+        none;
+
+      margin-top:
+        11px;
+
+      padding-top:
+        11px;
+
+      border-top:
+        1px solid var(--border);
+
     }
 
     .more-options.open {
-      display: block;
+
+      display:
+        block;
+
     }
 
     .form-actions {
-      display: grid;
-      grid-template-columns: 1fr 1fr;
-      gap: 7px;
-      margin-top: 13px;
+
+      display:
+        grid;
+
+      grid-template-columns:
+        1fr 1fr;
+
+      gap:
+        7px;
+
+      margin-top:
+        13px;
+
     }
 
-    button {
-      border: 0;
-      border-radius: 8px;
-      padding: 9px 11px;
-      cursor: pointer;
-      font-weight: bold;
-      font-size: 12px;
-    }
-
-    .primary {
-      background: var(--blue);
-      color: white;
-    }
-
-    .secondary {
-      background: #292f39;
-      color: white;
-    }
-
-    .danger {
-      background: #51272e;
-      color: #ff9aa5;
-    }
 
     /* =========================
-       區塊標題
+       卡片
     ========================= */
 
     .section-title {
-      margin: 15px 0 8px;
-      font-size: 12px;
-      color: var(--muted);
-    }
 
-    /* =========================
-       超精簡卡片
-    ========================= */
+      margin:
+        15px 0 8px;
+
+      font-size:
+        12px;
+
+      color:
+        var(--muted);
+
+    }
 
     .trade-card {
-      background: var(--card);
-      border: 1px solid var(--border);
-      border-radius: 10px;
-      padding: 9px 10px;
-      margin-bottom: 7px;
-    }
 
-    .trade-top {
-      display: flex;
-      align-items: center;
-      justify-content: space-between;
-      gap: 8px;
-      margin-bottom: 6px;
-    }
+      background:
+        var(--card);
 
-    .trade-main {
-      min-width: 0;
+      border:
+        1px solid var(--border);
+
+      border-radius:
+        10px;
+
+      padding:
+        9px 10px;
+
+      margin-bottom:
+        7px;
+
     }
 
     .trade-title-row {
-      display: flex;
-      align-items: center;
-      gap: 7px;
-      flex-wrap: wrap;
+
+      display:
+        flex;
+
+      align-items:
+        center;
+
+      gap:
+        7px;
+
+      flex-wrap:
+        wrap;
+
     }
 
     .symbol {
-      font-size: 15px;
-      font-weight: bold;
-      word-break: break-word;
+
+      font-size:
+        15px;
+
+      font-weight:
+        bold;
+
     }
 
-    .side {
-      display: inline-block;
-      font-size: 9px;
-      font-weight: bold;
-      border-radius: 999px;
-      padding: 3px 6px;
+    .side,
+    .status {
+
+      display:
+        inline-block;
+
+      font-size:
+        9px;
+
+      font-weight:
+        bold;
+
+      border-radius:
+        999px;
+
+      padding:
+        3px 6px;
+
     }
 
     .side.long {
       color: var(--green);
-      background: rgba(74, 222, 128, .08);
     }
 
     .side.short {
       color: var(--red);
-      background: rgba(248, 113, 113, .08);
-    }
-
-    .status {
-      display: inline-block;
-      font-size: 9px;
-      border-radius: 999px;
-      padding: 3px 6px;
     }
 
     .status.open {
       color: var(--yellow);
-      background: rgba(250, 204, 21, .08);
     }
 
     .status.win {
       color: var(--green);
-      background: rgba(74, 222, 128, .08);
     }
 
     .status.loss {
       color: var(--red);
-      background: rgba(248, 113, 113, .08);
     }
 
     .entry-line {
-      margin-top: 2px;
-      font-size: 11px;
-      color: var(--muted);
+
+      margin-top:
+        3px;
+
+      font-size:
+        11px;
+
+      color:
+        var(--muted);
+
     }
 
     .compact-data {
-      display: flex;
-      flex-wrap: wrap;
-      gap: 5px 12px;
-      margin-top: 5px;
+
+      display:
+        flex;
+
+      flex-wrap:
+        wrap;
+
+      gap:
+        5px 12px;
+
+      margin-top:
+        6px;
+
     }
 
     .compact-item {
-      font-size: 11px;
-      white-space: nowrap;
+
+      font-size:
+        11px;
+
+      white-space:
+        nowrap;
+
     }
 
     .compact-label {
-      color: var(--muted);
-      margin-right: 3px;
+
+      color:
+        var(--muted);
+
+      margin-right:
+        3px;
+
     }
 
     .compact-value {
-      font-weight: bold;
+
+      font-weight:
+        bold;
+
     }
 
     .card-extra {
-      margin-top: 6px;
-      padding-top: 6px;
-      border-top: 1px solid var(--border);
-      color: #aeb5bf;
-      font-size: 10px;
-      line-height: 1.4;
-      word-break: break-word;
+
+      margin-top:
+        6px;
+
+      padding-top:
+        6px;
+
+      border-top:
+        1px solid var(--border);
+
+      color:
+        #aeb5bf;
+
+      font-size:
+        10px;
+
+      line-height:
+        1.4;
+
     }
 
     .pnl {
-      font-size: 15px;
-      font-weight: bold;
-      margin-top: 6px;
+
+      font-size:
+        15px;
+
+      font-weight:
+        bold;
+
+      margin-top:
+        6px;
+
     }
 
     .card-actions {
-      display: grid;
-      grid-template-columns: 1fr 1fr;
-      gap: 6px;
-      margin-top: 7px;
+
+      display:
+        grid;
+
+      grid-template-columns:
+        1fr 1fr;
+
+      gap:
+        6px;
+
+      margin-top:
+        7px;
+
     }
 
     .card-actions.three {
-      grid-template-columns: repeat(3, 1fr);
-    }
 
-    .card-actions button {
-      padding: 7px 8px;
-      font-size: 11px;
-    }
+      grid-template-columns:
+        repeat(3, 1fr);
 
-    /* =========================
-       結算
-    ========================= */
+    }
 
     .settle-area {
-      display: none;
-      margin-top: 8px;
-      padding-top: 8px;
-      border-top: 1px solid var(--border);
+
+      display:
+        none;
+
+      margin-top:
+        8px;
+
+      padding-top:
+        8px;
+
+      border-top:
+        1px solid var(--border);
+
     }
 
     .settle-area.open {
-      display: block;
+
+      display:
+        block;
+
     }
 
     .settle-grid {
-      display: grid;
-      grid-template-columns: 1fr 1fr;
-      gap: 7px;
+
+      display:
+        grid;
+
+      grid-template-columns:
+        1fr 1fr;
+
+      gap:
+        7px;
+
     }
 
     .settle-actions {
-      display: grid;
-      grid-template-columns: 1fr 1fr;
-      gap: 6px;
-      margin-top: 7px;
+
+      display:
+        grid;
+
+      grid-template-columns:
+        1fr 1fr;
+
+      gap:
+        6px;
+
+      margin-top:
+        7px;
+
     }
 
     .empty {
-      padding: 18px 10px;
-      text-align: center;
-      color: var(--muted);
-      font-size: 12px;
+
+      padding:
+        18px 10px;
+
+      text-align:
+        center;
+
+      color:
+        var(--muted);
+
+      font-size:
+        12px;
+
     }
 
-    /* =========================
-       手機
-    ========================= */
 
-    @media (max-width: 600px) {
+    @media (
+      max-width: 600px
+    ) {
 
       .app {
-        width: calc(100% - 12px);
-        margin-top: 7px;
+
+        width:
+          calc(100% - 12px);
+
+        margin-top:
+          7px;
+
       }
 
       h1 {
-        font-size: 18px;
-        margin-bottom: 10px;
+
+        font-size:
+          18px;
+
       }
 
       .stats {
-        gap: 5px;
+
+        gap:
+          5px;
+
       }
 
       .stat {
-        padding: 8px 7px;
+
+        padding:
+          8px 7px;
+
       }
 
       .stat-label {
-        font-size: 9px;
+
+        font-size:
+          9px;
+
       }
 
       .stat-value {
-        font-size: 13px;
+
+        font-size:
+          13px;
+
       }
 
       .quick-grid {
-        grid-template-columns: 1fr;
-      }
 
-      .field.full {
-        grid-column: auto;
+        grid-template-columns:
+          1fr;
+
       }
 
       .form-actions {
-        grid-template-columns: 1fr;
-      }
 
-      .trade-card {
-        padding: 8px 9px;
-        margin-bottom: 6px;
-      }
+        grid-template-columns:
+          1fr;
 
-      .compact-data {
-        gap: 4px 9px;
-      }
-
-      .compact-item {
-        font-size: 10px;
       }
 
       .settle-grid {
-        grid-template-columns: 1fr;
+
+        grid-template-columns:
+          1fr;
+
       }
 
     }
 
   </style>
+
 </head>
+
 
 <body>
 
 <div class="app">
 
-  <h1>交易紀錄</h1>
+  <h1>RoyalOak</h1>
 
 
-  <!-- 統計 -->
   <div class="stats">
 
     <div class="stat">
-      <div class="stat-label">總 PNL</div>
-      <div id="totalPnL" class="stat-value">0 U</div>
+
+      <div class="stat-label">
+        總 PNL
+      </div>
+
+      <div
+        id="totalPnL"
+        class="stat-value"
+      >
+        0 U
+      </div>
+
     </div>
 
-    <div class="stat">
-      <div class="stat-label">勝率</div>
-      <div id="winRate" class="stat-value">-</div>
-    </div>
 
     <div class="stat">
-      <div class="stat-label">總筆數</div>
-      <div id="totalTrades" class="stat-value">0</div>
+
+      <div class="stat-label">
+        勝率
+      </div>
+
+      <div
+        id="winRate"
+        class="stat-value"
+      >
+        -
+      </div>
+
+    </div>
+
+
+    <div class="stat">
+
+      <div class="stat-label">
+        總筆數
+      </div>
+
+      <div
+        id="totalTrades"
+        class="stat-value"
+      >
+        0
+      </div>
+
     </div>
 
   </div>
 
 
-  <!-- 快速開單 -->
+  <div class="top-actions">
+
+    <button
+      class="primary"
+      onclick="toggleQuickForm(true)"
+    >
+      + 快速新增
+    </button>
+
+
+    <button
+      id="syncButton"
+      class="secondary"
+      onclick="syncBingX()"
+    >
+      ↻ 同步 BingX
+    </button>
+
+  </div>
+
+
+  <div
+    id="syncPanel"
+    class="sync-panel"
+  >
+
+    <div
+      id="syncStatus"
+      class="sync-status"
+    >
+      尚未同步
+    </div>
+
+    <div id="bingxPositions">
+    </div>
+
+  </div>
+
+
   <div class="panel">
 
     <div
@@ -556,8 +1170,9 @@
     >
 
       <div>
+
         <div class="panel-header-title">
-          + 快速新增交易
+          快速新增交易
         </div>
 
         <div
@@ -566,7 +1181,9 @@
         >
           點擊展開
         </div>
+
       </div>
+
 
       <div
         id="formArrow"
@@ -592,87 +1209,119 @@
       <div class="quick-grid">
 
         <div class="field">
-          <label>交易標的</label>
+
+          <label>
+            交易標的
+          </label>
 
           <input
             id="symbol"
-            placeholder="例如 ZEC"
+            placeholder="ZEC"
           >
+
         </div>
 
 
         <div class="field">
-          <label>方向</label>
+
+          <label>
+            方向
+          </label>
 
           <div class="direction-buttons">
 
             <button
               id="longButton"
-              class="direction-button long active"
-              onclick="setSide('LONG')"
+              class="
+                direction-button
+                long
+                active
+              "
+              onclick="
+                setSide('LONG')
+              "
               type="button"
             >
-              LONG 多
+              LONG
             </button>
+
 
             <button
               id="shortButton"
-              class="direction-button short"
-              onclick="setSide('SHORT')"
+              class="
+                direction-button
+                short
+              "
+              onclick="
+                setSide('SHORT')
+              "
               type="button"
             >
-              SHORT 空
+              SHORT
             </button>
 
           </div>
+
         </div>
 
 
         <div class="field">
-          <label>進場</label>
+
+          <label>
+            Entry
+          </label>
 
           <input
             id="entry"
             type="number"
             step="any"
-            placeholder="1510.23"
           >
+
         </div>
 
 
         <div class="field">
-          <label>SL</label>
+
+          <label>
+            SL
+          </label>
 
           <input
             id="sl"
             type="number"
             step="any"
-            placeholder="1516"
           >
+
         </div>
 
 
         <div class="field">
-          <label>TP1</label>
+
+          <label>
+            TP1
+          </label>
 
           <input
             id="tp1"
             type="number"
             step="any"
-            placeholder="1492"
           >
+
         </div>
 
 
         <div class="field">
-          <label>FTP</label>
+
+          <label>
+            FTP
+          </label>
 
           <input
             id="ftp"
             type="number"
             step="any"
-            placeholder="1421.25"
           >
+
         </div>
 
       </div>
@@ -694,36 +1343,45 @@
         <div class="quick-grid">
 
           <div class="field">
-            <label>TP2</label>
+
+            <label>
+              TP2
+            </label>
 
             <input
               id="tp2"
               type="number"
               step="any"
-              placeholder="1469"
             >
+
           </div>
 
 
           <div class="field">
-            <label>槓桿</label>
+
+            <label>
+              槓桿
+            </label>
 
             <input
               id="leverage"
               type="number"
               step="1"
-              placeholder="50"
             >
+
           </div>
 
 
           <div class="field full">
-            <label>進場原因 / 備註</label>
+
+            <label>
+              備註
+            </label>
 
             <textarea
               id="note"
-              placeholder="例如：M15 Break OB..."
             ></textarea>
+
           </div>
 
         </div>
@@ -740,6 +1398,7 @@
         >
           新增交易
         </button>
+
 
         <button
           id="cancelEditButton"
@@ -761,31 +1420,586 @@
     未結束
   </div>
 
-  <div id="openTrades"></div>
+  <div id="openTrades">
+  </div>
 
 
   <div class="section-title">
     已結束
   </div>
 
-  <div id="closedTrades"></div>
+  <div id="closedTrades">
+  </div>
 
 </div>
 
 
 <script>
 
+  /*
+    改成你的 Google Apps Script
+    Web App /exec URL
+  */
+  const BINGX_SYNC_URL =
+    "https://script.google.com/macros/s/你的部署ID/exec";
+
+
   let trades =
     JSON.parse(
-      localStorage.getItem("tradeJournal")
+      localStorage.getItem(
+        "tradeJournal"
+      )
     ) || [];
 
-  let currentSide = "LONG";
 
-  let editingId = null;
+  let currentSide =
+    "LONG";
 
-  let settlingId = null;
+  let editingId =
+    null;
 
+  let settlingId =
+    null;
+
+
+  /* =========================
+     BingX 同步
+  ========================= */
+
+  function syncBingX() {
+
+    if (
+      !BINGX_SYNC_URL ||
+      BINGX_SYNC_URL.includes(
+        "你的部署ID"
+      )
+    ) {
+
+      alert(
+        "請先設定 BINGX_SYNC_URL"
+      );
+
+      return;
+
+    }
+
+
+    const panel =
+      document.getElementById(
+        "syncPanel"
+      );
+
+    const status =
+      document.getElementById(
+        "syncStatus"
+      );
+
+    const button =
+      document.getElementById(
+        "syncButton"
+      );
+
+
+    panel.classList.add(
+      "open"
+    );
+
+
+    status.textContent =
+      "正在同步 BingX...";
+
+
+    button.disabled =
+      true;
+
+
+    const callbackName =
+      "bingxCallback_" +
+      Date.now();
+
+
+    const script =
+      document.createElement(
+        "script"
+      );
+
+
+    const timeout =
+      setTimeout(
+        function() {
+
+          cleanup();
+
+          status.textContent =
+            "同步逾時";
+
+          button.disabled =
+            false;
+
+        },
+        15000
+      );
+
+
+    window[callbackName] =
+      function(data) {
+
+        clearTimeout(
+          timeout
+        );
+
+
+        cleanup();
+
+
+        button.disabled =
+          false;
+
+
+        if (
+          !data ||
+          !data.success
+        ) {
+
+          status.textContent =
+            "同步失敗：" +
+            (
+              data?.message ||
+              "未知錯誤"
+            );
+
+          return;
+
+        }
+
+
+        const positions =
+          Array.isArray(
+            data.positions
+          )
+            ? data.positions
+            : [];
+
+
+        status.textContent =
+          "找到 " +
+          positions.length +
+          " 筆未平倉持倉";
+
+
+        renderBingXPositions(
+          positions
+        );
+
+      };
+
+
+    function cleanup() {
+
+      try {
+
+        delete window[
+          callbackName
+        ];
+
+      } catch (e) {
+
+      }
+
+
+      if (
+        script.parentNode
+      ) {
+
+        script.parentNode
+          .removeChild(
+            script
+          );
+
+      }
+
+    }
+
+
+    script.onerror =
+      function() {
+
+        clearTimeout(
+          timeout
+        );
+
+
+        cleanup();
+
+
+        button.disabled =
+          false;
+
+
+        status.textContent =
+          "同步失敗：無法連線 Apps Script";
+
+      };
+
+
+    script.src =
+      BINGX_SYNC_URL +
+      "?callback=" +
+      encodeURIComponent(
+        callbackName
+      ) +
+      "&_=" +
+      Date.now();
+
+
+    document.body.appendChild(
+      script
+    );
+
+  }
+
+
+  function renderBingXPositions(
+    positions
+  ) {
+
+    const container =
+      document.getElementById(
+        "bingxPositions"
+      );
+
+
+    container.innerHTML =
+      "";
+
+
+    if (
+      positions.length === 0
+    ) {
+
+      container.innerHTML = `
+        <div class="empty">
+          BingX 目前沒有未平倉持倉
+        </div>
+      `;
+
+      return;
+
+    }
+
+
+    positions.forEach(
+      function(position) {
+
+        const exists =
+          trades.some(
+            function(trade) {
+
+              return (
+                trade.status !==
+                  "CLOSED" &&
+                trade.bingxPositionId &&
+                String(
+                  trade.bingxPositionId
+                ) ===
+                String(
+                  position.positionId
+                )
+              );
+
+            }
+          );
+
+
+        const row =
+          document.createElement(
+            "div"
+          );
+
+
+        row.className =
+          "bingx-position";
+
+
+        row.innerHTML = `
+
+          <div class="
+            bingx-position-top
+          ">
+
+            <div class="
+              bingx-symbol
+            ">
+              ${escapeHTML(
+                normalizeSymbol(
+                  position.symbol
+                )
+              )}
+            </div>
+
+
+            <div
+              class="
+                bingx-side
+                ${
+                  position.side ===
+                  "LONG"
+                    ? "long"
+                    : "short"
+                }
+              "
+            >
+              ${escapeHTML(
+                position.side
+              )}
+            </div>
+
+          </div>
+
+
+          <div class="
+            bingx-info
+          ">
+
+            <span>
+              Entry
+              ${formatNumber(
+                position.entryPrice
+              )}
+            </span>
+
+            <span>
+              ${formatNumber(
+                position.leverage
+              )}x
+            </span>
+
+            <span>
+              Qty
+              ${formatNumber(
+                position.quantity
+              )}
+            </span>
+
+            <span
+              class="${
+                Number(
+                  position.unrealizedPnL
+                ) >= 0
+                  ? "positive"
+                  : "negative"
+              }"
+            >
+              uPNL
+              ${formatPnL(
+                position.unrealizedPnL
+              )}
+            </span>
+
+          </div>
+
+
+          <div class="
+            bingx-position-actions
+          ">
+
+            <button
+              class="${
+                exists
+                  ? "secondary"
+                  : "primary"
+              }"
+              ${
+                exists
+                  ? "disabled"
+                  : ""
+              }
+              onclick='importBingXPosition(
+                ${JSON.stringify(
+                  position
+                )}
+              )'
+            >
+              ${
+                exists
+                  ? "已匯入"
+                  : "匯入"
+              }
+            </button>
+
+          </div>
+
+        `;
+
+
+        container.appendChild(
+          row
+        );
+
+      }
+    );
+
+  }
+
+
+  function importBingXPosition(
+    position
+  ) {
+
+    const exists =
+      trades.some(
+        function(trade) {
+
+          return (
+            trade.status !==
+              "CLOSED" &&
+            trade.bingxPositionId &&
+            String(
+              trade.bingxPositionId
+            ) ===
+            String(
+              position.positionId
+            )
+          );
+
+        }
+      );
+
+
+    if (exists) {
+
+      alert(
+        "這筆 BingX 持倉已經匯入"
+      );
+
+      return;
+
+    }
+
+
+    const symbol =
+      normalizeSymbol(
+        position.symbol
+      );
+
+
+    trades.unshift({
+
+      id:
+        Date.now(),
+
+      bingxPositionId:
+        String(
+          position.positionId ||
+          ""
+        ),
+
+      source:
+        "BINGX",
+
+      symbol:
+        symbol,
+
+      side:
+        String(
+          position.side ||
+          "LONG"
+        ).toUpperCase(),
+
+      entry:
+        Number(
+          position.entryPrice ||
+          0
+        ),
+
+      sl:
+        null,
+
+      tp1:
+        null,
+
+      tp2:
+        null,
+
+      ftp:
+        null,
+
+      leverage:
+        Number(
+          position.leverage ||
+          0
+        ),
+
+      quantity:
+        Number(
+          position.quantity ||
+          0
+        ),
+
+      unrealizedPnL:
+        Number(
+          position.unrealizedPnL ||
+          0
+        ),
+
+      note:
+        "",
+
+      rrTP1:
+        null,
+
+      rrFTP:
+        null,
+
+      status:
+        "OPEN",
+
+      result:
+        null,
+
+      pnl:
+        null
+
+    });
+
+
+    saveStorage();
+
+    render();
+
+
+    syncBingX();
+
+  }
+
+
+  function normalizeSymbol(
+    symbol
+  ) {
+
+    return String(
+      symbol || ""
+    )
+      .replace(
+        "-USDT",
+        ""
+      )
+      .replace(
+        "/USDT",
+        ""
+      )
+      .replace(
+        "USDT",
+        ""
+      )
+      .toUpperCase();
+
+  }
+
+
+  /* =========================
+     基本功能
+  ========================= */
 
   function value(id) {
 
@@ -800,7 +2014,9 @@
 
     localStorage.setItem(
       "tradeJournal",
-      JSON.stringify(trades)
+      JSON.stringify(
+        trades
+      )
     );
 
   }
@@ -808,12 +2024,29 @@
 
   function escapeHTML(value) {
 
-    return String(value ?? "")
-      .replaceAll("&", "&amp;")
-      .replaceAll("<", "&lt;")
-      .replaceAll(">", "&gt;")
-      .replaceAll('"', "&quot;")
-      .replaceAll("'", "&#039;");
+    return String(
+      value ?? ""
+    )
+      .replaceAll(
+        "&",
+        "&amp;"
+      )
+      .replaceAll(
+        "<",
+        "&lt;"
+      )
+      .replaceAll(
+        ">",
+        "&gt;"
+      )
+      .replaceAll(
+        '"',
+        "&quot;"
+      )
+      .replaceAll(
+        "'",
+        "&#039;"
+      );
 
   }
 
@@ -825,16 +2058,21 @@
       value === undefined ||
       value === ""
     ) {
+
       return "-";
+
     }
 
-    return Number(value)
-      .toLocaleString(
-        undefined,
-        {
-          maximumFractionDigits: 8
-        }
-      );
+
+    return Number(
+      value
+    ).toLocaleString(
+      undefined,
+      {
+        maximumFractionDigits:
+          8
+      }
+    );
 
   }
 
@@ -845,11 +2083,15 @@
       pnl === null ||
       pnl === undefined
     ) {
+
       return "-";
+
     }
+
 
     const number =
       Number(pnl);
+
 
     return (
       number > 0
@@ -869,40 +2111,50 @@
     target
   ) {
 
-    entry = Number(entry);
-    sl = Number(sl);
-    target = Number(target);
+    entry =
+      Number(entry);
+
+    sl =
+      Number(sl);
+
+    target =
+      Number(target);
+
 
     if (
       !entry ||
       !sl ||
       !target
     ) {
+
       return null;
+
     }
+
 
     const risk =
-      Math.abs(entry - sl);
+      Math.abs(
+        entry - sl
+      );
+
 
     if (!risk) {
+
       return null;
-    }
-
-    let reward;
-
-    if (side === "LONG") {
-
-      reward =
-        target - entry;
-
-    } else {
-
-      reward =
-        entry - target;
 
     }
 
-    return reward / risk;
+
+    const reward =
+      side === "LONG"
+        ? target - entry
+        : entry - target;
+
+
+    return (
+      reward /
+      risk
+    );
 
   }
 
@@ -914,16 +2166,22 @@
       rr === undefined ||
       !Number.isFinite(rr)
     ) {
+
       return "-";
+
     }
 
-    return rr.toFixed(2) + "R";
+
+    return (
+      rr.toFixed(2) +
+      "R"
+    );
 
   }
 
 
   /* =========================
-     表單
+     Form
   ========================= */
 
   function toggleQuickForm(
@@ -945,34 +2203,44 @@
         "formStatus"
       );
 
+
     let open;
 
-    if (force === true) {
+
+    if (
+      force === true
+    ) {
 
       open = true;
 
-    } else if (force === false) {
+    } else if (
+      force === false
+    ) {
 
       open = false;
 
     } else {
 
       open =
-        !form.classList.contains(
-          "open"
-        );
+        !form.classList
+          .contains(
+            "open"
+          );
 
     }
+
 
     form.classList.toggle(
       "open",
       open
     );
 
+
     arrow.classList.toggle(
       "open",
       open
     );
+
 
     status.textContent =
       open
@@ -991,7 +2259,10 @@
         "moreOptions"
       );
 
-    if (force === true) {
+
+    if (
+      force === true
+    ) {
 
       box.classList.add(
         "open"
@@ -1018,34 +2289,31 @@
 
   function setSide(side) {
 
-    currentSide = side;
+    currentSide =
+      side;
+
 
     document
       .getElementById(
         "longButton"
       )
-      .classList
-      .toggle(
+      .classList.toggle(
         "active",
         side === "LONG"
       );
+
 
     document
       .getElementById(
         "shortButton"
       )
-      .classList
-      .toggle(
+      .classList.toggle(
         "active",
         side === "SHORT"
       );
 
   }
 
-
-  /* =========================
-     新增 / 編輯
-  ========================= */
 
   function saveTrade() {
 
@@ -1054,20 +2322,24 @@
         .trim()
         .toUpperCase();
 
+
     const entry =
       Number(
         value("entry")
       );
+
 
     const sl =
       Number(
         value("sl")
       );
 
+
     const tp1 =
       Number(
         value("tp1")
       ) || null;
+
 
     const ftp =
       Number(
@@ -1077,7 +2349,10 @@
 
     if (!symbol) {
 
-      alert("請輸入交易標的");
+      alert(
+        "請輸入交易標的"
+      );
+
       return;
 
     }
@@ -1085,15 +2360,10 @@
 
     if (!entry) {
 
-      alert("請輸入進場價");
-      return;
+      alert(
+        "請輸入 Entry"
+      );
 
-    }
-
-
-    if (!sl) {
-
-      alert("請輸入 SL");
       return;
 
     }
@@ -1108,7 +2378,8 @@
 
       entry,
 
-      sl,
+      sl:
+        sl || null,
 
       tp1,
 
@@ -1125,7 +2396,8 @@
         ) || null,
 
       note:
-        value("note").trim(),
+        value("note")
+          .trim(),
 
       rrTP1:
         calculateRR(
@@ -1146,15 +2418,21 @@
     };
 
 
-    if (editingId !== null) {
+    if (
+      editingId !== null
+    ) {
 
       const index =
         trades.findIndex(
           trade =>
-            trade.id === editingId
+            trade.id ===
+            editingId
         );
 
-      if (index !== -1) {
+
+      if (
+        index !== -1
+      ) {
 
         trades[index] = {
           ...trades[index],
@@ -1169,6 +2447,9 @@
 
         id:
           Date.now(),
+
+        source:
+          "MANUAL",
 
         status:
           "OPEN",
@@ -1190,7 +2471,9 @@
 
     resetForm();
 
-    toggleQuickForm(false);
+    toggleQuickForm(
+      false
+    );
 
     render();
 
@@ -1205,14 +2488,20 @@
           trade.id === id
       );
 
+
     if (!trade) {
       return;
     }
 
 
-    editingId = id;
+    editingId =
+      id;
 
-    toggleQuickForm(true);
+
+    toggleQuickForm(
+      true
+    );
+
 
     setSide(
       trade.side
@@ -1220,62 +2509,75 @@
 
 
     document
-      .getElementById("symbol")
+      .getElementById(
+        "symbol"
+      )
       .value =
-        trade.symbol || "";
+        trade.symbol ||
+        "";
 
 
     document
-      .getElementById("entry")
+      .getElementById(
+        "entry"
+      )
       .value =
-        trade.entry ?? "";
+        trade.entry ??
+        "";
 
 
     document
-      .getElementById("sl")
+      .getElementById(
+        "sl"
+      )
       .value =
-        trade.sl ?? "";
+        trade.sl ??
+        "";
 
 
     document
-      .getElementById("tp1")
+      .getElementById(
+        "tp1"
+      )
       .value =
-        trade.tp1 ?? "";
+        trade.tp1 ??
+        "";
 
 
     document
-      .getElementById("ftp")
+      .getElementById(
+        "ftp"
+      )
       .value =
-        trade.ftp ?? "";
+        trade.ftp ??
+        "";
 
 
     document
-      .getElementById("tp2")
+      .getElementById(
+        "tp2"
+      )
       .value =
-        trade.tp2 ?? "";
+        trade.tp2 ??
+        "";
 
 
     document
-      .getElementById("leverage")
+      .getElementById(
+        "leverage"
+      )
       .value =
-        trade.leverage ?? "";
+        trade.leverage ??
+        "";
 
 
     document
-      .getElementById("note")
+      .getElementById(
+        "note"
+      )
       .value =
-        trade.note || "";
-
-
-    if (
-      trade.tp2 ||
-      trade.leverage ||
-      trade.note
-    ) {
-
-      toggleMoreOptions(true);
-
-    }
+        trade.note ||
+        "";
 
 
     document
@@ -1295,9 +2597,10 @@
 
 
     const banner =
-      document.getElementById(
-        "editingBanner"
-      );
+      document
+        .getElementById(
+          "editingBanner"
+        );
 
 
     banner.style.display =
@@ -1311,11 +2614,17 @@
       trade.side;
 
 
-    document
-      .querySelector(".panel")
-      .scrollIntoView({
-        behavior: "smooth"
-      });
+    if (
+      trade.tp2 ||
+      trade.leverage ||
+      trade.note
+    ) {
+
+      toggleMoreOptions(
+        true
+      );
+
+    }
 
   }
 
@@ -1329,52 +2638,39 @@
 
   function resetForm() {
 
-    editingId = null;
+    editingId =
+      null;
 
 
-    document
-      .getElementById("symbol")
-      .value = "";
+    [
+      "symbol",
+      "entry",
+      "sl",
+      "tp1",
+      "ftp",
+      "tp2",
+      "leverage",
+      "note"
+    ].forEach(
+      function(id) {
+
+        document
+          .getElementById(id)
+          .value =
+            "";
+
+      }
+    );
 
 
-    document
-      .getElementById("entry")
-      .value = "";
+    setSide(
+      "LONG"
+    );
 
 
-    document
-      .getElementById("sl")
-      .value = "";
-
-
-    document
-      .getElementById("tp1")
-      .value = "";
-
-
-    document
-      .getElementById("ftp")
-      .value = "";
-
-
-    document
-      .getElementById("tp2")
-      .value = "";
-
-
-    document
-      .getElementById("leverage")
-      .value = "";
-
-
-    document
-      .getElementById("note")
-      .value = "";
-
-
-    setSide("LONG");
-
-    toggleMoreOptions(false);
+    toggleMoreOptions(
+      false
+    );
 
 
     document
@@ -1414,6 +2710,7 @@
         ? null
         : id;
 
+
     render();
 
   }
@@ -1437,9 +2734,14 @@
         .value;
 
 
-    if (pnlInput === "") {
+    if (
+      pnlInput === ""
+    ) {
 
-      alert("請輸入實際盈虧");
+      alert(
+        "請輸入實際盈虧"
+      );
+
       return;
 
     }
@@ -1460,8 +2762,10 @@
     trade.status =
       "CLOSED";
 
+
     trade.result =
       result;
+
 
     trade.pnl =
       Number(
@@ -1469,7 +2773,9 @@
       );
 
 
-    settlingId = null;
+    settlingId =
+      null;
+
 
     saveStorage();
 
@@ -1516,7 +2822,9 @@
         "確定刪除這筆交易？"
       )
     ) {
+
       return;
+
     }
 
 
@@ -1557,195 +2865,200 @@
       "trade-card";
 
 
-    let statusHTML;
+    const resultClass =
+      isOpen
+        ? "open"
+        : Number(
+            trade.pnl
+          ) >= 0
+            ? "win"
+            : "loss";
 
 
-    if (isOpen) {
-
-      statusHTML = `
-        <span class="status open">
-          未結束
-        </span>
-      `;
-
-    } else if (
-      Number(trade.pnl) > 0
-    ) {
-
-      statusHTML = `
-        <span class="status win">
-          ${escapeHTML(
+    const resultText =
+      isOpen
+        ? "未結束"
+        : escapeHTML(
             trade.result
-          )}
-        </span>
-      `;
-
-    } else {
-
-      statusHTML = `
-        <span class="status loss">
-          ${escapeHTML(
-            trade.result
-          )}
-        </span>
-      `;
-
-    }
-
-
-    const extraParts = [];
-
-
-    if (trade.tp2) {
-
-      extraParts.push(
-        "TP2 " +
-        formatNumber(
-          trade.tp2
-        )
-      );
-
-    }
-
-
-    if (trade.leverage) {
-
-      extraParts.push(
-        "槓桿 " +
-        trade.leverage +
-        "x"
-      );
-
-    }
-
-
-    if (trade.note) {
-
-      extraParts.push(
-        "備註：" +
-        escapeHTML(
-          trade.note
-        )
-      );
-
-    }
-
-
-    const extra =
-      extraParts.join(
-        "<br>"
-      );
+          );
 
 
     card.innerHTML = `
 
-      <div class="trade-top">
+      <div class="
+        trade-title-row
+      ">
 
-        <div class="trade-main">
-
-          <div class="trade-title-row">
-
-            <span class="symbol">
-              ${escapeHTML(
-                trade.symbol
-              )}
-            </span>
-
-            <span
-              class="
-                side
-                ${
-                  trade.side === "LONG"
-                    ? "long"
-                    : "short"
-                }
-              "
-            >
-              ${
-                trade.side === "LONG"
-                  ? "LONG"
-                  : "SHORT"
-              }
-            </span>
-
-            ${statusHTML}
-
-          </div>
+        <span class="symbol">
+          ${escapeHTML(
+            trade.symbol
+          )}
+        </span>
 
 
-          <div class="entry-line">
-            Entry
-            ${formatNumber(
-              trade.entry
-            )}
-          </div>
+        <span
+          class="
+            side
+            ${
+              trade.side ===
+              "LONG"
+                ? "long"
+                : "short"
+            }
+          "
+        >
+          ${escapeHTML(
+            trade.side
+          )}
+        </span>
 
-        </div>
+
+        <span
+          class="
+            status
+            ${resultClass}
+          "
+        >
+          ${resultText}
+        </span>
+
+
+        ${
+          trade.source ===
+          "BINGX"
+            ? `
+              <span
+                style="
+                  font-size:9px;
+                  color:#8fa0ff;
+                "
+              >
+                BingX
+              </span>
+            `
+            : ""
+        }
 
       </div>
 
 
-      <div class="compact-data">
+      <div class="
+        entry-line
+      ">
+        Entry
+        ${formatNumber(
+          trade.entry
+        )}
 
-        <div class="compact-item">
-          <span class="compact-label">
+        ${
+          trade.leverage
+            ? " · " +
+              trade.leverage +
+              "x"
+            : ""
+        }
+      </div>
+
+
+      <div class="
+        compact-data
+      ">
+
+        <div class="
+          compact-item
+        ">
+
+          <span class="
+            compact-label
+          ">
             SL
           </span>
 
-          <span class="compact-value">
+          <span class="
+            compact-value
+          ">
             ${formatNumber(
               trade.sl
             )}
           </span>
+
         </div>
 
 
-        <div class="compact-item">
-          <span class="compact-label">
+        <div class="
+          compact-item
+        ">
+
+          <span class="
+            compact-label
+          ">
             TP1
           </span>
 
-          <span class="compact-value">
+          <span class="
+            compact-value
+          ">
             ${formatNumber(
               trade.tp1
             )}
           </span>
+
         </div>
 
 
-        <div class="compact-item">
-          <span class="compact-label">
+        <div class="
+          compact-item
+        ">
+
+          <span class="
+            compact-label
+          ">
             FTP
           </span>
 
-          <span class="compact-value">
+          <span class="
+            compact-value
+          ">
             ${formatNumber(
               trade.ftp
             )}
           </span>
+
         </div>
 
 
-        <div class="compact-item">
-          <span class="compact-label">
+        <div class="
+          compact-item
+        ">
+
+          <span class="
+            compact-label
+          ">
             RR
           </span>
 
-          <span class="compact-value">
+          <span class="
+            compact-value
+          ">
             ${formatRR(
               trade.rrFTP
             )}
           </span>
+
         </div>
 
       </div>
 
 
       ${
-        extra
+        trade.note
           ? `
-            <div class="card-extra">
-              ${extra}
+            <div class="
+              card-extra
+            ">
+              ${escapeHTML(
+                trade.note
+              )}
             </div>
           `
           : ""
@@ -1759,7 +3072,9 @@
               class="
                 pnl
                 ${
-                  Number(trade.pnl) >= 0
+                  Number(
+                    trade.pnl
+                  ) >= 0
                     ? "positive"
                     : "negative"
                 }
@@ -1796,24 +3111,36 @@
     trade
   ) {
 
-    const settleOpen =
-      settlingId === trade.id;
+    const opened =
+      settlingId ===
+      trade.id;
 
 
     return `
 
-      <div class="card-actions">
+      <div class="
+        card-actions
+      ">
 
         <button
           class="primary"
-          onclick="toggleSettle(${trade.id})"
+          onclick="
+            toggleSettle(
+              ${trade.id}
+            )
+          "
         >
           結算
         </button>
 
+
         <button
           class="secondary"
-          onclick="editTrade(${trade.id})"
+          onclick="
+            editTrade(
+              ${trade.id}
+            )
+          "
         >
           編輯
         </button>
@@ -1824,11 +3151,17 @@
       <div
         class="
           settle-area
-          ${settleOpen ? "open" : ""}
+          ${
+            opened
+              ? "open"
+              : ""
+          }
         "
       >
 
-        <div class="settle-grid">
+        <div class="
+          settle-grid
+        ">
 
           <div class="field">
 
@@ -1837,7 +3170,9 @@
             </label>
 
             <select
-              id="result-${trade.id}"
+              id="
+                result-${trade.id}
+              "
             >
 
               <option value="TP1">
@@ -1857,7 +3192,7 @@
               </option>
 
               <option value="MANUAL">
-                手動平倉
+                手動
               </option>
 
             </select>
@@ -1868,14 +3203,15 @@
           <div class="field">
 
             <label>
-              實際盈虧 USDT
+              實際 PNL
             </label>
 
             <input
-              id="pnl-${trade.id}"
+              id="
+                pnl-${trade.id}
+              "
               type="number"
               step="any"
-              placeholder="+35 / -20"
             >
 
           </div>
@@ -1883,18 +3219,29 @@
         </div>
 
 
-        <div class="settle-actions">
+        <div class="
+          settle-actions
+        ">
 
           <button
             class="primary"
-            onclick="settleTrade(${trade.id})"
+            onclick="
+              settleTrade(
+                ${trade.id}
+              )
+            "
           >
-            完成結算
+            完成
           </button>
+
 
           <button
             class="secondary"
-            onclick="toggleSettle(${trade.id})"
+            onclick="
+              toggleSettle(
+                ${trade.id}
+              )
+            "
           >
             取消
           </button>
@@ -1914,25 +3261,42 @@
 
     return `
 
-      <div class="card-actions three">
+      <div class="
+        card-actions
+        three
+      ">
 
         <button
           class="secondary"
-          onclick="editTrade(${trade.id})"
+          onclick="
+            editTrade(
+              ${trade.id}
+            )
+          "
         >
           編輯
         </button>
 
+
         <button
           class="secondary"
-          onclick="reopenTrade(${trade.id})"
+          onclick="
+            reopenTrade(
+              ${trade.id}
+            )
+          "
         >
           重開
         </button>
 
+
         <button
           class="danger"
-          onclick="deleteTrade(${trade.id})"
+          onclick="
+            deleteTrade(
+              ${trade.id}
+            )
+          "
         >
           刪除
         </button>
@@ -1951,25 +3315,28 @@
   function render() {
 
     const openContainer =
-      document.getElementById(
-        "openTrades"
-      );
+      document
+        .getElementById(
+          "openTrades"
+        );
 
 
     const closedContainer =
-      document.getElementById(
-        "closedTrades"
-      );
+      document
+        .getElementById(
+          "closedTrades"
+        );
 
 
     openContainer.innerHTML =
       "";
 
+
     closedContainer.innerHTML =
       "";
 
 
-    const open =
+    const openTrades =
       trades.filter(
         trade =>
           trade.status !==
@@ -1977,7 +3344,7 @@
       );
 
 
-    const closed =
+    const closedTrades =
       trades.filter(
         trade =>
           trade.status ===
@@ -1985,7 +3352,9 @@
       );
 
 
-    if (!open.length) {
+    if (
+      openTrades.length === 0
+    ) {
 
       openContainer.innerHTML = `
         <div class="empty">
@@ -1995,14 +3364,15 @@
 
     } else {
 
-      open.forEach(
+      openTrades.forEach(
         trade => {
 
-          openContainer.appendChild(
-            createTradeCard(
-              trade
-            )
-          );
+          openContainer
+            .appendChild(
+              createTradeCard(
+                trade
+              )
+            );
 
         }
       );
@@ -2010,7 +3380,9 @@
     }
 
 
-    if (!closed.length) {
+    if (
+      closedTrades.length === 0
+    ) {
 
       closedContainer.innerHTML = `
         <div class="empty">
@@ -2020,14 +3392,15 @@
 
     } else {
 
-      closed.forEach(
+      closedTrades.forEach(
         trade => {
 
-          closedContainer.appendChild(
-            createTradeCard(
-              trade
-            )
-          );
+          closedContainer
+            .appendChild(
+              createTradeCard(
+                trade
+              )
+            );
 
         }
       );
@@ -2053,16 +3426,18 @@
     const wins =
       closed.filter(
         trade =>
-          Number(trade.pnl) > 0
+          Number(
+            trade.pnl
+          ) > 0
       );
 
 
     const totalPnL =
       closed.reduce(
-        (
+        function(
           total,
           trade
-        ) => {
+        ) {
 
           return (
             total +
@@ -2087,9 +3462,10 @@
 
 
     const pnl =
-      document.getElementById(
-        "totalPnL"
-      );
+      document
+        .getElementById(
+          "totalPnL"
+        );
 
 
     pnl.textContent =
@@ -2138,4 +3514,5 @@
 </script>
 
 </body>
+
 </html>
