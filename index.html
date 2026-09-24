@@ -2,7 +2,11 @@
 <html lang="zh-Hant">
 <head>
   <meta charset="UTF-8">
-  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+  <meta
+    name="viewport"
+    content="width=device-width, initial-scale=1.0"
+  >
 
   <title>RoyalOak</title>
 
@@ -37,9 +41,13 @@
         0 14px 40px rgba(0, 0, 0, 0.28);
     }
 
+    html,
+    body {
+      min-height: 100%;
+    }
+
     body {
       margin: 0;
-      min-height: 100vh;
 
       color: var(--text);
 
@@ -88,6 +96,7 @@
 
     .topbar {
       display: flex;
+
       align-items: center;
       justify-content: space-between;
 
@@ -98,13 +107,17 @@
 
     .brand-wrap {
       display: flex;
+
       flex-direction: column;
+
       gap: 3px;
     }
 
     .brand {
       display: flex;
+
       align-items: center;
+
       gap: 10px;
     }
 
@@ -115,6 +128,7 @@
       border-radius: 10px;
 
       display: grid;
+
       place-items: center;
 
       font-weight: 800;
@@ -136,27 +150,34 @@
     .brand-name {
       font-size: 22px;
       font-weight: 800;
+
       letter-spacing: -0.5px;
     }
 
     .brand-sub {
       color: var(--muted);
+
       font-size: 11px;
+
       margin-left: 44px;
     }
 
     .top-actions {
       display: flex;
+
       align-items: center;
+
       gap: 8px;
     }
 
     .sync-btn {
-      border: 1px solid rgba(91, 150, 255, .3);
+      border:
+        1px solid rgba(91, 150, 255, .3);
 
       border-radius: 10px;
 
-      padding: 9px 14px;
+      padding:
+        9px 14px;
 
       color: white;
 
@@ -181,7 +202,8 @@
     }
 
     .sync-btn:hover {
-      transform: translateY(-1px);
+      transform:
+        translateY(-1px);
 
       box-shadow:
         0 10px 28px rgba(31, 105, 255, .3);
@@ -189,7 +211,9 @@
 
     .sync-btn:disabled {
       opacity: .55;
+
       cursor: default;
+
       transform: none;
     }
 
@@ -205,7 +229,9 @@
       display: none;
 
       margin-bottom: 12px;
-      padding: 10px 12px;
+
+      padding:
+        10px 12px;
 
       border:
         1px solid rgba(255, 107, 122, .3);
@@ -256,7 +282,8 @@
           rgba(9, 20, 35, .96)
         );
 
-      box-shadow: var(--shadow);
+      box-shadow:
+        var(--shadow);
     }
 
     .overview-card::before {
@@ -284,13 +311,16 @@
 
     .overview-label {
       color: var(--muted);
+
       font-size: 10px;
+
       margin-bottom: 7px;
     }
 
     .overview-value {
       font-size: 23px;
       font-weight: 800;
+
       letter-spacing: -.3px;
 
       word-break: break-word;
@@ -300,6 +330,7 @@
       margin-top: 5px;
 
       color: var(--muted);
+
       font-size: 9px;
     }
 
@@ -312,7 +343,7 @@
     }
 
     /* =========================
-       MAIN DASHBOARD
+       MAIN
     ========================= */
 
     .dashboard-grid {
@@ -320,7 +351,7 @@
 
       grid-template-columns:
         minmax(0, 1.8fr)
-        minmax(270px, .8fr);
+        minmax(300px, .8fr);
 
       gap: 12px;
 
@@ -344,7 +375,8 @@
           rgba(8, 18, 32, .96)
         );
 
-      box-shadow: var(--shadow);
+      box-shadow:
+        var(--shadow);
 
       overflow: hidden;
 
@@ -353,12 +385,14 @@
 
     .panel-head {
       display: flex;
+
       align-items: center;
       justify-content: space-between;
 
       gap: 10px;
 
-      padding: 13px 14px;
+      padding:
+        13px 14px;
 
       border-bottom:
         1px solid rgba(111, 151, 210, .12);
@@ -371,6 +405,7 @@
 
     .panel-count {
       color: var(--muted);
+
       font-size: 10px;
     }
 
@@ -396,7 +431,8 @@
 
       min-width: 0;
 
-      padding: 9px 10px;
+      padding:
+        9px 10px;
 
       border:
         1px solid rgba(111, 151, 210, .16);
@@ -417,7 +453,8 @@
     }
 
     .trade-card:hover {
-      transform: translateY(-1px);
+      transform:
+        translateY(-1px);
 
       border-color:
         var(--border-hover);
@@ -428,6 +465,7 @@
 
     .trade-line {
       display: flex;
+
       align-items: center;
 
       flex-wrap: nowrap;
@@ -437,6 +475,7 @@
       white-space: nowrap;
 
       font-size: 10px;
+
       line-height: 1.4;
     }
 
@@ -451,17 +490,20 @@
     .symbol {
       font-size: 13px;
       font-weight: 800;
+
       letter-spacing: -.2px;
     }
 
     .side,
     .status {
       display: inline-flex;
+
       align-items: center;
 
       border-radius: 999px;
 
-      padding: 2px 5px;
+      padding:
+        2px 5px;
 
       font-size: 7px;
       font-weight: 800;
@@ -516,6 +558,7 @@
 
     .trade-value {
       color: var(--text);
+
       font-weight: 700;
 
       margin-left: 3px;
@@ -523,6 +566,7 @@
 
     .trade-gap {
       width: 7px;
+
       flex-shrink: 0;
     }
 
@@ -547,142 +591,173 @@
     }
 
     /* =========================
-       RIGHT SIDE
+       PERFORMANCE
     ========================= */
 
-    .side-card {
+    .performance-wrap {
       padding: 14px;
-
-      border-bottom:
-        1px solid rgba(111, 151, 210, .1);
     }
 
-    .side-card:last-child {
-      border-bottom: 0;
-    }
-
-    .side-title {
-      color: var(--muted);
-
-      font-size: 10px;
-
-      margin-bottom: 10px;
-    }
-
-    .big-number {
-      font-size: 30px;
-      font-weight: 800;
-      letter-spacing: -.6px;
-    }
-
-    .metric-row {
+    .performance-top {
       display: flex;
+
+      align-items: flex-end;
       justify-content: space-between;
-      align-items: center;
 
       gap: 10px;
 
-      margin-top: 9px;
-
-      font-size: 11px;
+      margin-bottom: 8px;
     }
 
-    .metric-label {
+    .performance-label {
       color: var(--muted);
+
+      font-size: 9px;
+
+      margin-bottom: 4px;
     }
 
-    .metric-value {
-      font-weight: 700;
+    .performance-value {
+      font-size: 29px;
+      font-weight: 800;
+
+      letter-spacing: -.5px;
     }
 
-    /* =========================
-       PNL BARS
-    ========================= */
+    .performance-change {
+      font-size: 9px;
 
-    .pnl-bar-wrap {
-      margin-top: 12px;
-    }
-
-    .pnl-bar-row {
-      margin-bottom: 11px;
-    }
-
-    .pnl-bar-row:last-child {
-      margin-bottom: 0;
-    }
-
-    .pnl-bar-top {
-      display: flex;
-      justify-content: space-between;
-
-      gap: 8px;
-
-      margin-bottom: 5px;
-
-      font-size: 10px;
-    }
-
-    .pnl-bar-label {
       color: var(--muted);
+
+      text-align: right;
     }
 
-    .pnl-bar-track {
-      height: 6px;
+    .chart-shell {
+      position: relative;
 
-      border-radius: 999px;
+      width: 100%;
+      height: 190px;
 
-      background:
-        rgba(255, 255, 255, .05);
+      margin-top: 8px;
+
+      border:
+        1px solid rgba(111, 151, 210, .09);
+
+      border-radius: 11px;
 
       overflow: hidden;
+
+      background:
+        linear-gradient(
+          180deg,
+          rgba(7, 22, 38, .8),
+          rgba(5, 15, 26, .55)
+        );
     }
 
-    .pnl-bar-fill {
+    #performanceCanvas {
+      display: block;
+
+      width: 100%;
       height: 100%;
-
-      border-radius: inherit;
-
-      width: 0;
-
-      transition: width .3s ease;
     }
 
-    .pnl-bar-fill.profit {
+    .chart-tooltip {
+      position: absolute;
+
+      display: none;
+
+      z-index: 5;
+
+      pointer-events: none;
+
+      min-width: 90px;
+
+      padding:
+        6px 8px;
+
+      border:
+        1px solid rgba(103, 160, 220, .25);
+
+      border-radius: 7px;
+
       background:
-        linear-gradient(
-          90deg,
-          #23c58e,
-          #4ee0af
-        );
+        rgba(6, 15, 27, .94);
+
+      box-shadow:
+        0 8px 20px rgba(0, 0, 0, .35);
+
+      font-size: 9px;
+
+      color: var(--muted2);
     }
 
-    .pnl-bar-fill.loss {
+    .tooltip-title {
+      color: var(--text);
+
+      font-weight: 700;
+
+      margin-bottom: 3px;
+    }
+
+    .performance-stats {
+      display: grid;
+
+      grid-template-columns:
+        repeat(3, 1fr);
+
+      gap: 6px;
+
+      margin-top: 10px;
+    }
+
+    .performance-stat {
+      padding: 8px;
+
+      border:
+        1px solid rgba(111, 151, 210, .09);
+
+      border-radius: 8px;
+
       background:
-        linear-gradient(
-          90deg,
-          #f44b61,
-          #ff7b89
-        );
+        rgba(6, 15, 27, .35);
+    }
+
+    .performance-stat-label {
+      color: var(--muted);
+
+      font-size: 8px;
+
+      margin-bottom: 3px;
+    }
+
+    .performance-stat-value {
+      font-size: 12px;
+      font-weight: 800;
     }
 
     /* =========================
-       RESULT LIST
+       RECENT
     ========================= */
 
     .result-list {
       display: flex;
+
       flex-direction: column;
+
       gap: 7px;
     }
 
     .result-row {
       display: flex;
+
       align-items: center;
       justify-content: space-between;
 
       gap: 8px;
 
-      padding: 7px 8px;
+      padding:
+        7px 8px;
 
       border:
         1px solid rgba(111, 151, 210, .1);
@@ -701,17 +776,24 @@
 
     .result-meta {
       color: var(--muted);
+
       font-size: 9px;
+
       margin-top: 2px;
     }
 
     .result-pnl {
       font-weight: 800;
+
       white-space: nowrap;
     }
 
     .empty {
-      padding: 20px 10px;
+      grid-column:
+        1 / -1;
+
+      padding:
+        20px 10px;
 
       text-align: center;
 
@@ -747,18 +829,22 @@
       .right-column .panel {
         margin-bottom: 0;
       }
+
     }
 
     @media (max-width: 620px) {
 
       .app {
-        width: calc(100% - 12px);
+        width:
+          calc(100% - 12px);
+
         margin-top: 8px;
       }
 
       .brand-logo {
         width: 30px;
         height: 30px;
+
         font-size: 13px;
       }
 
@@ -768,11 +854,14 @@
 
       .brand-sub {
         margin-left: 40px;
+
         font-size: 9px;
       }
 
       .sync-btn {
-        padding: 8px 10px;
+        padding:
+          8px 10px;
+
         font-size: 10px;
       }
 
@@ -785,6 +874,7 @@
 
       .overview-card {
         padding: 11px;
+
         border-radius: 11px;
       }
 
@@ -805,7 +895,8 @@
       }
 
       .panel-head {
-        padding: 11px 10px;
+        padding:
+          11px 10px;
       }
 
       .panel-body {
@@ -820,7 +911,8 @@
       }
 
       .trade-card {
-        padding: 7px 6px;
+        padding:
+          7px 6px;
       }
 
       .symbol {
@@ -830,7 +922,9 @@
       .side,
       .status {
         font-size: 6px;
-        padding: 2px 4px;
+
+        padding:
+          2px 4px;
       }
 
       .trade-line {
@@ -849,9 +943,14 @@
         grid-template-columns: 1fr;
       }
 
-      .big-number {
+      .performance-value {
         font-size: 24px;
       }
+
+      .chart-shell {
+        height: 170px;
+      }
+
     }
 
     @media (max-width: 380px) {
@@ -867,6 +966,7 @@
       .overview-value {
         font-size: 15px;
       }
+
     }
   </style>
 </head>
@@ -875,7 +975,7 @@
 
 <div class="app">
 
-  <!-- TOP -->
+  <!-- TOPBAR -->
   <div class="topbar">
 
     <div class="brand-wrap">
@@ -1013,7 +1113,6 @@
   </div>
 
 
-  <!-- MAIN -->
   <div class="dashboard-grid">
 
     <!-- LEFT -->
@@ -1036,6 +1135,7 @@
           </div>
 
         </div>
+
 
         <div class="panel-body">
 
@@ -1067,6 +1167,7 @@
 
         </div>
 
+
         <div class="panel-body">
 
           <div
@@ -1093,141 +1194,112 @@
             Performance
           </div>
 
-        </div>
-
-
-        <div class="side-card">
-
-          <div class="side-title">
-            NET PNL
-          </div>
-
-          <div
-            id="sidePnL"
-            class="big-number"
-          >
-            0.00 U
-          </div>
-
-
-          <div class="metric-row">
-
-            <span class="metric-label">
-              Wins
-            </span>
-
-            <span
-              id="winsCount"
-              class="metric-value positive"
-            >
-              0
-            </span>
-
-          </div>
-
-
-          <div class="metric-row">
-
-            <span class="metric-label">
-              Losses
-            </span>
-
-            <span
-              id="lossCount"
-              class="metric-value negative"
-            >
-              0
-            </span>
-
-          </div>
-
-
-          <div class="metric-row">
-
-            <span class="metric-label">
-              Closed
-            </span>
-
-            <span
-              id="closedCount"
-              class="metric-value"
-            >
-              0
-            </span>
-
+          <div class="panel-count">
+            Cumulative PNL
           </div>
 
         </div>
 
 
-        <div class="side-card">
+        <div class="performance-wrap">
 
-          <div class="side-title">
-            PROFIT / LOSS
-          </div>
+          <div class="performance-top">
 
+            <div>
 
-          <div class="pnl-bar-wrap">
-
-            <div class="pnl-bar-row">
-
-              <div class="pnl-bar-top">
-
-                <span class="pnl-bar-label">
-                  Profit
-                </span>
-
-                <span
-                  id="profitValue"
-                  class="positive"
-                >
-                  +0.00 U
-                </span>
-
+              <div class="performance-label">
+                NET PNL
               </div>
 
-              <div class="pnl-bar-track">
-
-                <div
-                  id="profitBar"
-                  class="
-                    pnl-bar-fill
-                    profit
-                  "
-                ></div>
-
+              <div
+                id="performancePnL"
+                class="performance-value"
+              >
+                0.00 U
               </div>
 
             </div>
 
 
-            <div class="pnl-bar-row">
+            <div
+              id="performanceChange"
+              class="performance-change"
+            >
+              0 筆已結束
+            </div>
 
-              <div class="pnl-bar-top">
+          </div>
 
-                <span class="pnl-bar-label">
-                  Loss
-                </span>
 
-                <span
-                  id="lossValue"
-                  class="negative"
-                >
-                  0.00 U
-                </span>
+          <div
+            id="chartShell"
+            class="chart-shell"
+          >
 
+            <canvas
+              id="performanceCanvas"
+            ></canvas>
+
+
+            <div
+              id="chartTooltip"
+              class="chart-tooltip"
+            ></div>
+
+          </div>
+
+
+          <div class="performance-stats">
+
+            <div class="performance-stat">
+
+              <div class="performance-stat-label">
+                WIN
               </div>
 
-              <div class="pnl-bar-track">
+              <div
+                id="performanceWins"
+                class="
+                  performance-stat-value
+                  positive
+                "
+              >
+                0
+              </div>
 
-                <div
-                  id="lossBar"
-                  class="
-                    pnl-bar-fill
-                    loss
-                  "
-                ></div>
+            </div>
 
+
+            <div class="performance-stat">
+
+              <div class="performance-stat-label">
+                LOSS
+              </div>
+
+              <div
+                id="performanceLosses"
+                class="
+                  performance-stat-value
+                  negative
+                "
+              >
+                0
+              </div>
+
+            </div>
+
+
+            <div class="performance-stat">
+
+              <div class="performance-stat-label">
+                WIN RATE
+              </div>
+
+              <div
+                id="performanceWinRate"
+                class="performance-stat-value"
+              >
+                -
               </div>
 
             </div>
@@ -1249,6 +1321,7 @@
           </div>
 
         </div>
+
 
         <div class="panel-body">
 
@@ -1279,9 +1352,11 @@
 
   let trades = [];
 
+  let chartPoints = [];
+
 
   /* =========================
-     LOAD
+     LOAD SHEET
   ========================= */
 
   async function loadSheetTrades() {
@@ -1436,7 +1511,9 @@
 
     let row = [];
     let cell = "";
-    let insideQuotes = false;
+
+    let insideQuotes =
+      false;
 
 
     for (
@@ -1739,6 +1816,9 @@
             id:
               index + 1,
 
+            order:
+              index,
+
             symbol,
 
             side,
@@ -1777,8 +1857,8 @@
       )
 
       /*
-        中文標題列 entry 不是數字，
-        會自動被排除
+        中文標題列 Entry 不是數字
+        因此自動排除
       */
       .filter(
         trade =>
@@ -1800,7 +1880,8 @@
     if (
       value === null ||
       value === undefined ||
-      String(value).trim() === ""
+      String(value)
+        .trim() === ""
     ) {
 
       return null;
@@ -1985,7 +2066,9 @@
 
 
     const number =
-      Number(value);
+      Number(
+        value
+      );
 
 
     return (
@@ -2136,7 +2219,6 @@
 
     card.innerHTML = `
 
-      <!-- 1 -->
       <div
         class="
           trade-line
@@ -2181,7 +2263,6 @@
       </div>
 
 
-      <!-- 2 -->
       <div class="trade-line">
 
         <span class="trade-label">
@@ -2228,7 +2309,6 @@
       </div>
 
 
-      <!-- 3 -->
       <div class="trade-line">
 
         <span class="trade-label">
@@ -2272,7 +2352,6 @@
       </div>
 
 
-      <!-- 4 -->
       <div class="trade-line">
 
         <span class="trade-label">
@@ -2465,6 +2544,11 @@
       closedTrades
     );
 
+
+    renderPerformanceChart(
+      closedTrades
+    );
+
   }
 
 
@@ -2477,7 +2561,7 @@
     closedTrades
   ) {
 
-    const tradesWithPnL =
+    const pnlTrades =
       closedTrades.filter(
         trade =>
           trade.pnl !== null
@@ -2485,7 +2569,7 @@
 
 
     const wins =
-      tradesWithPnL.filter(
+      pnlTrades.filter(
         trade =>
           Number(
             trade.pnl
@@ -2493,17 +2577,8 @@
       );
 
 
-    const losses =
-      tradesWithPnL.filter(
-        trade =>
-          Number(
-            trade.pnl
-          ) < 0
-      );
-
-
     const totalPnL =
-      tradesWithPnL.reduce(
+      pnlTrades.reduce(
         (
           total,
           trade
@@ -2513,46 +2588,6 @@
             total +
             Number(
               trade.pnl || 0
-            )
-          );
-
-        },
-        0
-      );
-
-
-    const totalProfit =
-      wins.reduce(
-        (
-          total,
-          trade
-        ) => {
-
-          return (
-            total +
-            Number(
-              trade.pnl || 0
-            )
-          );
-
-        },
-        0
-      );
-
-
-    const totalLoss =
-      losses.reduce(
-        (
-          total,
-          trade
-        ) => {
-
-          return (
-            total +
-            Math.abs(
-              Number(
-                trade.pnl || 0
-              )
             )
           );
 
@@ -2562,11 +2597,11 @@
 
 
     const winRate =
-      tradesWithPnL.length
+      pnlTrades.length
 
         ? (
             wins.length /
-            tradesWithPnL.length *
+            pnlTrades.length *
             100
           ).toFixed(1)
 
@@ -2579,18 +2614,11 @@
     );
 
 
-    setPnLText(
-      "sidePnL",
-      totalPnL
-    );
-
-
     document
       .getElementById(
         "winRate"
       )
       .textContent =
-
         winRate === null
 
           ? "-"
@@ -2613,84 +2641,6 @@
       )
       .textContent =
         openTrades.length;
-
-
-    document
-      .getElementById(
-        "winsCount"
-      )
-      .textContent =
-        wins.length;
-
-
-    document
-      .getElementById(
-        "lossCount"
-      )
-      .textContent =
-        losses.length;
-
-
-    document
-      .getElementById(
-        "closedCount"
-      )
-      .textContent =
-        closedTrades.length;
-
-
-    document
-      .getElementById(
-        "profitValue"
-      )
-      .textContent =
-        "+" +
-        totalProfit.toFixed(2) +
-        " U";
-
-
-    document
-      .getElementById(
-        "lossValue"
-      )
-      .textContent =
-        "-" +
-        totalLoss.toFixed(2) +
-        " U";
-
-
-    const max =
-      Math.max(
-        totalProfit,
-        totalLoss,
-        1
-      );
-
-
-    document
-      .getElementById(
-        "profitBar"
-      )
-      .style.width =
-        (
-          totalProfit /
-          max *
-          100
-        ) +
-        "%";
-
-
-    document
-      .getElementById(
-        "lossBar"
-      )
-      .style.width =
-        (
-          totalLoss /
-          max *
-          100
-        ) +
-        "%";
 
   }
 
@@ -2744,6 +2694,1047 @@
 
 
   /* =========================
+     PERFORMANCE CHART
+  ========================= */
+
+  function renderPerformanceChart(
+    closedTrades
+  ) {
+
+    /*
+      按 Google Sheet 原本的列順序計算
+      累積 PNL。
+    */
+    const pnlTrades =
+      closedTrades
+        .filter(
+          trade =>
+            trade.pnl !== null
+        )
+        .sort(
+          (
+            a,
+            b
+          ) =>
+            a.order -
+            b.order
+        );
+
+
+    const wins =
+      pnlTrades.filter(
+        trade =>
+          Number(
+            trade.pnl
+          ) > 0
+      );
+
+
+    const losses =
+      pnlTrades.filter(
+        trade =>
+          Number(
+            trade.pnl
+          ) < 0
+      );
+
+
+    const totalPnL =
+      pnlTrades.reduce(
+        (
+          total,
+          trade
+        ) =>
+          total +
+          Number(
+            trade.pnl || 0
+          ),
+        0
+      );
+
+
+    const winRate =
+      pnlTrades.length
+
+        ? (
+            wins.length /
+            pnlTrades.length *
+            100
+          ).toFixed(1)
+
+        : null;
+
+
+    setPnLText(
+      "performancePnL",
+      totalPnL
+    );
+
+
+    document
+      .getElementById(
+        "performanceChange"
+      )
+      .textContent =
+        pnlTrades.length +
+        " 筆已結束";
+
+
+    document
+      .getElementById(
+        "performanceWins"
+      )
+      .textContent =
+        wins.length;
+
+
+    document
+      .getElementById(
+        "performanceLosses"
+      )
+      .textContent =
+        losses.length;
+
+
+    document
+      .getElementById(
+        "performanceWinRate"
+      )
+      .textContent =
+        winRate === null
+          ? "-"
+          : winRate +
+            "%";
+
+
+    /*
+      從 0 開始。
+    */
+    let cumulative =
+      0;
+
+
+    chartPoints = [
+
+      {
+        index: 0,
+        value: 0,
+        symbol: "START",
+        pnl: 0
+      }
+
+    ];
+
+
+    pnlTrades.forEach(
+      (
+        trade,
+        index
+      ) => {
+
+        cumulative +=
+          Number(
+            trade.pnl || 0
+          );
+
+
+        chartPoints.push({
+
+          index:
+            index + 1,
+
+          value:
+            cumulative,
+
+          symbol:
+            trade.symbol,
+
+          pnl:
+            Number(
+              trade.pnl || 0
+            )
+
+        });
+
+      }
+    );
+
+
+    drawPerformanceChart();
+
+  }
+
+
+  function drawPerformanceChart() {
+
+    const canvas =
+      document.getElementById(
+        "performanceCanvas"
+      );
+
+
+    const shell =
+      document.getElementById(
+        "chartShell"
+      );
+
+
+    if (
+      !canvas ||
+      !shell
+    ) {
+      return;
+    }
+
+
+    const rect =
+      shell.getBoundingClientRect();
+
+
+    const dpr =
+      window.devicePixelRatio ||
+      1;
+
+
+    canvas.width =
+      Math.max(
+        1,
+        Math.round(
+          rect.width *
+          dpr
+        )
+      );
+
+
+    canvas.height =
+      Math.max(
+        1,
+        Math.round(
+          rect.height *
+          dpr
+        )
+      );
+
+
+    canvas.style.width =
+      rect.width +
+      "px";
+
+
+    canvas.style.height =
+      rect.height +
+      "px";
+
+
+    const ctx =
+      canvas.getContext(
+        "2d"
+      );
+
+
+    ctx.setTransform(
+      dpr,
+      0,
+      0,
+      dpr,
+      0,
+      0
+    );
+
+
+    const width =
+      rect.width;
+
+
+    const height =
+      rect.height;
+
+
+    ctx.clearRect(
+      0,
+      0,
+      width,
+      height
+    );
+
+
+    const padding = {
+      left: 12,
+      right: 12,
+      top: 14,
+      bottom: 18
+    };
+
+
+    const chartWidth =
+      width -
+      padding.left -
+      padding.right;
+
+
+    const chartHeight =
+      height -
+      padding.top -
+      padding.bottom;
+
+
+    /*
+      背景水平格線
+    */
+    ctx.lineWidth =
+      1;
+
+
+    ctx.strokeStyle =
+      "rgba(122, 163, 210, 0.08)";
+
+
+    for (
+      let i = 0;
+      i <= 4;
+      i++
+    ) {
+
+      const y =
+        padding.top +
+        chartHeight *
+        (
+          i / 4
+        );
+
+
+      ctx.beginPath();
+
+
+      ctx.moveTo(
+        padding.left,
+        y
+      );
+
+
+      ctx.lineTo(
+        width -
+        padding.right,
+        y
+      );
+
+
+      ctx.stroke();
+
+    }
+
+
+    /*
+      垂直格線
+    */
+    for (
+      let i = 0;
+      i <= 4;
+      i++
+    ) {
+
+      const x =
+        padding.left +
+        chartWidth *
+        (
+          i / 4
+        );
+
+
+      ctx.beginPath();
+
+
+      ctx.moveTo(
+        x,
+        padding.top
+      );
+
+
+      ctx.lineTo(
+        x,
+        height -
+        padding.bottom
+      );
+
+
+      ctx.stroke();
+
+    }
+
+
+    if (
+      chartPoints.length <
+      2
+    ) {
+
+      ctx.fillStyle =
+        "rgba(127, 141, 163, .8)";
+
+
+      ctx.font =
+        "11px Arial";
+
+
+      ctx.textAlign =
+        "center";
+
+
+      ctx.fillText(
+        "尚無足夠交易資料",
+        width / 2,
+        height / 2
+      );
+
+
+      return;
+
+    }
+
+
+    const values =
+      chartPoints.map(
+        point =>
+          point.value
+      );
+
+
+    let minValue =
+      Math.min(
+        ...values
+      );
+
+
+    let maxValue =
+      Math.max(
+        ...values
+      );
+
+
+    /*
+      讓圖不會貼上下邊界。
+    */
+    if (
+      minValue ===
+      maxValue
+    ) {
+
+      minValue -=
+        1;
+
+      maxValue +=
+        1;
+
+    }
+
+
+    const range =
+      maxValue -
+      minValue;
+
+
+    const extra =
+      range *
+      .18;
+
+
+    minValue -=
+      extra;
+
+
+    maxValue +=
+      extra;
+
+
+    function getX(index) {
+
+      return (
+        padding.left +
+        (
+          index /
+          (
+            chartPoints.length -
+            1
+          )
+        ) *
+        chartWidth
+      );
+
+    }
+
+
+    function getY(value) {
+
+      return (
+        padding.top +
+        (
+          (
+            maxValue -
+            value
+          ) /
+          (
+            maxValue -
+            minValue
+          )
+        ) *
+        chartHeight
+      );
+
+    }
+
+
+    /*
+      0 PNL 基準線
+    */
+    if (
+      minValue <
+      0 &&
+      maxValue >
+      0
+    ) {
+
+      const zeroY =
+        getY(
+          0
+        );
+
+
+      ctx.strokeStyle =
+        "rgba(180, 195, 215, .14)";
+
+
+      ctx.setLineDash(
+        [
+          4,
+          4
+        ]
+      );
+
+
+      ctx.beginPath();
+
+
+      ctx.moveTo(
+        padding.left,
+        zeroY
+      );
+
+
+      ctx.lineTo(
+        width -
+        padding.right,
+        zeroY
+      );
+
+
+      ctx.stroke();
+
+
+      ctx.setLineDash(
+        []
+      );
+
+    }
+
+
+    const finalValue =
+      chartPoints[
+        chartPoints.length - 1
+      ].value;
+
+
+    const positive =
+      finalValue >=
+      0;
+
+
+    const lineColor =
+      positive
+
+        ? "#40d7a1"
+
+        : "#ff6b7a";
+
+
+    /*
+      填色區域
+    */
+    const gradient =
+      ctx.createLinearGradient(
+        0,
+        padding.top,
+        0,
+        height -
+        padding.bottom
+      );
+
+
+    if (
+      positive
+    ) {
+
+      gradient.addColorStop(
+        0,
+        "rgba(64, 215, 161, .30)"
+      );
+
+
+      gradient.addColorStop(
+        1,
+        "rgba(64, 215, 161, 0)"
+      );
+
+    } else {
+
+      gradient.addColorStop(
+        0,
+        "rgba(255, 107, 122, .28)"
+      );
+
+
+      gradient.addColorStop(
+        1,
+        "rgba(255, 107, 122, 0)"
+      );
+
+    }
+
+
+    ctx.beginPath();
+
+
+    chartPoints.forEach(
+      (
+        point,
+        index
+      ) => {
+
+        const x =
+          getX(
+            index
+          );
+
+
+        const y =
+          getY(
+            point.value
+          );
+
+
+        if (
+          index ===
+          0
+        ) {
+
+          ctx.moveTo(
+            x,
+            y
+          );
+
+        } else {
+
+          ctx.lineTo(
+            x,
+            y
+          );
+
+        }
+
+      }
+    );
+
+
+    ctx.lineTo(
+      getX(
+        chartPoints.length -
+        1
+      ),
+      height -
+      padding.bottom
+    );
+
+
+    ctx.lineTo(
+      getX(0),
+      height -
+      padding.bottom
+    );
+
+
+    ctx.closePath();
+
+
+    ctx.fillStyle =
+      gradient;
+
+
+    ctx.fill();
+
+
+    /*
+      主線
+    */
+    ctx.beginPath();
+
+
+    chartPoints.forEach(
+      (
+        point,
+        index
+      ) => {
+
+        const x =
+          getX(
+            index
+          );
+
+
+        const y =
+          getY(
+            point.value
+          );
+
+
+        if (
+          index ===
+          0
+        ) {
+
+          ctx.moveTo(
+            x,
+            y
+          );
+
+        } else {
+
+          ctx.lineTo(
+            x,
+            y
+          );
+
+        }
+
+      }
+    );
+
+
+    ctx.strokeStyle =
+      lineColor;
+
+
+    ctx.lineWidth =
+      2;
+
+
+    ctx.lineJoin =
+      "round";
+
+
+    ctx.lineCap =
+      "round";
+
+
+    ctx.shadowColor =
+      positive
+
+        ? "rgba(64, 215, 161, .35)"
+
+        : "rgba(255, 107, 122, .35)";
+
+
+    ctx.shadowBlur =
+      7;
+
+
+    ctx.stroke();
+
+
+    ctx.shadowBlur =
+      0;
+
+
+    /*
+      最後一個點
+    */
+    const lastX =
+      getX(
+        chartPoints.length -
+        1
+      );
+
+
+    const lastY =
+      getY(
+        finalValue
+      );
+
+
+    ctx.beginPath();
+
+
+    ctx.arc(
+      lastX,
+      lastY,
+      3,
+      0,
+      Math.PI *
+      2
+    );
+
+
+    ctx.fillStyle =
+      lineColor;
+
+
+    ctx.fill();
+
+
+    /*
+      右上角最終 PNL
+    */
+    ctx.textAlign =
+      "right";
+
+
+    ctx.fillStyle =
+      lineColor;
+
+
+    ctx.font =
+      "700 10px Arial";
+
+
+    ctx.fillText(
+      formatPnL(
+        finalValue
+      ),
+      width -
+      padding.right,
+      12
+    );
+
+
+    /*
+      儲存繪圖位置供 hover 使用
+    */
+    chartPoints.forEach(
+      (
+        point,
+        index
+      ) => {
+
+        point.x =
+          getX(
+            index
+          );
+
+
+        point.y =
+          getY(
+            point.value
+          );
+
+      }
+    );
+
+  }
+
+
+  /* =========================
+     CHART TOOLTIP
+  ========================= */
+
+  function setupChartTooltip() {
+
+    const shell =
+      document.getElementById(
+        "chartShell"
+      );
+
+
+    const tooltip =
+      document.getElementById(
+        "chartTooltip"
+      );
+
+
+    shell.addEventListener(
+      "mousemove",
+      function(event) {
+
+        if (
+          !chartPoints.length
+        ) {
+
+          return;
+
+        }
+
+
+        const rect =
+          shell.getBoundingClientRect();
+
+
+        const mouseX =
+          event.clientX -
+          rect.left;
+
+
+        let nearest =
+          null;
+
+
+        let nearestDistance =
+          Infinity;
+
+
+        chartPoints.forEach(
+          point => {
+
+            if (
+              point.x ===
+              undefined
+            ) {
+
+              return;
+
+            }
+
+
+            const distance =
+              Math.abs(
+                mouseX -
+                point.x
+              );
+
+
+            if (
+              distance <
+              nearestDistance
+            ) {
+
+              nearest =
+                point;
+
+
+              nearestDistance =
+                distance;
+
+            }
+
+          }
+        );
+
+
+        if (
+          !nearest
+        ) {
+
+          return;
+
+        }
+
+
+        tooltip.innerHTML = `
+
+          <div class="tooltip-title">
+            ${
+              nearest.index === 0
+                ? "起始"
+                : "#" +
+                  nearest.index +
+                  " " +
+                  escapeHTML(
+                    nearest.symbol
+                  )
+            }
+          </div>
+
+          <div>
+            累積：
+            ${formatPnL(
+              nearest.value
+            )}
+          </div>
+
+          ${
+            nearest.index > 0
+
+              ? `
+                <div>
+                  本筆：
+                  ${formatPnL(
+                    nearest.pnl
+                  )}
+                </div>
+              `
+
+              : ""
+          }
+
+        `;
+
+
+        tooltip.style.display =
+          "block";
+
+
+        const tooltipWidth =
+          110;
+
+
+        let left =
+          nearest.x +
+          8;
+
+
+        if (
+          left +
+          tooltipWidth >
+          rect.width
+        ) {
+
+          left =
+            nearest.x -
+            tooltipWidth -
+            8;
+
+        }
+
+
+        tooltip.style.left =
+          Math.max(
+            4,
+            left
+          ) +
+          "px";
+
+
+        tooltip.style.top =
+          Math.max(
+            5,
+            nearest.y -
+            42
+          ) +
+          "px";
+
+      }
+    );
+
+
+    shell.addEventListener(
+      "mouseleave",
+      function() {
+
+        tooltip.style.display =
+          "none";
+
+      }
+    );
+
+  }
+
+
+  /* =========================
      RECENT
   ========================= */
 
@@ -2763,7 +3754,12 @@
 
     const recent =
       closedTrades
-        .slice(0, 5);
+        .slice()
+        .reverse()
+        .slice(
+          0,
+          5
+        );
 
 
     if (
@@ -2851,8 +3847,42 @@
   }
 
 
+  /* =========================
+     RESIZE
+  ========================= */
+
+  let resizeTimer =
+    null;
+
+
+  window.addEventListener(
+    "resize",
+    function() {
+
+      clearTimeout(
+        resizeTimer
+      );
+
+
+      resizeTimer =
+        setTimeout(
+          function() {
+
+            drawPerformanceChart();
+
+          },
+          120
+        );
+
+    }
+  );
+
+
+  setupChartTooltip();
+
+
   /*
-    進頁面自動同步
+    開頁面自動同步一次
   */
   loadSheetTrades();
 
