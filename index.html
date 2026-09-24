@@ -46,6 +46,10 @@
       font-size: 20px;
     }
 
+    /* =========================
+       TOP
+    ========================= */
+
     .topbar {
       display: flex;
       justify-content: space-between;
@@ -88,6 +92,10 @@
       line-height: 1.45;
     }
 
+    /* =========================
+       STATS
+    ========================= */
+
     .stats {
       display: grid;
       grid-template-columns: repeat(3, minmax(0, 1fr));
@@ -123,39 +131,52 @@
       color: var(--red);
     }
 
+    /* =========================
+       SECTION
+    ========================= */
+
     .section-title {
-      margin: 15px 0 7px;
+      margin: 13px 0 6px;
       font-size: 12px;
       color: var(--muted);
     }
 
+    /* =========================
+       COMPACT TRADE CARD
+    ========================= */
+
     .trade-card {
       background: var(--card);
       border: 1px solid var(--border);
-      border-radius: 10px;
-      padding: 9px 10px;
-      margin-bottom: 7px;
+      border-radius: 8px;
+
+      padding: 6px 8px;
+      margin-bottom: 5px;
     }
 
     .trade-title-row {
       display: flex;
       align-items: center;
-      gap: 7px;
+      gap: 6px;
       flex-wrap: wrap;
+      line-height: 1;
     }
 
     .symbol {
-      font-size: 15px;
+      font-size: 14px;
       font-weight: bold;
     }
 
     .side,
     .status {
       display: inline-block;
-      font-size: 9px;
+
+      font-size: 8px;
       font-weight: bold;
+
       border-radius: 999px;
-      padding: 3px 6px;
+
+      padding: 2px 5px;
     }
 
     .side.long {
@@ -185,55 +206,79 @@
 
     .entry-line {
       margin-top: 3px;
-      font-size: 11px;
+
+      font-size: 10px;
+      line-height: 1.15;
+
       color: var(--muted);
     }
 
     .compact-data {
       display: flex;
+      align-items: center;
       flex-wrap: wrap;
-      gap: 5px 12px;
-      margin-top: 6px;
+
+      gap: 3px 9px;
+
+      margin-top: 4px;
     }
 
     .compact-item {
-      font-size: 11px;
+      font-size: 10px;
+      line-height: 1.15;
       white-space: nowrap;
     }
 
     .compact-label {
       color: var(--muted);
-      margin-right: 3px;
+      margin-right: 2px;
     }
 
     .compact-value {
       font-weight: bold;
     }
 
+    /*
+      備註仍顯示，
+      但 TP2 / 槓桿不再放這裡
+    */
     .card-extra {
-      margin-top: 6px;
-      padding-top: 6px;
+      margin-top: 4px;
+      padding-top: 4px;
+
       border-top: 1px solid var(--border);
+
       color: #aeb5bf;
-      font-size: 10px;
-      line-height: 1.4;
+
+      font-size: 9px;
+      line-height: 1.25;
+
       word-break: break-word;
     }
 
     .pnl {
-      margin-top: 6px;
-      font-size: 15px;
+      display: inline-block;
+
+      margin-top: 4px;
+
+      font-size: 12px;
       font-weight: bold;
+      line-height: 1;
     }
 
     .empty {
-      padding: 18px 10px;
+      padding: 16px 10px;
       text-align: center;
       color: var(--muted);
       font-size: 12px;
     }
 
+    /* =========================
+       MOBILE
+    ========================= */
+
     @media (max-width: 600px) {
+
       .app {
         width: calc(100% - 12px);
         margin-top: 7px;
@@ -255,12 +300,33 @@
         font-size: 13px;
       }
 
+      .trade-card {
+        padding: 6px 7px;
+        margin-bottom: 5px;
+      }
+
+      .symbol {
+        font-size: 13px;
+      }
+
+      .entry-line {
+        font-size: 9px;
+      }
+
       .compact-data {
-        gap: 4px 9px;
+        gap: 3px 8px;
       }
 
       .compact-item {
-        font-size: 10px;
+        font-size: 9px;
+      }
+
+      .card-extra {
+        font-size: 9px;
+      }
+
+      .pnl {
+        font-size: 12px;
       }
     }
   </style>
@@ -271,6 +337,7 @@
 <div class="app">
 
   <div class="topbar">
+
     <h1>RoyalOak</h1>
 
     <button
@@ -280,6 +347,7 @@
     >
       ↻ 同步 Sheet
     </button>
+
   </div>
 
 
@@ -300,6 +368,7 @@
   <div class="stats">
 
     <div class="stat">
+
       <div class="stat-label">
         總 PNL
       </div>
@@ -310,10 +379,12 @@
       >
         0 U
       </div>
+
     </div>
 
 
     <div class="stat">
+
       <div class="stat-label">
         勝率
       </div>
@@ -324,10 +395,12 @@
       >
         -
       </div>
+
     </div>
 
 
     <div class="stat">
+
       <div class="stat-label">
         總筆數
       </div>
@@ -338,6 +411,7 @@
       >
         0
       </div>
+
     </div>
 
   </div>
@@ -362,18 +436,18 @@
 <script>
 
   /*
-    Google Sheet：
-    檔案 → 共用 → 發布到網路
-    選擇 CSV
-
-    把公開 CSV 網址貼在這裡
+    Google Sheet CSV
   */
   const SHEET_CSV_URL =
-  "https://docs.google.com/spreadsheets/d/1tPLSXTk56Z-ylsDjz5VQ4R_30J4OFpGAVUmtxujqupE/export?format=csv&gid=0";
+    "https://docs.google.com/spreadsheets/d/1tPLSXTk56Z-ylsDjz5VQ4R_30J4OFpGAVUmtxujqupE/export?format=csv&gid=0";
 
 
   let trades = [];
 
+
+  /* =========================
+     LOAD SHEET
+  ========================= */
 
   async function loadSheetTrades() {
 
@@ -398,22 +472,6 @@
 
     errorBox.textContent =
       "";
-
-
-    if (
-      !SHEET_CSV_URL ||
-      SHEET_CSV_URL.includes(
-        "你的 Google Sheet"
-      )
-    ) {
-
-      showError(
-        "請先設定 SHEET_CSV_URL"
-      );
-
-      return;
-
-    }
 
 
     button.disabled =
@@ -495,6 +553,7 @@
       status.textContent =
         "同步失敗";
 
+
     } finally {
 
       button.disabled =
@@ -505,7 +564,9 @@
   }
 
 
-  function showError(message) {
+  function showError(
+    message
+  ) {
 
     const errorBox =
       document.getElementById(
@@ -523,16 +584,13 @@
   }
 
 
-  /*
-    CSV Parser
+  /* =========================
+     CSV
+  ========================= */
 
-    支援：
-    - 逗號
-    - 雙引號
-    - 欄位內逗號
-    - 欄位內換行
-  */
-  function parseCSV(text) {
+  function parseCSV(
+    text
+  ) {
 
     const rows = [];
 
@@ -632,7 +690,9 @@
           );
 
 
-        if (hasData) {
+        if (
+          hasData
+        ) {
 
           rows.push(
             row
@@ -671,7 +731,9 @@
         );
 
 
-      if (hasData) {
+      if (
+        hasData
+      ) {
 
         rows.push(
           row
@@ -687,27 +749,26 @@
   }
 
 
-  /*
-    完全不讀 title。
+  /* =========================
+     ROW → TRADE
 
-    Google Sheet 固定欄位：
+     A = 交易標的
+     B = 方向
+     C = 進場價
+     D = 止損
+     E = 止盈1
+     F = 止盈2
+     G = 最終止盈
+     H = 槓桿
+     I = 狀態
+     J = 結果
+     K = 實際盈虧
+     L = 備註
+  ========================= */
 
-    A = symbol
-    B = side
-    C = entry
-    D = sl
-    E = tp1
-    F = tp2
-    G = ftp
-    H = leverage
-    I = status
-    J = result
-    K = pnl
-    L = note
-
-    第一列可以直接放交易資料。
-  */
-  function rowsToTrades(rows) {
+  function rowsToTrades(
+    rows
+  ) {
 
     if (
       !rows ||
@@ -722,7 +783,10 @@
     return rows
 
       .map(
-        (row, index) => {
+        (
+          row,
+          index
+        ) => {
 
           const symbol =
             String(
@@ -802,7 +866,8 @@
           const note =
             String(
               row[11] || ""
-            ).trim();
+            )
+              .trim();
 
 
           let side =
@@ -889,6 +954,11 @@
         }
       )
 
+      /*
+        如果第一列是中文 title，
+        entry 會無法轉成數字，
+        所以自然會被排除。
+      */
       .filter(
         trade =>
           trade.symbol &&
@@ -898,7 +968,13 @@
   }
 
 
-  function toNumberOrNull(value) {
+  /* =========================
+     NUMBER
+  ========================= */
+
+  function toNumberOrNull(
+    value
+  ) {
 
     if (
       value === null ||
@@ -914,22 +990,27 @@
 
     const normalized =
       String(value)
+
         .replaceAll(
           ",",
           ""
         )
+
         .replace(
           "x",
           ""
         )
+
         .replace(
           "X",
           ""
         )
+
         .replace(
           "+",
           ""
         )
+
         .trim();
 
 
@@ -947,6 +1028,10 @@
 
   }
 
+
+  /* =========================
+     RR
+  ========================= */
 
   function calculateRR(
     side,
@@ -982,7 +1067,9 @@
       );
 
 
-    if (!risk) {
+    if (
+      !risk
+    ) {
 
       return null;
 
@@ -991,7 +1078,9 @@
 
     const reward =
       side === "SHORT"
+
         ? entry - target
+
         : target - entry;
 
 
@@ -1003,7 +1092,13 @@
   }
 
 
-  function formatNumber(value) {
+  /* =========================
+     FORMAT
+  ========================= */
+
+  function formatNumber(
+    value
+  ) {
 
     if (
       value === null ||
@@ -1016,7 +1111,9 @@
     }
 
 
-    return Number(value)
+    return Number(
+      value
+    )
       .toLocaleString(
         undefined,
         {
@@ -1028,7 +1125,9 @@
   }
 
 
-  function formatRR(rr) {
+  function formatRR(
+    rr
+  ) {
 
     if (
       rr === null ||
@@ -1049,7 +1148,9 @@
   }
 
 
-  function formatPnL(pnl) {
+  function formatPnL(
+    pnl
+  ) {
 
     if (
       pnl === null ||
@@ -1062,7 +1163,9 @@
 
 
     const number =
-      Number(pnl);
+      Number(
+        pnl
+      );
 
 
     return (
@@ -1076,27 +1179,34 @@
   }
 
 
-  function escapeHTML(value) {
+  function escapeHTML(
+    value
+  ) {
 
     return String(
       value ?? ""
     )
+
       .replaceAll(
         "&",
         "&amp;"
       )
+
       .replaceAll(
         "<",
         "&lt;"
       )
+
       .replaceAll(
         ">",
         "&gt;"
       )
+
       .replaceAll(
         '"',
         "&quot;"
       )
+
       .replaceAll(
         "'",
         "&#039;"
@@ -1105,7 +1215,13 @@
   }
 
 
-  function getResultText(result) {
+  /* =========================
+     RESULT
+  ========================= */
+
+  function getResultText(
+    result
+  ) {
 
     const map = {
 
@@ -1145,6 +1261,10 @@
   }
 
 
+  /* =========================
+     CARD
+  ========================= */
+
   function createTradeCard(
     trade
   ) {
@@ -1172,13 +1292,17 @@
       "未結束";
 
 
-    if (!isOpen) {
+    if (
+      !isOpen
+    ) {
 
       statusClass =
         Number(
           trade.pnl
         ) >= 0
+
           ? "win"
+
           : "loss";
 
 
@@ -1190,57 +1314,29 @@
     }
 
 
-    const extra = [];
+    /*
+      下方額外區域只保留備註。
 
-
-    if (
-      trade.tp2 !== null
-    ) {
-
-      extra.push(
-        "TP2 " +
-        formatNumber(
-          trade.tp2
-        )
-      );
-
-    }
-
-
-    if (
-      trade.leverage !== null
-    ) {
-
-      extra.push(
-        "槓桿 " +
-        formatNumber(
-          trade.leverage
-        ) +
-        "x"
-      );
-
-    }
-
-
-    if (
+      TP2 已經移到主要列。
+      槓桿已經顯示在 Entry 後面。
+    */
+    const noteHTML =
       trade.note
-    ) {
 
-      extra.push(
-        "備註：" +
-        escapeHTML(
-          trade.note
-        )
-      );
+        ? `
+          <div class="card-extra">
+            ${escapeHTML(
+              trade.note
+            )}
+          </div>
+        `
 
-    }
+        : "";
 
 
     card.innerHTML = `
 
-      <div class="
-        trade-title-row
-      ">
+      <div class="trade-title-row">
 
         <span class="symbol">
           ${escapeHTML(
@@ -1288,34 +1384,29 @@
 
         ${
           trade.leverage !== null
+
             ? " · " +
               formatNumber(
                 trade.leverage
               ) +
               "x"
+
             : ""
         }
 
       </div>
 
 
-      <div class="
-        compact-data
-      ">
+      <div class="compact-data">
 
-        <div class="
-          compact-item
-        ">
 
-          <span class="
-            compact-label
-          ">
+        <div class="compact-item">
+
+          <span class="compact-label">
             SL
           </span>
 
-          <span class="
-            compact-value
-          ">
+          <span class="compact-value">
             ${formatNumber(
               trade.sl
             )}
@@ -1324,19 +1415,13 @@
         </div>
 
 
-        <div class="
-          compact-item
-        ">
+        <div class="compact-item">
 
-          <span class="
-            compact-label
-          ">
+          <span class="compact-label">
             TP1
           </span>
 
-          <span class="
-            compact-value
-          ">
+          <span class="compact-value">
             ${formatNumber(
               trade.tp1
             )}
@@ -1345,19 +1430,28 @@
         </div>
 
 
-        <div class="
-          compact-item
-        ">
+        <div class="compact-item">
 
-          <span class="
-            compact-label
-          ">
+          <span class="compact-label">
+            TP2
+          </span>
+
+          <span class="compact-value">
+            ${formatNumber(
+              trade.tp2
+            )}
+          </span>
+
+        </div>
+
+
+        <div class="compact-item">
+
+          <span class="compact-label">
             FTP
           </span>
 
-          <span class="
-            compact-value
-          ">
+          <span class="compact-value">
             ${formatNumber(
               trade.ftp
             )}
@@ -1366,19 +1460,13 @@
         </div>
 
 
-        <div class="
-          compact-item
-        ">
+        <div class="compact-item">
 
-          <span class="
-            compact-label
-          ">
+          <span class="compact-label">
             RR
           </span>
 
-          <span class="
-            compact-value
-          ">
+          <span class="compact-value">
             ${formatRR(
               trade.rrFTP
             )}
@@ -1389,24 +1477,13 @@
       </div>
 
 
-      ${
-        extra.length
-          ? `
-            <div class="
-              card-extra
-            ">
-              ${extra.join(
-                "<br>"
-              )}
-            </div>
-          `
-          : ""
-      }
+      ${noteHTML}
 
 
       ${
         !isOpen &&
         trade.pnl !== null
+
           ? `
             <div
               class="
@@ -1415,7 +1492,9 @@
                   Number(
                     trade.pnl
                   ) >= 0
+
                     ? "positive"
+
                     : "negative"
                 }
               "
@@ -1425,6 +1504,7 @@
               )}
             </div>
           `
+
           : ""
       }
 
@@ -1435,6 +1515,10 @@
 
   }
 
+
+  /* =========================
+     RENDER
+  ========================= */
 
   function render() {
 
@@ -1535,6 +1619,10 @@
   }
 
 
+  /* =========================
+     STATS
+  ========================= */
+
   function renderStats() {
 
     const closed =
@@ -1582,11 +1670,13 @@
 
     const winRate =
       tradesWithPnL.length
+
         ? (
             wins.length /
             tradesWithPnL.length *
             100
           ).toFixed(1)
+
         : null;
 
 
@@ -1610,9 +1700,13 @@
       "stat-value " +
       (
         totalPnL > 0
+
           ? "positive"
+
           : totalPnL < 0
+
             ? "negative"
+
             : ""
       );
 
@@ -1622,8 +1716,11 @@
         "winRate"
       )
       .textContent =
+
         winRate === null
+
           ? "-"
+
           : winRate +
             "%";
 
@@ -1639,10 +1736,7 @@
 
 
   /*
-    網頁打開時直接自動同步一次。
-
-    如果不想自動同步，
-    刪掉這行即可。
+    開頁面自動同步一次
   */
   loadSheetTrades();
 
