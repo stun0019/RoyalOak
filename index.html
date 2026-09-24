@@ -12,24 +12,59 @@
     }
 
     :root {
-      --bg: #0f1115;
-      --card: #181b21;
-      --border: #2b303a;
+      --bg: #07101d;
+      --bg2: #0b1424;
 
-      --text: #eeeeee;
-      --muted: #8f97a5;
+      --panel: rgba(12, 23, 40, 0.94);
+      --panel2: rgba(15, 29, 50, 0.92);
 
-      --blue: #6374ff;
-      --green: #4ade80;
-      --red: #f87171;
+      --border: rgba(111, 151, 210, 0.18);
+      --border-hover: rgba(71, 143, 255, 0.55);
+
+      --text: #f4f7fb;
+      --muted: #7f8da3;
+      --muted2: #aeb9ca;
+
+      --blue: #3b82f6;
+      --blue2: #1d4ed8;
+      --cyan: #37c8ff;
+
+      --green: #40d7a1;
+      --red: #ff6b7a;
       --yellow: #facc15;
+
+      --shadow:
+        0 14px 40px rgba(0, 0, 0, 0.28);
     }
 
     body {
       margin: 0;
-      background: var(--bg);
+      min-height: 100vh;
+
       color: var(--text);
-      font-family: Arial, "Microsoft JhengHei", sans-serif;
+
+      font-family:
+        Inter,
+        Arial,
+        "Microsoft JhengHei",
+        sans-serif;
+
+      background:
+        radial-gradient(
+          circle at 20% 0%,
+          rgba(42, 99, 180, 0.18),
+          transparent 32%
+        ),
+        radial-gradient(
+          circle at 100% 20%,
+          rgba(26, 91, 175, 0.12),
+          transparent 28%
+        ),
+        linear-gradient(
+          145deg,
+          var(--bg),
+          var(--bg2)
+        );
     }
 
     button {
@@ -37,88 +72,235 @@
     }
 
     .app {
-      width: min(900px, calc(100% - 16px));
-      margin: 12px auto 50px;
-    }
+      width:
+        min(
+          1380px,
+          calc(100% - 32px)
+        );
 
-    h1 {
-      margin: 0;
-      font-size: 20px;
+      margin:
+        18px auto 50px;
     }
 
     /* =========================
-       TOP
+       TOPBAR
     ========================= */
 
     .topbar {
       display: flex;
+      align-items: center;
       justify-content: space-between;
+
+      gap: 16px;
+
+      margin-bottom: 14px;
+    }
+
+    .brand-wrap {
+      display: flex;
+      flex-direction: column;
+      gap: 3px;
+    }
+
+    .brand {
+      display: flex;
+      align-items: center;
+      gap: 10px;
+    }
+
+    .brand-logo {
+      width: 34px;
+      height: 34px;
+
+      border-radius: 10px;
+
+      display: grid;
+      place-items: center;
+
+      font-weight: 800;
+      font-size: 15px;
+
+      color: white;
+
+      background:
+        linear-gradient(
+          135deg,
+          #175eea,
+          #38bdf8
+        );
+
+      box-shadow:
+        0 0 24px rgba(51, 147, 255, 0.28);
+    }
+
+    .brand-name {
+      font-size: 22px;
+      font-weight: 800;
+      letter-spacing: -0.5px;
+    }
+
+    .brand-sub {
+      color: var(--muted);
+      font-size: 11px;
+      margin-left: 44px;
+    }
+
+    .top-actions {
+      display: flex;
       align-items: center;
       gap: 8px;
-      margin-bottom: 12px;
     }
 
     .sync-btn {
-      border: 0;
-      border-radius: 8px;
-      padding: 8px 11px;
-      background: var(--blue);
+      border: 1px solid rgba(91, 150, 255, .3);
+
+      border-radius: 10px;
+
+      padding: 9px 14px;
+
       color: white;
+
       cursor: pointer;
+
       font-size: 12px;
-      font-weight: bold;
+      font-weight: 700;
+
+      background:
+        linear-gradient(
+          135deg,
+          #315df5,
+          #1d8df8
+        );
+
+      box-shadow:
+        0 8px 22px rgba(31, 105, 255, .18);
+
+      transition:
+        transform .18s ease,
+        box-shadow .18s ease;
+    }
+
+    .sync-btn:hover {
+      transform: translateY(-1px);
+
+      box-shadow:
+        0 10px 28px rgba(31, 105, 255, .3);
     }
 
     .sync-btn:disabled {
-      opacity: .5;
+      opacity: .55;
       cursor: default;
+      transform: none;
     }
 
     .sync-status {
-      margin-bottom: 10px;
-      font-size: 11px;
       color: var(--muted);
+
+      font-size: 11px;
+
+      margin-bottom: 12px;
     }
 
     .error-box {
       display: none;
-      margin-bottom: 10px;
-      padding: 9px 10px;
-      border: 1px solid rgba(248, 113, 113, .35);
-      background: rgba(248, 113, 113, .06);
-      color: #ffb0b0;
-      border-radius: 8px;
+
+      margin-bottom: 12px;
+      padding: 10px 12px;
+
+      border:
+        1px solid rgba(255, 107, 122, .3);
+
+      border-radius: 10px;
+
+      color: #ffbbc3;
+
+      background:
+        rgba(255, 107, 122, .07);
+
       font-size: 11px;
     }
 
     /* =========================
-       STATS
+       OVERVIEW
     ========================= */
 
-    .stats {
+    .overview-grid {
       display: grid;
-      grid-template-columns: repeat(3, minmax(0, 1fr));
-      gap: 6px;
-      margin-bottom: 14px;
+
+      grid-template-columns:
+        repeat(4, minmax(0, 1fr));
+
+      gap: 10px;
+
+      margin-bottom: 12px;
     }
 
-    .stat {
-      background: var(--card);
-      border: 1px solid var(--border);
-      border-radius: 10px;
-      padding: 9px;
+    .overview-card {
+      position: relative;
+
+      overflow: hidden;
+
       min-width: 0;
+
+      padding: 15px;
+
+      border:
+        1px solid var(--border);
+
+      border-radius: 14px;
+
+      background:
+        linear-gradient(
+          145deg,
+          rgba(16, 31, 53, .96),
+          rgba(9, 20, 35, .96)
+        );
+
+      box-shadow: var(--shadow);
     }
 
-    .stat-label {
-      font-size: 10px;
+    .overview-card::before {
+      content: "";
+
+      position: absolute;
+
+      width: 130px;
+      height: 130px;
+
+      right: -55px;
+      top: -65px;
+
+      border-radius: 50%;
+
+      background:
+        radial-gradient(
+          circle,
+          rgba(50, 145, 255, .16),
+          transparent 70%
+        );
+
+      pointer-events: none;
+    }
+
+    .overview-label {
       color: var(--muted);
-      margin-bottom: 4px;
+      font-size: 10px;
+      margin-bottom: 7px;
     }
 
-    .stat-value {
-      font-size: 15px;
-      font-weight: bold;
+    .overview-value {
+      font-size: 23px;
+      font-weight: 800;
+      letter-spacing: -.3px;
+
+      word-break: break-word;
+    }
+
+    .overview-foot {
+      margin-top: 5px;
+
+      color: var(--muted);
+      font-size: 9px;
     }
 
     .positive {
@@ -130,228 +312,561 @@
     }
 
     /* =========================
-       SECTION
+       MAIN DASHBOARD
     ========================= */
 
-    .section-title {
-      margin: 13px 0 6px;
-      font-size: 12px;
-      color: var(--muted);
-    }
-
-    /*
-      每區兩欄
-      = 每張卡片約原本 50% 寬
-    */
-    .trade-list {
+    .dashboard-grid {
       display: grid;
-      grid-template-columns: repeat(2, minmax(0, 1fr));
-      gap: 6px;
+
+      grid-template-columns:
+        minmax(0, 1.8fr)
+        minmax(270px, .8fr);
+
+      gap: 12px;
+
       align-items: start;
     }
 
-    /* =========================
-       TRADE CARD
-    ========================= */
-
-    .trade-card {
-      width: 100%;
+    .column {
       min-width: 0;
-
-      background: var(--card);
-      border: 1px solid var(--border);
-      border-radius: 8px;
-
-      padding: 7px 8px;
     }
 
-    /*
-      四行共用設定
-    */
+    .panel {
+      border:
+        1px solid var(--border);
+
+      border-radius: 15px;
+
+      background:
+        linear-gradient(
+          145deg,
+          rgba(13, 27, 47, .95),
+          rgba(8, 18, 32, .96)
+        );
+
+      box-shadow: var(--shadow);
+
+      overflow: hidden;
+
+      margin-bottom: 12px;
+    }
+
+    .panel-head {
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+
+      gap: 10px;
+
+      padding: 13px 14px;
+
+      border-bottom:
+        1px solid rgba(111, 151, 210, .12);
+    }
+
+    .panel-title {
+      font-size: 13px;
+      font-weight: 700;
+    }
+
+    .panel-count {
+      color: var(--muted);
+      font-size: 10px;
+    }
+
+    .panel-body {
+      padding: 10px;
+    }
+
+    /* =========================
+       TRADE GRID
+    ========================= */
+
+    .trade-grid {
+      display: grid;
+
+      grid-template-columns:
+        repeat(2, minmax(0, 1fr));
+
+      gap: 8px;
+    }
+
+    .trade-card {
+      position: relative;
+
+      min-width: 0;
+
+      padding: 9px 10px;
+
+      border:
+        1px solid rgba(111, 151, 210, .16);
+
+      border-radius: 11px;
+
+      background:
+        linear-gradient(
+          145deg,
+          rgba(16, 31, 53, .93),
+          rgba(9, 20, 35, .94)
+        );
+
+      transition:
+        border-color .18s ease,
+        transform .18s ease,
+        box-shadow .18s ease;
+    }
+
+    .trade-card:hover {
+      transform: translateY(-1px);
+
+      border-color:
+        var(--border-hover);
+
+      box-shadow:
+        0 8px 22px rgba(31, 98, 180, .12);
+    }
+
     .trade-line {
       display: flex;
       align-items: center;
+
       flex-wrap: nowrap;
 
       min-width: 0;
 
-      font-size: 9px;
-      line-height: 1.35;
-
       white-space: nowrap;
+
+      font-size: 10px;
+      line-height: 1.4;
     }
 
-    /*
-      第 1 行
-    */
+    .trade-line + .trade-line {
+      margin-top: 3px;
+    }
+
     .trade-line-1 {
       gap: 5px;
-      margin-bottom: 3px;
     }
 
     .symbol {
-      font-size: 12px;
-      font-weight: bold;
-      color: var(--text);
+      font-size: 13px;
+      font-weight: 800;
+      letter-spacing: -.2px;
     }
 
     .side,
     .status {
-      display: inline-block;
-
-      font-size: 7px;
-      font-weight: bold;
+      display: inline-flex;
+      align-items: center;
 
       border-radius: 999px;
 
-      padding: 2px 4px;
+      padding: 2px 5px;
+
+      font-size: 7px;
+      font-weight: 800;
 
       flex-shrink: 0;
     }
 
     .side.long {
       color: var(--green);
-      background: rgba(74, 222, 128, .08);
+
+      background:
+        rgba(64, 215, 161, .1);
+
+      border:
+        1px solid rgba(64, 215, 161, .1);
     }
 
     .side.short {
       color: var(--red);
-      background: rgba(248, 113, 113, .08);
+
+      background:
+        rgba(255, 107, 122, .1);
+
+      border:
+        1px solid rgba(255, 107, 122, .1);
     }
 
     .status.open {
       color: var(--yellow);
-      background: rgba(250, 204, 21, .08);
+
+      background:
+        rgba(250, 204, 21, .08);
     }
 
     .status.win {
       color: var(--green);
-      background: rgba(74, 222, 128, .08);
+
+      background:
+        rgba(64, 215, 161, .08);
     }
 
     .status.loss {
       color: var(--red);
-      background: rgba(248, 113, 113, .08);
+
+      background:
+        rgba(255, 107, 122, .08);
     }
 
-    /*
-      第 2 ~ 4 行
-    */
-    .trade-info-line {
-      gap: 4px;
+    .trade-label {
       color: var(--muted);
     }
 
-    .info-value {
+    .trade-value {
       color: var(--text);
-      font-weight: bold;
+      font-weight: 700;
+
+      margin-left: 3px;
     }
 
-    .info-space {
-      display: inline-block;
-      width: 3px;
+    .trade-gap {
+      width: 7px;
+      flex-shrink: 0;
     }
 
-    .rr-value {
-      color: var(--text);
-      font-weight: bold;
+    .trade-pnl {
+      font-weight: 800;
     }
 
-    .pnl-value {
-      font-weight: bold;
-      margin-left: 5px;
+    .trade-note {
+      margin-top: 6px;
+
+      padding-top: 5px;
+
+      border-top:
+        1px solid rgba(111, 151, 210, .1);
+
+      color: var(--muted2);
+
+      font-size: 9px;
+      line-height: 1.35;
+
+      word-break: break-word;
+    }
+
+    /* =========================
+       RIGHT SIDE
+    ========================= */
+
+    .side-card {
+      padding: 14px;
+
+      border-bottom:
+        1px solid rgba(111, 151, 210, .1);
+    }
+
+    .side-card:last-child {
+      border-bottom: 0;
+    }
+
+    .side-title {
+      color: var(--muted);
+
+      font-size: 10px;
+
+      margin-bottom: 10px;
+    }
+
+    .big-number {
+      font-size: 30px;
+      font-weight: 800;
+      letter-spacing: -.6px;
+    }
+
+    .metric-row {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+
+      gap: 10px;
+
+      margin-top: 9px;
+
+      font-size: 11px;
+    }
+
+    .metric-label {
+      color: var(--muted);
+    }
+
+    .metric-value {
+      font-weight: 700;
+    }
+
+    /* =========================
+       PNL BARS
+    ========================= */
+
+    .pnl-bar-wrap {
+      margin-top: 12px;
+    }
+
+    .pnl-bar-row {
+      margin-bottom: 11px;
+    }
+
+    .pnl-bar-row:last-child {
+      margin-bottom: 0;
+    }
+
+    .pnl-bar-top {
+      display: flex;
+      justify-content: space-between;
+
+      gap: 8px;
+
+      margin-bottom: 5px;
+
+      font-size: 10px;
+    }
+
+    .pnl-bar-label {
+      color: var(--muted);
+    }
+
+    .pnl-bar-track {
+      height: 6px;
+
+      border-radius: 999px;
+
+      background:
+        rgba(255, 255, 255, .05);
+
+      overflow: hidden;
+    }
+
+    .pnl-bar-fill {
+      height: 100%;
+
+      border-radius: inherit;
+
+      width: 0;
+
+      transition: width .3s ease;
+    }
+
+    .pnl-bar-fill.profit {
+      background:
+        linear-gradient(
+          90deg,
+          #23c58e,
+          #4ee0af
+        );
+    }
+
+    .pnl-bar-fill.loss {
+      background:
+        linear-gradient(
+          90deg,
+          #f44b61,
+          #ff7b89
+        );
+    }
+
+    /* =========================
+       RESULT LIST
+    ========================= */
+
+    .result-list {
+      display: flex;
+      flex-direction: column;
+      gap: 7px;
+    }
+
+    .result-row {
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+
+      gap: 8px;
+
+      padding: 7px 8px;
+
+      border:
+        1px solid rgba(111, 151, 210, .1);
+
+      border-radius: 8px;
+
+      background:
+        rgba(6, 15, 27, .5);
+
+      font-size: 10px;
+    }
+
+    .result-symbol {
+      font-weight: 700;
+    }
+
+    .result-meta {
+      color: var(--muted);
+      font-size: 9px;
+      margin-top: 2px;
+    }
+
+    .result-pnl {
+      font-weight: 800;
+      white-space: nowrap;
     }
 
     .empty {
-      grid-column: 1 / -1;
-
-      padding: 16px 10px;
+      padding: 20px 10px;
 
       text-align: center;
 
       color: var(--muted);
 
-      font-size: 12px;
+      font-size: 11px;
     }
 
     /* =========================
-       MOBILE
+       RESPONSIVE
     ========================= */
 
-    @media (max-width: 600px) {
+    @media (max-width: 950px) {
+
+      .overview-grid {
+        grid-template-columns:
+          repeat(2, minmax(0, 1fr));
+      }
+
+      .dashboard-grid {
+        grid-template-columns: 1fr;
+      }
+
+      .right-column {
+        display: grid;
+
+        grid-template-columns:
+          repeat(2, minmax(0, 1fr));
+
+        gap: 12px;
+      }
+
+      .right-column .panel {
+        margin-bottom: 0;
+      }
+    }
+
+    @media (max-width: 620px) {
 
       .app {
         width: calc(100% - 12px);
-        margin-top: 7px;
+        margin-top: 8px;
       }
 
-      h1 {
-        font-size: 18px;
-      }
-
-      .stat {
-        padding: 8px 7px;
-      }
-
-      .stat-label {
-        font-size: 9px;
-      }
-
-      .stat-value {
+      .brand-logo {
+        width: 30px;
+        height: 30px;
         font-size: 13px;
       }
 
-      /*
-        手機仍維持兩欄
-      */
-      .trade-list {
-        grid-template-columns: repeat(2, minmax(0, 1fr));
+      .brand-name {
+        font-size: 18px;
+      }
+
+      .brand-sub {
+        margin-left: 40px;
+        font-size: 9px;
+      }
+
+      .sync-btn {
+        padding: 8px 10px;
+        font-size: 10px;
+      }
+
+      .overview-grid {
+        grid-template-columns:
+          repeat(2, minmax(0, 1fr));
+
+        gap: 6px;
+      }
+
+      .overview-card {
+        padding: 11px;
+        border-radius: 11px;
+      }
+
+      .overview-label {
+        font-size: 9px;
+      }
+
+      .overview-value {
+        font-size: 17px;
+      }
+
+      .overview-foot {
+        font-size: 8px;
+      }
+
+      .panel {
+        border-radius: 12px;
+      }
+
+      .panel-head {
+        padding: 11px 10px;
+      }
+
+      .panel-body {
+        padding: 7px;
+      }
+
+      .trade-grid {
+        grid-template-columns:
+          repeat(2, minmax(0, 1fr));
+
         gap: 5px;
       }
 
       .trade-card {
-        padding: 6px 6px;
-      }
-
-      .symbol {
-        font-size: 11px;
-      }
-
-      .side,
-      .status {
-        font-size: 6.5px;
-        padding: 2px 4px;
-      }
-
-      .trade-line {
-        font-size: 8px;
-      }
-
-    }
-
-    /*
-      極窄手機仍然維持兩張，
-      但再縮字
-    */
-    @media (max-width: 380px) {
-
-      .trade-card {
-        padding: 5px;
+        padding: 7px 6px;
       }
 
       .symbol {
         font-size: 10px;
       }
 
+      .side,
+      .status {
+        font-size: 6px;
+        padding: 2px 4px;
+      }
+
       .trade-line {
         font-size: 7px;
       }
 
-      .side,
-      .status {
-        font-size: 6px;
+      .trade-gap {
+        width: 4px;
       }
 
+      .trade-note {
+        font-size: 7px;
+      }
+
+      .right-column {
+        grid-template-columns: 1fr;
+      }
+
+      .big-number {
+        font-size: 24px;
+      }
+    }
+
+    @media (max-width: 380px) {
+
+      .trade-line {
+        font-size: 6.5px;
+      }
+
+      .symbol {
+        font-size: 9px;
+      }
+
+      .overview-value {
+        font-size: 15px;
+      }
     }
   </style>
 </head>
@@ -360,17 +875,41 @@
 
 <div class="app">
 
+  <!-- TOP -->
   <div class="topbar">
 
-    <h1>RoyalOak</h1>
+    <div class="brand-wrap">
 
-    <button
-      id="syncButton"
-      class="sync-btn"
-      onclick="loadSheetTrades()"
-    >
-      ↻ 同步 Sheet
-    </button>
+      <div class="brand">
+
+        <div class="brand-logo">
+          R
+        </div>
+
+        <div class="brand-name">
+          RoyalOak
+        </div>
+
+      </div>
+
+      <div class="brand-sub">
+        Trading Journal Dashboard
+      </div>
+
+    </div>
+
+
+    <div class="top-actions">
+
+      <button
+        id="syncButton"
+        class="sync-btn"
+        onclick="loadSheetTrades()"
+      >
+        ↻ 同步 Sheet
+      </button>
+
+    </div>
 
   </div>
 
@@ -389,51 +928,84 @@
   ></div>
 
 
-  <div class="stats">
+  <!-- OVERVIEW -->
+  <div class="overview-grid">
 
-    <div class="stat">
+    <div class="overview-card">
 
-      <div class="stat-label">
-        總 PNL
+      <div class="overview-label">
+        TOTAL PNL
       </div>
 
       <div
         id="totalPnL"
-        class="stat-value"
+        class="overview-value"
       >
-        0 U
+        0.00 U
+      </div>
+
+      <div class="overview-foot">
+        已結束交易
       </div>
 
     </div>
 
 
-    <div class="stat">
+    <div class="overview-card">
 
-      <div class="stat-label">
-        勝率
+      <div class="overview-label">
+        WIN RATE
       </div>
 
       <div
         id="winRate"
-        class="stat-value"
+        class="overview-value"
       >
         -
       </div>
 
+      <div class="overview-foot">
+        勝率
+      </div>
+
     </div>
 
 
-    <div class="stat">
+    <div class="overview-card">
 
-      <div class="stat-label">
-        總筆數
+      <div class="overview-label">
+        TOTAL TRADES
       </div>
 
       <div
         id="totalTrades"
-        class="stat-value"
+        class="overview-value"
       >
         0
+      </div>
+
+      <div class="overview-foot">
+        總交易筆數
+      </div>
+
+    </div>
+
+
+    <div class="overview-card">
+
+      <div class="overview-label">
+        OPEN TRADES
+      </div>
+
+      <div
+        id="openCount"
+        class="overview-value"
+      >
+        0
+      </div>
+
+      <div class="overview-foot">
+        未結束交易
       </div>
 
     </div>
@@ -441,30 +1013,266 @@
   </div>
 
 
-  <div class="section-title">
-    未結束
+  <!-- MAIN -->
+  <div class="dashboard-grid">
+
+    <!-- LEFT -->
+    <div class="column">
+
+      <!-- OPEN -->
+      <div class="panel">
+
+        <div class="panel-head">
+
+          <div class="panel-title">
+            未結束交易
+          </div>
+
+          <div
+            id="openLabel"
+            class="panel-count"
+          >
+            0 筆
+          </div>
+
+        </div>
+
+        <div class="panel-body">
+
+          <div
+            id="openTrades"
+            class="trade-grid"
+          ></div>
+
+        </div>
+
+      </div>
+
+
+      <!-- CLOSED -->
+      <div class="panel">
+
+        <div class="panel-head">
+
+          <div class="panel-title">
+            已結束交易
+          </div>
+
+          <div
+            id="closedLabel"
+            class="panel-count"
+          >
+            0 筆
+          </div>
+
+        </div>
+
+        <div class="panel-body">
+
+          <div
+            id="closedTrades"
+            class="trade-grid"
+          ></div>
+
+        </div>
+
+      </div>
+
+    </div>
+
+
+    <!-- RIGHT -->
+    <div class="column right-column">
+
+      <!-- PERFORMANCE -->
+      <div class="panel">
+
+        <div class="panel-head">
+
+          <div class="panel-title">
+            Performance
+          </div>
+
+        </div>
+
+
+        <div class="side-card">
+
+          <div class="side-title">
+            NET PNL
+          </div>
+
+          <div
+            id="sidePnL"
+            class="big-number"
+          >
+            0.00 U
+          </div>
+
+
+          <div class="metric-row">
+
+            <span class="metric-label">
+              Wins
+            </span>
+
+            <span
+              id="winsCount"
+              class="metric-value positive"
+            >
+              0
+            </span>
+
+          </div>
+
+
+          <div class="metric-row">
+
+            <span class="metric-label">
+              Losses
+            </span>
+
+            <span
+              id="lossCount"
+              class="metric-value negative"
+            >
+              0
+            </span>
+
+          </div>
+
+
+          <div class="metric-row">
+
+            <span class="metric-label">
+              Closed
+            </span>
+
+            <span
+              id="closedCount"
+              class="metric-value"
+            >
+              0
+            </span>
+
+          </div>
+
+        </div>
+
+
+        <div class="side-card">
+
+          <div class="side-title">
+            PROFIT / LOSS
+          </div>
+
+
+          <div class="pnl-bar-wrap">
+
+            <div class="pnl-bar-row">
+
+              <div class="pnl-bar-top">
+
+                <span class="pnl-bar-label">
+                  Profit
+                </span>
+
+                <span
+                  id="profitValue"
+                  class="positive"
+                >
+                  +0.00 U
+                </span>
+
+              </div>
+
+              <div class="pnl-bar-track">
+
+                <div
+                  id="profitBar"
+                  class="
+                    pnl-bar-fill
+                    profit
+                  "
+                ></div>
+
+              </div>
+
+            </div>
+
+
+            <div class="pnl-bar-row">
+
+              <div class="pnl-bar-top">
+
+                <span class="pnl-bar-label">
+                  Loss
+                </span>
+
+                <span
+                  id="lossValue"
+                  class="negative"
+                >
+                  0.00 U
+                </span>
+
+              </div>
+
+              <div class="pnl-bar-track">
+
+                <div
+                  id="lossBar"
+                  class="
+                    pnl-bar-fill
+                    loss
+                  "
+                ></div>
+
+              </div>
+
+            </div>
+
+          </div>
+
+        </div>
+
+      </div>
+
+
+      <!-- RECENT -->
+      <div class="panel">
+
+        <div class="panel-head">
+
+          <div class="panel-title">
+            Recent Results
+          </div>
+
+        </div>
+
+        <div class="panel-body">
+
+          <div
+            id="recentResults"
+            class="result-list"
+          ></div>
+
+        </div>
+
+      </div>
+
+    </div>
+
   </div>
-
-  <div
-    id="openTrades"
-    class="trade-list"
-  ></div>
-
-
-  <div class="section-title">
-    已結束
-  </div>
-
-  <div
-    id="closedTrades"
-    class="trade-list"
-  ></div>
 
 </div>
 
 
 <script>
 
+  /*
+    Google Sheet CSV
+  */
   const SHEET_CSV_URL =
     "https://docs.google.com/spreadsheets/d/1tPLSXTk56Z-ylsDjz5VQ4R_30J4OFpGAVUmtxujqupE/export?format=csv&gid=0";
 
@@ -473,7 +1281,7 @@
 
 
   /* =========================
-     LOAD SHEET
+     LOAD
   ========================= */
 
   async function loadSheetTrades() {
@@ -483,10 +1291,12 @@
         "syncButton"
       );
 
+
     const status =
       document.getElementById(
         "syncStatus"
       );
+
 
     const errorBox =
       document.getElementById(
@@ -497,6 +1307,7 @@
     errorBox.style.display =
       "none";
 
+
     errorBox.textContent =
       "";
 
@@ -506,7 +1317,7 @@
 
 
     status.textContent =
-      "正在讀取 Google Sheet...";
+      "正在同步 Google Sheet...";
 
 
     try {
@@ -531,7 +1342,9 @@
         );
 
 
-      if (!response.ok) {
+      if (
+        !response.ok
+      ) {
 
         throw new Error(
           "HTTP " +
@@ -561,7 +1374,7 @@
 
 
       status.textContent =
-        "同步完成，共 " +
+        "同步完成 · " +
         trades.length +
         " 筆交易";
 
@@ -634,6 +1447,7 @@
 
       const char =
         text[i];
+
 
       const next =
         text[i + 1];
@@ -710,8 +1524,8 @@
 
         const hasData =
           row.some(
-            item =>
-              String(item)
+            value =>
+              String(value)
                 .trim() !== ""
           );
 
@@ -751,8 +1565,8 @@
 
       const hasData =
         row.some(
-          item =>
-            String(item)
+          value =>
+            String(value)
               .trim() !== ""
         );
 
@@ -776,35 +1590,25 @@
 
 
   /* =========================
-     SHEET →
+     ROW MAP
 
-     A = 交易標的
-     B = 方向
-     C = 進場價
-     D = 止損
-     E = 止盈1
-     F = 止盈2
-     G = 最終止盈
-     H = 槓桿
-     I = 狀態
-     J = 結果
-     K = 實際盈虧
-     L = 備註
+     A 交易標的
+     B 方向
+     C 進場價
+     D 止損
+     E 止盈1
+     F 止盈2
+     G 最終止盈
+     H 槓桿
+     I 狀態
+     J 結果
+     K 實際盈虧
+     L 備註
   ========================= */
 
   function rowsToTrades(
     rows
   ) {
-
-    if (
-      !rows ||
-      rows.length === 0
-    ) {
-
-      return [];
-
-    }
-
 
     return rows
 
@@ -973,8 +1777,8 @@
       )
 
       /*
-        中文 title 列會因為 Entry 無法轉數字，
-        自動被排除
+        中文標題列 entry 不是數字，
+        會自動被排除
       */
       .filter(
         trade =>
@@ -996,8 +1800,7 @@
     if (
       value === null ||
       value === undefined ||
-      String(value)
-        .trim() === ""
+      String(value).trim() === ""
     ) {
 
       return null;
@@ -1060,8 +1863,10 @@
     entry =
       Number(entry);
 
+
     sl =
       Number(sl);
+
 
     target =
       Number(target);
@@ -1143,13 +1948,13 @@
 
 
   function formatRR(
-    rr
+    value
   ) {
 
     if (
-      rr === null ||
-      rr === undefined ||
-      !Number.isFinite(rr)
+      value === null ||
+      value === undefined ||
+      !Number.isFinite(value)
     ) {
 
       return "-";
@@ -1158,7 +1963,7 @@
 
 
     return (
-      rr.toFixed(2) +
+      value.toFixed(2) +
       "R"
     );
 
@@ -1166,12 +1971,12 @@
 
 
   function formatPnL(
-    pnl
+    value
   ) {
 
     if (
-      pnl === null ||
-      pnl === undefined
+      value === null ||
+      value === undefined
     ) {
 
       return "-";
@@ -1180,9 +1985,7 @@
 
 
     const number =
-      Number(
-        pnl
-      );
+      Number(value);
 
 
     return (
@@ -1279,7 +2082,7 @@
 
 
   /* =========================
-     CARD
+     TRADE CARD
   ========================= */
 
   function createTradeCard(
@@ -1331,17 +2134,9 @@
     }
 
 
-    /*
-      固定四行：
-
-      1 Symbol / Side / Status
-      2 Entry / Leverage / SL
-      3 TP1 / TP2 / FTP
-      4 RR / PNL
-    */
     card.innerHTML = `
 
-      <!-- 第一行 -->
+      <!-- 1 -->
       <div
         class="
           trade-line
@@ -1386,19 +2181,14 @@
       </div>
 
 
-      <!-- 第二行 -->
-      <div
-        class="
-          trade-line
-          trade-info-line
-        "
-      >
+      <!-- 2 -->
+      <div class="trade-line">
 
-        <span>
+        <span class="trade-label">
           Entry
         </span>
 
-        <span class="info-value">
+        <span class="trade-value">
           ${formatNumber(
             trade.entry
           )}
@@ -1409,11 +2199,9 @@
           trade.leverage !== null
 
             ? `
-              <span>
-                ·
-              </span>
+              <span class="trade-gap"></span>
 
-              <span class="info-value">
+              <span class="trade-value">
                 ${formatNumber(
                   trade.leverage
                 )}x
@@ -1424,11 +2212,14 @@
         }
 
 
-        <span>
+        <span class="trade-gap"></span>
+
+
+        <span class="trade-label">
           SL
         </span>
 
-        <span class="info-value">
+        <span class="trade-value">
           ${formatNumber(
             trade.sl
           )}
@@ -1437,41 +2228,42 @@
       </div>
 
 
-      <!-- 第三行 -->
-      <div
-        class="
-          trade-line
-          trade-info-line
-        "
-      >
+      <!-- 3 -->
+      <div class="trade-line">
 
-        <span>
+        <span class="trade-label">
           TP1
         </span>
 
-        <span class="info-value">
+        <span class="trade-value">
           ${formatNumber(
             trade.tp1
           )}
         </span>
 
 
-        <span>
+        <span class="trade-gap"></span>
+
+
+        <span class="trade-label">
           TP2
         </span>
 
-        <span class="info-value">
+        <span class="trade-value">
           ${formatNumber(
             trade.tp2
           )}
         </span>
 
 
-        <span>
+        <span class="trade-gap"></span>
+
+
+        <span class="trade-label">
           FTP
         </span>
 
-        <span class="info-value">
+        <span class="trade-value">
           ${formatNumber(
             trade.ftp
           )}
@@ -1480,19 +2272,14 @@
       </div>
 
 
-      <!-- 第四行 -->
-      <div
-        class="
-          trade-line
-          trade-info-line
-        "
-      >
+      <!-- 4 -->
+      <div class="trade-line">
 
-        <span>
+        <span class="trade-label">
           RR
         </span>
 
-        <span class="rr-value">
+        <span class="trade-value">
           ${formatRR(
             trade.rrFTP
           )}
@@ -1504,16 +2291,16 @@
           trade.pnl !== null
 
             ? `
+              <span class="trade-gap"></span>
+
               <span
                 class="
-                  pnl-value
+                  trade-pnl
                   ${
                     Number(
                       trade.pnl
                     ) >= 0
-
                       ? "positive"
-
                       : "negative"
                   }
                 "
@@ -1528,6 +2315,21 @@
         }
 
       </div>
+
+
+      ${
+        trade.note
+
+          ? `
+            <div class="trade-note">
+              ${escapeHTML(
+                trade.note
+              )}
+            </div>
+          `
+
+          : ""
+      }
 
     `;
 
@@ -1635,7 +2437,33 @@
     }
 
 
-    renderStats();
+    document
+      .getElementById(
+        "openLabel"
+      )
+      .textContent =
+        openTrades.length +
+        " 筆";
+
+
+    document
+      .getElementById(
+        "closedLabel"
+      )
+      .textContent =
+        closedTrades.length +
+        " 筆";
+
+
+    renderStats(
+      openTrades,
+      closedTrades
+    );
+
+
+    renderRecentResults(
+      closedTrades
+    );
 
   }
 
@@ -1644,18 +2472,13 @@
      STATS
   ========================= */
 
-  function renderStats() {
-
-    const closed =
-      trades.filter(
-        trade =>
-          trade.status ===
-          "CLOSED"
-      );
-
+  function renderStats(
+    openTrades,
+    closedTrades
+  ) {
 
     const tradesWithPnL =
-      closed.filter(
+      closedTrades.filter(
         trade =>
           trade.pnl !== null
       );
@@ -1667,6 +2490,15 @@
           Number(
             trade.pnl
           ) > 0
+      );
+
+
+    const losses =
+      tradesWithPnL.filter(
+        trade =>
+          Number(
+            trade.pnl
+          ) < 0
       );
 
 
@@ -1689,6 +2521,46 @@
       );
 
 
+    const totalProfit =
+      wins.reduce(
+        (
+          total,
+          trade
+        ) => {
+
+          return (
+            total +
+            Number(
+              trade.pnl || 0
+            )
+          );
+
+        },
+        0
+      );
+
+
+    const totalLoss =
+      losses.reduce(
+        (
+          total,
+          trade
+        ) => {
+
+          return (
+            total +
+            Math.abs(
+              Number(
+                trade.pnl || 0
+              )
+            )
+          );
+
+        },
+        0
+      );
+
+
     const winRate =
       tradesWithPnL.length
 
@@ -1701,35 +2573,16 @@
         : null;
 
 
-    const pnlElement =
-      document.getElementById(
-        "totalPnL"
-      );
+    setPnLText(
+      "totalPnL",
+      totalPnL
+    );
 
 
-    pnlElement.textContent =
-      (
-        totalPnL > 0
-          ? "+"
-          : ""
-      ) +
-      totalPnL.toFixed(2) +
-      " U";
-
-
-    pnlElement.className =
-      "stat-value " +
-      (
-        totalPnL > 0
-
-          ? "positive"
-
-          : totalPnL < 0
-
-            ? "negative"
-
-            : ""
-      );
+    setPnLText(
+      "sidePnL",
+      totalPnL
+    );
 
 
     document
@@ -1753,9 +2606,254 @@
       .textContent =
         trades.length;
 
+
+    document
+      .getElementById(
+        "openCount"
+      )
+      .textContent =
+        openTrades.length;
+
+
+    document
+      .getElementById(
+        "winsCount"
+      )
+      .textContent =
+        wins.length;
+
+
+    document
+      .getElementById(
+        "lossCount"
+      )
+      .textContent =
+        losses.length;
+
+
+    document
+      .getElementById(
+        "closedCount"
+      )
+      .textContent =
+        closedTrades.length;
+
+
+    document
+      .getElementById(
+        "profitValue"
+      )
+      .textContent =
+        "+" +
+        totalProfit.toFixed(2) +
+        " U";
+
+
+    document
+      .getElementById(
+        "lossValue"
+      )
+      .textContent =
+        "-" +
+        totalLoss.toFixed(2) +
+        " U";
+
+
+    const max =
+      Math.max(
+        totalProfit,
+        totalLoss,
+        1
+      );
+
+
+    document
+      .getElementById(
+        "profitBar"
+      )
+      .style.width =
+        (
+          totalProfit /
+          max *
+          100
+        ) +
+        "%";
+
+
+    document
+      .getElementById(
+        "lossBar"
+      )
+      .style.width =
+        (
+          totalLoss /
+          max *
+          100
+        ) +
+        "%";
+
   }
 
 
+  function setPnLText(
+    id,
+    pnl
+  ) {
+
+    const element =
+      document.getElementById(
+        id
+      );
+
+
+    element.textContent =
+      (
+        pnl > 0
+          ? "+"
+          : ""
+      ) +
+      pnl.toFixed(2) +
+      " U";
+
+
+    element.classList.remove(
+      "positive",
+      "negative"
+    );
+
+
+    if (
+      pnl > 0
+    ) {
+
+      element.classList.add(
+        "positive"
+      );
+
+    } else if (
+      pnl < 0
+    ) {
+
+      element.classList.add(
+        "negative"
+      );
+
+    }
+
+  }
+
+
+  /* =========================
+     RECENT
+  ========================= */
+
+  function renderRecentResults(
+    closedTrades
+  ) {
+
+    const container =
+      document.getElementById(
+        "recentResults"
+      );
+
+
+    container.innerHTML =
+      "";
+
+
+    const recent =
+      closedTrades
+        .slice(0, 5);
+
+
+    if (
+      recent.length === 0
+    ) {
+
+      container.innerHTML = `
+        <div class="empty">
+          尚無已結束交易
+        </div>
+      `;
+
+      return;
+
+    }
+
+
+    recent.forEach(
+      trade => {
+
+        const row =
+          document.createElement(
+            "div"
+          );
+
+
+        row.className =
+          "result-row";
+
+
+        row.innerHTML = `
+
+          <div>
+
+            <div class="result-symbol">
+              ${escapeHTML(
+                trade.symbol
+              )}
+            </div>
+
+            <div class="result-meta">
+              ${escapeHTML(
+                trade.side
+              )}
+              ·
+              ${escapeHTML(
+                getResultText(
+                  trade.result
+                )
+              )}
+            </div>
+
+          </div>
+
+
+          <div
+            class="
+              result-pnl
+              ${
+                Number(
+                  trade.pnl
+                ) >= 0
+
+                  ? "positive"
+
+                  : "negative"
+              }
+            "
+          >
+            ${formatPnL(
+              trade.pnl
+            )}
+          </div>
+
+        `;
+
+
+        container.appendChild(
+          row
+        );
+
+      }
+    );
+
+  }
+
+
+  /*
+    進頁面自動同步
+  */
   loadSheetTrades();
 
 </script>
