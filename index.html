@@ -89,7 +89,6 @@
       color: #ffb0b0;
       border-radius: 8px;
       font-size: 11px;
-      line-height: 1.45;
     }
 
     /* =========================
@@ -120,7 +119,6 @@
     .stat-value {
       font-size: 15px;
       font-weight: bold;
-      word-break: break-word;
     }
 
     .positive {
@@ -141,42 +139,74 @@
       color: var(--muted);
     }
 
+    /*
+      每區兩欄
+      = 每張卡片約原本 50% 寬
+    */
+    .trade-list {
+      display: grid;
+      grid-template-columns: repeat(2, minmax(0, 1fr));
+      gap: 6px;
+      align-items: start;
+    }
+
     /* =========================
-       COMPACT TRADE CARD
+       TRADE CARD
     ========================= */
 
     .trade-card {
+      width: 100%;
+      min-width: 0;
+
       background: var(--card);
       border: 1px solid var(--border);
       border-radius: 8px;
 
-      padding: 6px 8px;
-      margin-bottom: 5px;
+      padding: 7px 8px;
     }
 
-    .trade-title-row {
+    /*
+      四行共用設定
+    */
+    .trade-line {
       display: flex;
       align-items: center;
-      gap: 6px;
-      flex-wrap: wrap;
-      line-height: 1;
+      flex-wrap: nowrap;
+
+      min-width: 0;
+
+      font-size: 9px;
+      line-height: 1.35;
+
+      white-space: nowrap;
+    }
+
+    /*
+      第 1 行
+    */
+    .trade-line-1 {
+      gap: 5px;
+      margin-bottom: 3px;
     }
 
     .symbol {
-      font-size: 14px;
+      font-size: 12px;
       font-weight: bold;
+      color: var(--text);
     }
 
     .side,
     .status {
       display: inline-block;
 
-      font-size: 8px;
+      font-size: 7px;
       font-weight: bold;
 
       border-radius: 999px;
 
-      padding: 2px 5px;
+      padding: 2px 4px;
+
+      flex-shrink: 0;
     }
 
     .side.long {
@@ -204,72 +234,43 @@
       background: rgba(248, 113, 113, .08);
     }
 
-    .entry-line {
-      margin-top: 3px;
-
-      font-size: 10px;
-      line-height: 1.15;
-
-      color: var(--muted);
-    }
-
-    .compact-data {
-      display: flex;
-      align-items: center;
-      flex-wrap: wrap;
-
-      gap: 3px 9px;
-
-      margin-top: 4px;
-    }
-
-    .compact-item {
-      font-size: 10px;
-      line-height: 1.15;
-      white-space: nowrap;
-    }
-
-    .compact-label {
-      color: var(--muted);
-      margin-right: 2px;
-    }
-
-    .compact-value {
-      font-weight: bold;
-    }
-
     /*
-      備註仍顯示，
-      但 TP2 / 槓桿不再放這裡
+      第 2 ~ 4 行
     */
-    .card-extra {
-      margin-top: 4px;
-      padding-top: 4px;
-
-      border-top: 1px solid var(--border);
-
-      color: #aeb5bf;
-
-      font-size: 9px;
-      line-height: 1.25;
-
-      word-break: break-word;
+    .trade-info-line {
+      gap: 4px;
+      color: var(--muted);
     }
 
-    .pnl {
-      display: inline-block;
-
-      margin-top: 4px;
-
-      font-size: 12px;
+    .info-value {
+      color: var(--text);
       font-weight: bold;
-      line-height: 1;
+    }
+
+    .info-space {
+      display: inline-block;
+      width: 3px;
+    }
+
+    .rr-value {
+      color: var(--text);
+      font-weight: bold;
+    }
+
+    .pnl-value {
+      font-weight: bold;
+      margin-left: 5px;
     }
 
     .empty {
+      grid-column: 1 / -1;
+
       padding: 16px 10px;
+
       text-align: center;
+
       color: var(--muted);
+
       font-size: 12px;
     }
 
@@ -300,34 +301,57 @@
         font-size: 13px;
       }
 
+      /*
+        手機仍維持兩欄
+      */
+      .trade-list {
+        grid-template-columns: repeat(2, minmax(0, 1fr));
+        gap: 5px;
+      }
+
       .trade-card {
-        padding: 6px 7px;
-        margin-bottom: 5px;
+        padding: 6px 6px;
       }
 
       .symbol {
-        font-size: 13px;
+        font-size: 11px;
       }
 
-      .entry-line {
-        font-size: 9px;
+      .side,
+      .status {
+        font-size: 6.5px;
+        padding: 2px 4px;
       }
 
-      .compact-data {
-        gap: 3px 8px;
+      .trade-line {
+        font-size: 8px;
       }
 
-      .compact-item {
-        font-size: 9px;
+    }
+
+    /*
+      極窄手機仍然維持兩張，
+      但再縮字
+    */
+    @media (max-width: 380px) {
+
+      .trade-card {
+        padding: 5px;
       }
 
-      .card-extra {
-        font-size: 9px;
+      .symbol {
+        font-size: 10px;
       }
 
-      .pnl {
-        font-size: 12px;
+      .trade-line {
+        font-size: 7px;
       }
+
+      .side,
+      .status {
+        font-size: 6px;
+      }
+
     }
   </style>
 </head>
@@ -421,23 +445,26 @@
     未結束
   </div>
 
-  <div id="openTrades"></div>
+  <div
+    id="openTrades"
+    class="trade-list"
+  ></div>
 
 
   <div class="section-title">
     已結束
   </div>
 
-  <div id="closedTrades"></div>
+  <div
+    id="closedTrades"
+    class="trade-list"
+  ></div>
 
 </div>
 
 
 <script>
 
-  /*
-    Google Sheet CSV
-  */
   const SHEET_CSV_URL =
     "https://docs.google.com/spreadsheets/d/1tPLSXTk56Z-ylsDjz5VQ4R_30J4OFpGAVUmtxujqupE/export?format=csv&gid=0";
 
@@ -596,9 +623,7 @@
 
     let row = [];
     let cell = "";
-
-    let insideQuotes =
-      false;
+    let insideQuotes = false;
 
 
     for (
@@ -679,6 +704,7 @@
           cell
         );
 
+
         cell = "";
 
 
@@ -750,7 +776,7 @@
 
 
   /* =========================
-     ROW → TRADE
+     SHEET →
 
      A = 交易標的
      B = 方向
@@ -933,14 +959,6 @@
 
             note,
 
-            rrTP1:
-              calculateRR(
-                side,
-                entry,
-                sl,
-                tp1
-              ),
-
             rrFTP:
               calculateRR(
                 side,
@@ -955,9 +973,8 @@
       )
 
       /*
-        如果第一列是中文 title，
-        entry 會無法轉成數字，
-        所以自然會被排除。
+        中文 title 列會因為 Entry 無法轉數字，
+        自動被排除
       */
       .filter(
         trade =>
@@ -1315,28 +1332,22 @@
 
 
     /*
-      下方額外區域只保留備註。
+      固定四行：
 
-      TP2 已經移到主要列。
-      槓桿已經顯示在 Entry 後面。
+      1 Symbol / Side / Status
+      2 Entry / Leverage / SL
+      3 TP1 / TP2 / FTP
+      4 RR / PNL
     */
-    const noteHTML =
-      trade.note
-
-        ? `
-          <div class="card-extra">
-            ${escapeHTML(
-              trade.note
-            )}
-          </div>
-        `
-
-        : "";
-
-
     card.innerHTML = `
 
-      <div class="trade-title-row">
+      <!-- 第一行 -->
+      <div
+        class="
+          trade-line
+          trade-line-1
+        "
+      >
 
         <span class="symbol">
           ${escapeHTML(
@@ -1375,138 +1386,148 @@
       </div>
 
 
-      <div class="entry-line">
+      <!-- 第二行 -->
+      <div
+        class="
+          trade-line
+          trade-info-line
+        "
+      >
 
-        Entry
-        ${formatNumber(
-          trade.entry
-        )}
+        <span>
+          Entry
+        </span>
+
+        <span class="info-value">
+          ${formatNumber(
+            trade.entry
+          )}
+        </span>
+
 
         ${
           trade.leverage !== null
 
-            ? " · " +
-              formatNumber(
-                trade.leverage
-              ) +
-              "x"
+            ? `
+              <span>
+                ·
+              </span>
+
+              <span class="info-value">
+                ${formatNumber(
+                  trade.leverage
+                )}x
+              </span>
+            `
+
+            : ""
+        }
+
+
+        <span>
+          SL
+        </span>
+
+        <span class="info-value">
+          ${formatNumber(
+            trade.sl
+          )}
+        </span>
+
+      </div>
+
+
+      <!-- 第三行 -->
+      <div
+        class="
+          trade-line
+          trade-info-line
+        "
+      >
+
+        <span>
+          TP1
+        </span>
+
+        <span class="info-value">
+          ${formatNumber(
+            trade.tp1
+          )}
+        </span>
+
+
+        <span>
+          TP2
+        </span>
+
+        <span class="info-value">
+          ${formatNumber(
+            trade.tp2
+          )}
+        </span>
+
+
+        <span>
+          FTP
+        </span>
+
+        <span class="info-value">
+          ${formatNumber(
+            trade.ftp
+          )}
+        </span>
+
+      </div>
+
+
+      <!-- 第四行 -->
+      <div
+        class="
+          trade-line
+          trade-info-line
+        "
+      >
+
+        <span>
+          RR
+        </span>
+
+        <span class="rr-value">
+          ${formatRR(
+            trade.rrFTP
+          )}
+        </span>
+
+
+        ${
+          !isOpen &&
+          trade.pnl !== null
+
+            ? `
+              <span
+                class="
+                  pnl-value
+                  ${
+                    Number(
+                      trade.pnl
+                    ) >= 0
+
+                      ? "positive"
+
+                      : "negative"
+                  }
+                "
+              >
+                ${formatPnL(
+                  trade.pnl
+                )}
+              </span>
+            `
 
             : ""
         }
 
       </div>
-
-
-      <div class="compact-data">
-
-
-        <div class="compact-item">
-
-          <span class="compact-label">
-            SL
-          </span>
-
-          <span class="compact-value">
-            ${formatNumber(
-              trade.sl
-            )}
-          </span>
-
-        </div>
-
-
-        <div class="compact-item">
-
-          <span class="compact-label">
-            TP1
-          </span>
-
-          <span class="compact-value">
-            ${formatNumber(
-              trade.tp1
-            )}
-          </span>
-
-        </div>
-
-
-        <div class="compact-item">
-
-          <span class="compact-label">
-            TP2
-          </span>
-
-          <span class="compact-value">
-            ${formatNumber(
-              trade.tp2
-            )}
-          </span>
-
-        </div>
-
-
-        <div class="compact-item">
-
-          <span class="compact-label">
-            FTP
-          </span>
-
-          <span class="compact-value">
-            ${formatNumber(
-              trade.ftp
-            )}
-          </span>
-
-        </div>
-
-
-        <div class="compact-item">
-
-          <span class="compact-label">
-            RR
-          </span>
-
-          <span class="compact-value">
-            ${formatRR(
-              trade.rrFTP
-            )}
-          </span>
-
-        </div>
-
-      </div>
-
-
-      ${noteHTML}
-
-
-      ${
-        !isOpen &&
-        trade.pnl !== null
-
-          ? `
-            <div
-              class="
-                pnl
-                ${
-                  Number(
-                    trade.pnl
-                  ) >= 0
-
-                    ? "positive"
-
-                    : "negative"
-                }
-              "
-            >
-              ${formatPnL(
-                trade.pnl
-              )}
-            </div>
-          `
-
-          : ""
-      }
 
     `;
 
@@ -1735,9 +1756,6 @@
   }
 
 
-  /*
-    開頁面自動同步一次
-  */
   loadSheetTrades();
 
 </script>
